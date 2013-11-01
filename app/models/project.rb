@@ -43,8 +43,9 @@ class Project < ActiveRecord::Base
     all
   }
 
-  acts_as_taggable
-
+  unless (ARGV & ['assets:precompile', 'assets:clean']).any?
+    acts_as_taggable
+  end
   validates :name, presence: true
   validates :type, presence: true
 
