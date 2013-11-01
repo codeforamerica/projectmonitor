@@ -16,8 +16,10 @@ class AggregateProject < ActiveRecord::Base
     all
   }
 
+unless (ARGV & ['assets:precompile', 'assets:clean']).any?
   acts_as_taggable
-  validates :name, presence: true
+end
+validates :name, presence: true
 
   def red?
     projects.any?(&:red?)
