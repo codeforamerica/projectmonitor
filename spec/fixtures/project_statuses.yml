@@ -2,6 +2,7 @@ pivots_status:
   id: 1
   build_id: 1
   success: true
+  valid_readme: true
   url: http://ci.pivotallabs.com:3333/builds/pivots/61968.1
   published_at: <%= 1.hour.ago.to_s(:db) %>
   project: pivots
@@ -78,6 +79,7 @@ green_currently_building_status:
   id: 11
   build_id: 11
   success: true
+  valid_readme: true
   published_at: <%= 10.minutes.ago.to_s(:db) %>
   project: green_currently_building
 

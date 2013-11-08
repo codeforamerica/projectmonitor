@@ -1,12 +1,18 @@
 require 'spec_helper'
 describe LegacyTeamCityXmlPayload do
-  let(:project) { FactoryGirl.create(:team_city_project) }
+  let(:project) { FactoryGirl.create(:team_city_project, name: 'brigade') }
   let(:content) { TeamcityCradiatorXmlExample.new(xml).read }
   let(:payload) { LegacyTeamCityXmlPayload.new }
 
   subject do
     PayloadProcessor.new(project, payload).process
     project
+  end
+
+  before do
+    uri = "https://api.github.com/repos/codeforamerica/brigade/readme"
+    response_path = "#{Rails.root}/spec/support/responses/github_brigade_readme_response.txt"
+    FakeWeb.register_uri(:get, uri, response: response_path)
   end
 
   describe "project status" do

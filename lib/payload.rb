@@ -10,14 +10,15 @@ class Payload
     self.build_processable = true
   end
 
-  def each_status
+  def each_status(project)
     status_content.each do |content|
       next if !content_ready?(content)
       yield ProjectStatus.new(
         success: parse_success(content),
         url: parse_url(content),
         build_id: parse_build_id(content),
-        published_at: parse_published_at(content)
+        published_at: parse_published_at(content),
+        valid_readme: project.has_valid_readme?
       )
     end
   end
