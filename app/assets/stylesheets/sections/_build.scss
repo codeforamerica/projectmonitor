@@ -73,6 +73,14 @@ article.build {
         height: 80px;
       }
 
+      .readme-status {
+        line-height: 78px;
+        font-size: 30px;
+        float: right;
+        padding: 0px 10px;
+        min-width: 62px;
+      }
+
       .time-since-last-build {
         line-height: 78px;
         font-size: 30px;
@@ -125,7 +133,7 @@ article.build {
         font-size: 20px;
       }
 
-      .time-since-last-build {
+      .time-since-last-build, .readme-status {
         line-height: 73px;
         padding: 0px 10px;
       }
@@ -168,7 +176,7 @@ article.build {
         font-size: 20px;
       }
 
-      .time-since-last-build {
+      .time-since-last-build, .readme-status {
         line-height: 60px;
         padding: 0px 16px;
       }
@@ -202,6 +210,13 @@ article.build {
     aside {
       > div {
         height: 35px;
+      }
+
+      .readme-status {
+        line-height: 33px;
+        font-size: 18px;
+        float: right;
+        padding: 0px 4px 0px 20px;
       }
 
       .time-since-last-build {

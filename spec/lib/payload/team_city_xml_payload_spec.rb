@@ -1,8 +1,14 @@
 require 'spec_helper'
 
 describe TeamCityXmlPayload do
-  let(:project) { FactoryGirl.create(:team_city_rest_project) }
+  let(:project) { FactoryGirl.create(:team_city_rest_project, name: 'brigade') }
   let(:payload) { TeamCityXmlPayload.new(project).tap{|p|p.status_content = content} }
+
+  before do
+    uri = "https://api.github.com/repos/codeforamerica/brigade/readme"
+    response_path = "#{Rails.root}/spec/support/responses/github_brigade_readme_response.txt"
+    FakeWeb.register_uri(:get, uri, response: response_path)
+  end
 
   describe '.process' do
     subject do
