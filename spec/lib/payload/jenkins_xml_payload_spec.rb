@@ -1,13 +1,19 @@
 require 'spec_helper'
 
 describe JenkinsXmlPayload do
-  let(:project) { FactoryGirl.create(:jenkins_project, jenkins_build_name: "ProjectMonitor") }
+  let(:project) { FactoryGirl.create(:jenkins_project, jenkins_build_name: "ProjectMonitor", name: 'brigade') }
   let(:status_content) { JenkinsAtomExample.new(atom).read }
   let(:jenkins_payload) { JenkinsXmlPayload.new(project.jenkins_build_name) }
 
   subject do
     PayloadProcessor.new(project, jenkins_payload).process
     project
+  end
+
+  before do
+    uri = "https://api.github.com/repos/codeforamerica/brigade/readme"
+    response_path = "#{Rails.root}/spec/support/responses/github_brigade_readme_response.txt"
+    FakeWeb.register_uri(:get, uri, response: response_path)
   end
 
   describe "project status" do

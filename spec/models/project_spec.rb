@@ -224,6 +224,51 @@ describe Project do
     end
   end
 
+  describe "#has_valid_readme?" do
+    let!(:project) { Project.new(name: "brigade", created_at: Time.now) }
+    let(:uri)      { "https://api.github.com/repos/codeforamerica/brigade/readme" }
+
+    before do
+      response_path = "#{Rails.root}/spec/support/responses/github_brigade_readme_response.txt"
+      FakeWeb.register_uri(:get, uri, response: response_path)
+    end
+
+    it "returns true when there's a readme with content and installation instructions" do
+      project.has_valid_readme?.should be_true
+    end
+
+    it "returns true when there's a readme with content and a relocation section" do
+      response_path = "#{Rails.root}/spec/support/responses/github_relocated_readme_response.txt"
+      FakeWeb.register_uri(:get, uri, response: response_path)
+      project.has_valid_readme?.should be_true
+    end
+
+    it "returns false if there is no readme" do
+      response_path = "#{Rails.root}/spec/support/responses/github_empty_readme_response.txt"
+      FakeWeb.register_uri(:get, uri, response: response_path)
+      project.has_valid_readme?.should be_false
+    end
+
+    context "with a readme with rando content" do
+      before do
+        response_path = "#{Rails.root}/spec/support/responses/github_rando_readme_response.txt"
+        FakeWeb.register_uri(:get, uri, response: response_path)
+      end
+
+      it "returns true if the repo is less than a week old" do
+        Timecop.travel(6.days.from_now) do
+          project.has_valid_readme?.should be_true
+        end
+      end
+
+      it "returns false if the repo is more than a week old" do
+        Timecop.travel(8.days.from_now) do
+          project.has_valid_readme?.should be_false
+        end
+      end
+    end
+  end
+
   describe "#code" do
     let(:project) { Project.new(name: "My Cool Project", code: code) }
     subject { project.code }
@@ -305,18 +350,36 @@ describe Project do
   describe "#red?, #green? and #yellow?" do
     subject { project }
 
-    context "the project has a failure status" do
+    context "the project has a failure status and an invalid readme" do
       let(:project) { FactoryGirl.create(:jenkins_project, online: true) }
-      let!(:status) { ProjectStatus.create!(project: project, success: false, build_id: 1) }
+      let!(:status) { ProjectStatus.create!(project: project, success: false, valid_readme: false, build_id: 1) }
 
       its(:red?) { should be_true }
       its(:green?) { should be_false }
       its(:yellow?) { should be_false }
     end
 
-    context "the project has a success status" do
+    context "the project has a success status and an invalid readme" do
+      let(:project) { FactoryGirl.create(:jenkins_project, online: true) }
+      let!(:status) { ProjectStatus.create!(project: project, success: true, valid_readme: false, build_id: 1) }
+
+      its(:red?) { should be_true }
+      its(:green?) { should be_false }
+      its(:yellow?) { should be_false }
+    end
+
+    context "the project has a failure status and a valid readme" do
       let(:project) { FactoryGirl.create(:project, online: true) }
-      let!(:status) { ProjectStatus.create!(project: project, success: true, build_id: 1) }
+      let!(:status) { ProjectStatus.create!(project: project, success: false, valid_readme: true, build_id: 1) }
+
+      its(:red?) { should be_true }
+      its(:green?) { should be_false }
+      its(:yellow?) { should be_false }
+    end
+
+    context "the project has a success status and a valid readme" do
+      let(:project) { FactoryGirl.create(:project, online: true) }
+      let!(:status) { ProjectStatus.create!(project: project, success: true, valid_readme: true, build_id: 1) }
 
       its(:red?) { should be_false }
       its(:green?) { should be_true }

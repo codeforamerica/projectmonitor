@@ -2,8 +2,14 @@ require 'spec_helper'
 describe StatusController do
   describe "#create" do
 
+    before do
+      uri = "https://api.github.com/repos/codeforamerica/brigade/readme"
+      response_path = "#{Rails.root}/spec/support/responses/github_brigade_readme_response.txt"
+      FakeWeb.register_uri(:get, uri, response: response_path)
+    end
+
     context "Travis project" do
-      let!(:project) { FactoryGirl.create(:travis_project) }
+      let!(:project) { FactoryGirl.create(:travis_project, name: 'brigade') }
       let(:payload) do
       URI.encode '{
         "id": 4219108,
@@ -130,7 +136,7 @@ describe StatusController do
     end
 
     context "Jenkins project" do
-      let!(:project) { FactoryGirl.create(:project) }
+      let!(:project) { FactoryGirl.create(:project, name: 'brigade') }
       let(:build_id) { 7 }
       let(:build_url) { "job/projectmonitor_ci_test/#{build_id}/" }
       let(:parsed_url) { "job/projectmonitor_ci_test/" }
@@ -188,7 +194,7 @@ describe StatusController do
     end
 
     context "TeamCity Rest project" do
-      let!(:project) { FactoryGirl.create(:team_city_rest_project) }
+      let!(:project) { FactoryGirl.create(:team_city_rest_project, name: 'brigade') }
       let(:payload) do
         {
           "buildStatus"=> "Running",
@@ -242,7 +248,7 @@ describe StatusController do
     end
 
     context 'when processing the payload succeeded' do
-      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1')}
+      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1', name: 'brigade')}
 
       let(:payload) do
         {'name'  => 'projectmonitor_ci_test',
@@ -273,7 +279,7 @@ describe StatusController do
 
     context 'when processing the payload failed' do
 
-      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1')}
+      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1', name: 'brigade')}
 
       before do
         Project.stub(:find_by_guid).and_return(project)

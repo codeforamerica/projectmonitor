@@ -61,6 +61,27 @@ class Project < ActiveRecord::Base
     where(aggregate_project_id: aggregate_project_id).scoping(&block)
   end
 
+  def self.content_exists?(readme)
+    readme.match(/^#+.+/).present?
+  end
+
+  def self.installation_instructions_exists?(readme)
+    readme.match(/\bInstall(ation|ing)?\b|\bBuild(ing)?\b|\bSetup\b|\bDeploy(ing|ment)?\b/).present?
+  end
+
+  def self.relocated_section_exists?(readme)
+    readme.match(/Repository has moved/i).present?
+  end
+
+  def has_valid_readme?
+    response_json = get("repos/codeforamerica/#{name}/readme")
+    readme = Base64.decode64(response_json["content"])
+    Project.content_exists?(readme) &&
+    (Project.installation_instructions_exists?(readme) ||
+     Project.relocated_section_exists?(readme) ||
+     created_at > 1.week.ago)
+  end
+
   def code
     super.presence || name.downcase.gsub(" ", '')[0..3]
   end
@@ -78,7 +99,7 @@ class Project < ActiveRecord::Base
   end
 
   def green?
-    online? && status.success?
+    online? && status.success? && status.valid_readme?
   end
 
   def yellow?
@@ -86,7 +107,15 @@ class Project < ActiveRecord::Base
   end
 
   def red?
-    online? && latest_status.try(:success?) == false
+    online? && (latest_status.try(:success?) == false || latest_status.try(:valid_readme?) == false)
+  end
+
+  def readme_status_in_words
+    if status.valid_readme
+      'Readme Valid'
+    else
+      'Readme Broke'
+    end
   end
 
   def status_in_words
@@ -198,6 +227,7 @@ class Project < ActiveRecord::Base
       .merge({"status" => status_in_words})
       .merge({"statuses" => statuses.reverse_chronological})
       .merge({"current_build_url" => current_build_url })
+      .merge({"readme_status" => readme_status_in_words})
       json["tracker"] = super(
         only: [:tracker_online, :current_velocity, :last_ten_velocities, :stories_to_accept_count, :open_stories_count, :iteration_story_state_counts],
         methods: ["volatility"],
@@ -266,6 +296,22 @@ class Project < ActiveRecord::Base
       url
     else
       "http://#{url}"
+    end
+  end
+
+  def get(path)
+    uri = URI.join("https://api.github.com/", path)
+    response = nil
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    if response.is_a?(Net::HTTPSuccess) || response.is_a?(Net::HTTPOK)
+      JSON.parse response.body
+    else
+      response.error!
     end
   end
 end
