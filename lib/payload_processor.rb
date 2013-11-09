@@ -35,7 +35,7 @@ class PayloadProcessor
   end
 
   def add_statuses_from_payload
-    payload.each_status do |status|
+    payload.each_status(project) do |status|
       next if project.has_status?(status)
       if status.valid?
         project.statuses.push status

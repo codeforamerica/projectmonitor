@@ -3,6 +3,7 @@ class ProjectStatus < ActiveRecord::Base
   belongs_to :project
 
   validates :success, inclusion: { in: [true, false] }
+  validates :valid_readme, inclusion: { in: [true, false] }
   validates :build_id, presence: true
 
   class << self

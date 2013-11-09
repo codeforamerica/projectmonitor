@@ -1,11 +1,17 @@
 require 'spec_helper'
 
 describe CruiseControlXmlPayload do
-  let(:project) { FactoryGirl.create(:cruise_control_project, cruise_control_rss_feed_url: "http://foo.bar.com:3434/projects/Socialitis.rss") }
+  let(:project) { FactoryGirl.create(:cruise_control_project, cruise_control_rss_feed_url: "http://foo.bar.com:3434/projects/Socialitis.rss", name: 'brigade') }
 
   subject do
     PayloadProcessor.new(project, payload).process
     project
+  end
+
+  before do
+    uri = "https://api.github.com/repos/codeforamerica/brigade/readme"
+    response_path = "#{Rails.root}/spec/support/responses/github_brigade_readme_response.txt"
+    FakeWeb.register_uri(:get, uri, response: response_path)
   end
 
   describe "project status" do
