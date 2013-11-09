@@ -110,14 +110,6 @@ class Project < ActiveRecord::Base
     online? && (latest_status.try(:success?) == false || latest_status.try(:valid_readme?) == false)
   end
 
-  def readme_status_in_words
-    if status.valid_readme
-      'Readme Valid'
-    else
-      'Readme Broke'
-    end
-  end
-
   def status_in_words
     if red?
       'failure'
@@ -227,7 +219,7 @@ class Project < ActiveRecord::Base
       .merge({"status" => status_in_words})
       .merge({"statuses" => statuses.reverse_chronological})
       .merge({"current_build_url" => current_build_url })
-      .merge({"readme_status" => readme_status_in_words})
+      .merge({"readme_status" => status.readme_valid_in_words})
       json["tracker"] = super(
         only: [:tracker_online, :current_velocity, :last_ten_velocities, :stories_to_accept_count, :open_stories_count, :iteration_story_state_counts],
         methods: ["volatility"],

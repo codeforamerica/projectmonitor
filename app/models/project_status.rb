@@ -45,4 +45,12 @@ class ProjectStatus < ActiveRecord::Base
     end
   end
 
+  def readme_valid_in_words
+    if valid_readme
+      'Readme Valid'
+    else
+      'Readme Broke'
+    end
+  end
+
 end
