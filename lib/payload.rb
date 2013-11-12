@@ -12,9 +12,6 @@ class Payload
 
   def each_status(project)
     status_content.each do |content|
-      Rails.logger.error "*********************"
-      Rails.logger.error "content: #{content.inspect}"
-      Rails.logger.error "success: #{parse_success(content)}"
       next if !content_ready?(content)
       yield ProjectStatus.new(
         success: parse_success(content),
