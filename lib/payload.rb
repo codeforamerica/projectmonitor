@@ -12,20 +12,7 @@ class Payload
 
   def each_status(project)
     status_content.each do |content|
-      Rails.logger.error "*********************"
-      Rails.logger.error "success: #{parse_success(content)}"
-      Rails.logger.error "url: #{parse_url(content)}"
-      Rails.logger.error "published_at: #{parse_build_id(content)}"
-      Rails.logger.error "valid_readme: #{project.has_valid_readme?}"
       next if !content_ready?(content)
-      foo = ProjectStatus.new(
-        success: parse_success(content),
-        url: parse_url(content),
-        build_id: parse_build_id(content),
-        published_at: parse_published_at(content),
-        valid_readme: project.has_valid_readme?
-      )
-      Rails.logger.error "status is valid? #{foo.valid?} #{foo.errors.each.join(" ")}"
       yield ProjectStatus.new(
         success: parse_success(content),
         url: parse_url(content),
