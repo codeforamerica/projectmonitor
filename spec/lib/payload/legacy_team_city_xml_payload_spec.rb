@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe LegacyTeamCityXmlPayload do
-  let(:project) { FactoryGirl.create(:team_city_project, name: 'brigade') }
+  let(:project) { FactoryGirl.create(:team_city_project, repo_name: 'brigade') }
   let(:content) { TeamcityCradiatorXmlExample.new(xml).read }
   let(:payload) { LegacyTeamCityXmlPayload.new }
 

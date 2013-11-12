@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TeamCityXmlPayload do
-  let(:project) { FactoryGirl.create(:team_city_rest_project, name: 'brigade') }
+  let(:project) { FactoryGirl.create(:team_city_rest_project, repo_name: 'brigade') }
   let(:payload) { TeamCityXmlPayload.new(project).tap{|p|p.status_content = content} }
 
   before do

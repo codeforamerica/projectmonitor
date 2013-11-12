@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108192938) do
+ActiveRecord::Schema.define(version: 20131112213529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20131108192938) do
     t.string   "circleci_auth_token"
     t.string   "circleci_project_name"
     t.string   "circleci_username"
+    t.string   "repo_name"
   end
 
   add_index "projects", ["aggregate_project_id"], name: "index_projects_on_aggregate_project_id", using: :btree

@@ -4,6 +4,9 @@
 %p
   = f.label :name
   = f.text_field :name
+%p
+  = f.label :repo_name
+  = f.text_field :repo_name
 - if f.object.creator.present?
   %p
     = f.label :creator
