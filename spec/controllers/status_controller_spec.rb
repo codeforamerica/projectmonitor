@@ -9,7 +9,7 @@ describe StatusController do
     end
 
     context "Travis project" do
-      let!(:project) { FactoryGirl.create(:travis_project, name: 'brigade') }
+      let!(:project) { FactoryGirl.create(:travis_project, repo_name: 'brigade') }
       let(:payload) do
       URI.encode '{
         "id": 4219108,
@@ -136,7 +136,7 @@ describe StatusController do
     end
 
     context "Jenkins project" do
-      let!(:project) { FactoryGirl.create(:project, name: 'brigade') }
+      let!(:project) { FactoryGirl.create(:project, repo_name: 'brigade') }
       let(:build_id) { 7 }
       let(:build_url) { "job/projectmonitor_ci_test/#{build_id}/" }
       let(:parsed_url) { "job/projectmonitor_ci_test/" }
@@ -194,7 +194,7 @@ describe StatusController do
     end
 
     context "TeamCity Rest project" do
-      let!(:project) { FactoryGirl.create(:team_city_rest_project, name: 'brigade') }
+      let!(:project) { FactoryGirl.create(:team_city_rest_project, repo_name: 'brigade') }
       let(:payload) do
         {
           "buildStatus"=> "Running",
@@ -248,7 +248,7 @@ describe StatusController do
     end
 
     context 'when processing the payload succeeded' do
-      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1', name: 'brigade')}
+      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1', repo_name: 'brigade')}
 
       let(:payload) do
         {'name'  => 'projectmonitor_ci_test',
@@ -279,7 +279,7 @@ describe StatusController do
 
     context 'when processing the payload failed' do
 
-      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1', name: 'brigade')}
+      let(:project) { FactoryGirl.build(:jenkins_project, guid: '1', repo_name: 'brigade')}
 
       before do
         Project.stub(:find_by_guid).and_return(project)

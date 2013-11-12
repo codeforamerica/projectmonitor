@@ -225,7 +225,7 @@ describe Project do
   end
 
   describe "#has_valid_readme?" do
-    let!(:project) { Project.new(name: "brigade", created_at: Time.now) }
+    let!(:project) { Project.new(repo_name: "brigade", created_at: Time.now) }
     let(:uri)      { "https://api.github.com/repos/codeforamerica/brigade/readme" }
 
     before do
