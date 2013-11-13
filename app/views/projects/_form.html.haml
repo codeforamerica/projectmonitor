@@ -1,12 +1,15 @@
 %p
   = f.label :code
   = f.text_field :code
+  %em Text displayed on status dashboard
 %p
   = f.label :name
   = f.text_field :name
+  %em Name used for managing app internally
 %p
   = f.label :repo_name
   = f.text_field :repo_name
+  %em Github Repository name
 - if f.object.creator.present?
   %p
     = f.label :creator
