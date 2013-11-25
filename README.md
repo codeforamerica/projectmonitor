@@ -17,15 +17,7 @@ ProjectMonitor currently supports:
   * [Semaphore](http://www.semaphoreapp.com/)
   * [CircleCI](http://circleci.com)
 
-We use ProjectMonitor internally at Pivotal Labs to display the status of the
-builds for all our client projects. We also have an instance of ProjectMonitor
-running at [ci.pivotallabs.com](http://ci.pivotallabs.com) that we use for
-displaying the status of the builds of various open source projects - both of
-projects Pivotal Labs maintains (such as Jasmine) and of non-Pivotal projects
-(such as Rails).
-
-[![](http://f.cl.ly/items/2R2U392y1D2B033I0z3J/Screen%20Shot%202013-04-02%20at%208.27.44%20PM.png)](http://ci.pivotallabs.com)
-
+This project is forked from from [pivotal/projectmonitor](https://github.com/pivotal/projectmonitor). CfA uses it to show the status of fellowship projects and internal tools.
 
 ## Installation
 
@@ -304,10 +296,6 @@ project's build server cannot be reached. If the build server is online but no
 builds have been run then the tile will appear in yellow. A pulsating tile indicates
 that a new build is currently in progress.
 
-### Project Ticker Codes
-Each tile shows the project's brief ticker code.  If not chosen explicitly,
-this will be the first 4 letters of the project.
-
 ### Build Statuses
 To the right of the ticker and name, each project lists the amount of time
 since the last build, followed by the build status history.  The last 5-8 builds
@@ -319,12 +307,6 @@ are marked with an x.
 ### Aggregate Projects
 Striped tiles indicate the aggregate status of several projects.  Click on an
 aggregate project to see the status of its component projects.
-
-### Pivotal Tracker Integration
-ProjectMonitor can display basic [Pivotal Tracker](http://pivotaltracker.com) information.  When
-configured, the current velocity will be displayed, as well as a graph showing points completed for
-the current iteration and the past 9 iterations.  To add this integration, you will need to add your
-Pivotal Tracker project ID and a Pivotal Tracker API key in the admin section.
 
 ### Admin Interface
 Click 'manage projects' at the lower right to edit project details.
