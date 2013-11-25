@@ -17,7 +17,7 @@ ProjectMonitor currently supports:
   * [Semaphore](http://www.semaphoreapp.com/)
   * [CircleCI](http://circleci.com)
 
-This project is forked from from [pivotal/projectmonitor](https://github.com/pivotal/projectmonitor). CfA uses it to show the status of fellowship projects and internal tools.
+This project is forked from [pivotal/projectmonitor](https://github.com/pivotal/projectmonitor). CfA uses it to show the status of fellowship projects and internal tools.
 
 ## Installation
 
