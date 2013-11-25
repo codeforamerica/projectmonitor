@@ -3,7 +3,6 @@ ruby "2.0.0"
 
 gem "dalli"
 gem "acts-as-taggable-on", :github => "mbleigh/acts-as-taggable-on"
-gem "airbrake"
 gem "bourbon"
 gem "choices"
 gem "daemons"
