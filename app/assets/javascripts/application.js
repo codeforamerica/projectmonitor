@@ -18,9 +18,6 @@
 //= require projectEdit
 //= require versionCheck
 //= require projectCheck
-//= require githubRefresh
-//= require herokuRefresh
-//= require rubygemsRefresh
 
 $(function() {
   ProjectEdit.init();
@@ -28,7 +25,4 @@ $(function() {
   TagSwitcher.init();
   VersionCheck.init();
   ProjectCheck.init();
-  GithubRefresh.init();
-  HerokuRefresh.init();
-  RubyGemsRefresh.init();
 });
