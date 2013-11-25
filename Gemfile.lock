@@ -58,10 +58,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
-    airbrake (3.1.12)
-      activesupport
-      builder
-      json
     archive-tar-minitar (0.5.2)
     arel (4.0.0)
     atomic (1.1.14)
@@ -399,7 +395,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on!
-  airbrake
   awesome_print
   bourbon
   capybara
