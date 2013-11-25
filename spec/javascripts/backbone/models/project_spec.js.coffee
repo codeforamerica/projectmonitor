@@ -5,11 +5,6 @@ describe "ProjectMonitor.Models.Project", ->
     expect(project.get("build")).toBeDefined()
     expect(project.get("tracker")).toBeDefined()
 
-  it "should not include undefined airbrake model", ->
-    project = BackboneFactory.create("project")
-
-    expect(project.get("tracker")).not.toBeDefined()
-
   describe "#update", ->
     beforeEach ->
       @build_changed = jasmine.createSpy()

@@ -12,8 +12,6 @@
 
 //= require_tree ./initializers
 
-//= require autocomplete
-//= require tagSwitcher
 //= require backtraceHide
 //= require projectEdit
 //= require versionCheck
@@ -22,7 +20,6 @@
 $(function() {
   ProjectEdit.init();
   BacktraceHide.init();
-  TagSwitcher.init();
   VersionCheck.init();
   ProjectCheck.init();
 });

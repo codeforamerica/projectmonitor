@@ -23,13 +23,6 @@
 %p
   = f.label :aggregate_project_id, "Aggregate Project"
   = collection_select(:project, :aggregate_project_id, AggregateProject.all, :id, :name, {:prompt => false, :disabled => lambda { |ap| !ap.enabled? }, :include_blank => true})
-%p
-  :javascript
-    autocomplete("#project_tag_list", #{ ActsAsTaggableOn::Tag.all.map(&:name) });
-  = f.label :tag_list, "Tags"
-  = f.text_field :tag_list, :size=>40
-  %em
-    Separate with commas
 %hr
 %fieldset#build_setup
   %h2 Build Setup
