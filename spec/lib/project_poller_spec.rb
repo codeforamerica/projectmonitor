@@ -140,51 +140,6 @@ describe ProjectPoller do
         end
       end
     end
-
-    context 'the tracker poller periodic timer has elapsed' do
-      let(:connection) { double(:connection, get: request) }
-      let(:request) { double(:request, callback: nil, errback: nil) }
-      let(:workload) { double(:workload, complete?: nil, unfinished_job_descriptions: {}) }
-
-      before do
-        poller.stub(:poll_projects) # XXX: Because rspec doesn't support conditional yields
-        EM.stub(:add_periodic_timer).and_yield.and_yield
-        EM::HttpRequest.stub(:new).and_return(connection)
-        Project.stub(:tracker_updateable).and_return(double.as_null_object)
-        ProjectTrackerWorkloadHandler.stub(:new).and_return(double.as_null_object)
-        PollerWorkload.stub(:new).and_return(workload)
-      end
-
-      it 'should get the tracker updateable projects' do
-        Project.should_receive(:tracker_updateable)
-      end
-
-      context 'and there are tracker updateable projects' do
-        let(:project) { double(:jenkins_project, tracker_project_url: double, tracker_auth_token: double) }
-
-        before do
-          Project.stub_chain(:tracker_updateable, :find_each).and_yield(project)
-        end
-
-        it 'should create a workload' do
-          PollerWorkload.should_receive(:new)
-        end
-
-        context 'when there are jobs to complete' do
-          before do
-            workload.stub(:unfinished_job_descriptions).and_return({tracker_project_url: project.tracker_project_url})
-          end
-
-          it 'should set the tracker header' do
-            connection.should_receive(:get).with(redirects: 10, head: {'X-TrackerToken' => project.tracker_auth_token})
-          end
-
-          it 'should be initialized with the tracker_url and timeouts' do
-            EM::HttpRequest.should_receive(:new).with("http://"+project.tracker_project_url, connect_timeout: 45, inactivity_timeout: 30)
-          end
-        end
-      end
-    end
   end
 
   describe '#stop' do

@@ -86,21 +86,6 @@ class ProjectsController < ApplicationController
     }
   end
 
-  def validate_tracker_project
-    project = Project.find(params[:id])
-    status = :accepted
-    if project.tracker_validation_status.present? &&
-      project.tracker_validation_status[:auth_token] == params[:auth_token] &&
-      project.tracker_validation_status[:project_id] == params[:project_id]
-      status = project.tracker_validation_status[:status]
-    else
-      TrackerProjectValidator.delay(priority: 0).validate(params)
-      project.tracker_validation_status = {auth_token: params[:auth_token], project_id: params[:project_id], status: :accepted}
-      project.save!
-    end
-    head status
-  end
-
   private
 
   def load_project
@@ -126,8 +111,7 @@ class ProjectsController < ApplicationController
                                        build_branch code cruise_control_rss_feed_url enabled
                                        jenkins_base_url jenkins_build_name name online
                                        semaphore_api_url tag_list tddium_auth_token tddium_project_name
-                                       team_city_base_url team_city_build_name tracker_auth_token
-                                       tracker_online tracker_project_id travis_github_account
+                                       team_city_base_url team_city_build_name travis_github_account
                                        travis_repository type verify_ssl webhooks_enabled
                                        circleci_username circleci_project_name circleci_auth_token repo_name))
   end

@@ -216,16 +216,6 @@ form {
  h1 { margin-bottom: 10px; }
 }
 
-.projects.edit, .projects.new {
-  #project_tracker_project_id_error, #project_tracker_auth_token_error {
-    display: inline;
-    color: $very-dark-red;
-  }
-  #project_tracker_project_id_success,#project_tracker_auth_token_success {
-    display: inline;
-    color: $very-dark-green;
-  }
-}
 .projects td {
   .last_status.failed a {
     color: $very-dark-red;

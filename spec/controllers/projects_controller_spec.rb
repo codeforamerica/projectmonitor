@@ -172,15 +172,6 @@ describe ProjectsController do
       it { should redirect_to edit_configuration_path }
     end
 
-    describe "#validate_tracker_project" do
-      it "should enqueue a job" do
-        project = projects(:jenkins_project)
-        TrackerProjectValidator.should_receive(:delay) { TrackerProjectValidator }
-        TrackerProjectValidator.should_receive :validate
-        post :validate_tracker_project, { auth_token: "12354", project_id: "98765", id: project.id }
-      end
-    end
-
     describe '#validate_build_info' do
       let(:parsed_response) { JSON.parse(post(:validate_build_info, {project: {type: TravisProject}}).body)}
 
