@@ -15,7 +15,6 @@ class ProjectPoller
   def initialize
     @workloads = {}
     @poll_period = 60
-    @tracker_poll_period = 120
     @connection_timeout = 45
     @inactivity_timeout = 30
     @max_follow_redirects = 10
@@ -29,10 +28,6 @@ class ProjectPoller
       EM.add_periodic_timer(@poll_period) do
         poll_projects
       end
-
-      EM.add_periodic_timer(@tracker_poll_period) do
-        poll_tracker
-      end
     end
   end
 
@@ -42,10 +37,6 @@ class ProjectPoller
     EM.run do
       poll_projects
     end
-
-    EM.run do
-      poll_tracker
-    end
   end
 
   def stop
@@ -53,17 +44,6 @@ class ProjectPoller
   end
 
   private
-
-  def poll_tracker
-    Project.tracker_updateable.find_each do |project|
-      workload = find_or_create_workload(project, ProjectTrackerWorkloadHandler.new(project))
-
-      workload.unfinished_job_descriptions.each do |job_id, description|
-        request = create_tracker_request(project, description)
-        add_workload_handlers(project, workload, job_id, request)
-      end
-    end
-  end
 
   def poll_projects
     Project.updateable.find_each do |project|
@@ -74,10 +54,6 @@ class ProjectPoller
         add_workload_handlers(project, workload, job_id, request)
       end
     end
-  end
-
-  def create_tracker_request(project, url)
-    create_request(url, head: {'X-TrackerToken' => project.tracker_auth_token})
   end
 
   def create_ci_request(project, url)

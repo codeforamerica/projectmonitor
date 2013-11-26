@@ -88,29 +88,6 @@
       %br
       %label
       %input{ class: 'refresh', type: 'button', value: 'Refresh' }
-%hr
-%fieldset#tracker_setup
-  %h3 Tracker Setup
-  %p
-    = f.label :tracker_project_id, "Tracker project id"
-    = f.text_field :tracker_project_id
-    %span#project_tracker_project_id_status
-      %span.success.hide &#10004;
-      %span.failure.hide &#10008;
-  %p
-    = f.label :tracker_auth_token, "Tracker auth token"
-    = f.text_field :tracker_auth_token
-    %span#project_tracker_auth_token_status
-      %span.success.hide &#10004;
-      %span.failure.hide &#10008;
-  %p
-    = f.label :tracker_online, "Tracker status"
-    = f.hidden_field :tracker_online
-    %span#tracker_status
-      %span.success.hide OK
-      %span.pending.hide &nbsp;
-      %span.unconfigured.hide Unconfigured
-      %span.failure.hide
 %p
   %em
     Server time is #{Time.now}
