@@ -35,7 +35,6 @@ gem 'pg'
 gem "eventmachine"
 # NOTE: >= 1.0.0.beta.4 is required for connection timeout support
 gem "em-http-request", ">= 1.0.0.beta.4"
-gem 'newrelic_rpm'
 gem 'hashie'
 gem 'unicorn'
 # NOTE: this can be removed once we transition completely to Heroku
