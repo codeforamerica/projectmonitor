@@ -1,8 +1,6 @@
 %h1== Projects #{link_to 'Add Project +', new_project_path, :class => "button add_button"}
 %br
-== Filter by Tag #{select_tag(:tag, options_for_select(@tags.insert(0, '')))}
 
-= hidden_field_tag(:current_tag, params[:tags])
 %table.projects
   %tr
     %th Code
@@ -11,7 +9,6 @@
     %th Enabled?
     %th Last Status
     %th Aggregate
-    %th Tags
     %th Last Edit
     %th Webhooks
     %th Actions
@@ -31,7 +28,6 @@
         %td
           = project_last_status(project)
       %td{:style => "text-align: center;"}= project.aggregate_project.present? ? project.aggregate_project.name : ""
-      %td.tag_list= project.tag_list
       %td.age= project.updated_at.present? ? time_ago_in_words(project.updated_at) : "N/A"
       %td.webhooks= project.webhooks_enabled ? "✓" : "x"
       %td.actions
@@ -44,7 +40,6 @@
   %tr
     %th Name
     %th Enabled?
-    %th Tags
     %th Count
     %th Last Edit
     %th Actions
@@ -57,7 +52,6 @@
           ✓
         - else
           %span{:style => "color: #AA1224;"} ✕
-      %td.tag_list= aggregate_project.tag_list
       %td.count= aggregate_project.projects.count
       %td.age= aggregate_project.updated_at.present? ? time_ago_in_words(aggregate_project.updated_at) : "N/A"
       %td.actions

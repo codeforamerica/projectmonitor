@@ -7,9 +7,6 @@
 %p
   = f.label :enabled, "Enabled?"
   = f.check_box :enabled
-%p
-  = f.label :tag_list, "Tags"
-  = f.text_field :tag_list, :size=>40
-  %em (separate with commas)
+
 %p{:style => "text-align: right; margin-bottom: 0;"}
   = submit_tag @aggregate_project.new_record? ? "Create" : "Update"

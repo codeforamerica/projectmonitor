@@ -7,8 +7,6 @@ describe HomeController do
   let!(:aggregate_projects) { [aggregate_project] }
 
   describe "#index" do
-    let(:tags) { 'bleecker' }
-
     before do
       AggregateProject.stub(:displayable).and_return(aggregate_projects)
       Project.stub_chain(:standalone, :displayable).and_return(projects)
@@ -20,10 +18,10 @@ describe HomeController do
       assigns(:projects).should == (projects + aggregate_projects)
     end
 
-    it 'gets a collection of aggregate projects by tag' do
-      AggregateProject.should_receive(:displayable).with(tags)
+    it 'gets a collection of aggregate projects' do
+      AggregateProject.should_receive(:displayable)
       projects.stub(:take).and_return(projects)
-      get :index, tags: tags
+      get :index
     end
   end
 
@@ -42,18 +40,16 @@ describe HomeController do
   end
 
   context 'when the aggregate project id is not specified' do
-    let(:tags) { 'bleecker' }
-
     before do
       AggregateProject.stub(:displayable).and_return(aggregate_projects)
       Project.stub_chain(:standalone, :displayable).and_return(projects)
       projects.stub_chain(:concat, :sort_by).and_return(projects)
     end
 
-    it 'gets a collection of aggregate projects by tag' do
-      AggregateProject.should_receive(:displayable).with(tags)
+    it 'gets a collection of aggregate projects' do
+      AggregateProject.should_receive(:displayable)
       projects.stub(:take).and_return(projects)
-      get :index, tags: tags
+      get :index
     end
   end
 
