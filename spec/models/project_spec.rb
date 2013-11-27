@@ -128,22 +128,6 @@ describe Project do
       it { should_not include disabled_nil_project }
     end
 
-    describe '.tracker_updateable' do
-      subject { Project.tracker_updateable }
-
-      let!(:updateable1) { FactoryGirl.create(:jenkins_project, tracker_auth_token: 'aafaf', tracker_project_id: '1') }
-      let!(:updateable2) { FactoryGirl.create(:travis_project, tracker_auth_token: 'aafaf', tracker_project_id: '1') }
-      let!(:not_updateable1) { FactoryGirl.create(:jenkins_project, tracker_project_id: '1') }
-      let!(:not_updateable2) { FactoryGirl.create(:jenkins_project, tracker_auth_token: 'aafaf') }
-      let!(:not_updateable3) { FactoryGirl.create(:travis_project, tracker_project_id: '', tracker_auth_token: '') }
-
-      it { should include updateable1 }
-      it { should include updateable2 }
-      it { should_not include not_updateable1 }
-      it { should_not include not_updateable2 }
-      it { should_not include not_updateable3 }
-    end
-
     describe '.displayable' do
       subject { Project.displayable tags }
 
@@ -317,32 +301,6 @@ describe Project do
 
       it "returns new status associated with the project" do
         project.status.project.should == project
-      end
-    end
-  end
-
-  describe "tracker integration" do
-    let(:project) { Project.new }
-
-    describe "#tracker_project?" do
-      it "should return true if the project has a tracker_project_id and a tracker_auth_token" do
-        project.tracker_project_id = double(:tracker_project_id)
-        project.tracker_auth_token = double(:tracker_auth_token)
-        project.tracker_project?.should be(true)
-      end
-
-      it "should return false if the project has a blank tracker_project_id AND a blank tracker_auth_token" do
-        project.tracker_project_id = ""
-        project.tracker_auth_token = ""
-        project.tracker_project?.should be(false)
-      end
-
-      it "should return false if the project doesn't have tracker_project_id" do
-        project.tracker_project?.should be(false)
-      end
-
-      it "should return false if the project doesn't have tracker_auth_token" do
-        project.tracker_project?.should be(false)
       end
     end
   end
@@ -657,20 +615,6 @@ describe Project do
         end
       end
     end
-
-    context "tracker" do
-      let(:project) { FactoryGirl.build(:project_with_tracker_integration) }
-
-      it "should have a tracker properties" do
-        hash = project.as_json
-
-        hash["tracker"]["current_velocity"].should == project.current_velocity
-        hash["tracker"]["volatility"].should == project.volatility
-        hash["tracker"]["last_ten_velocities"].should == project.last_ten_velocities
-        hash["tracker"]["stories_to_accept_count"].should == project.stories_to_accept_count
-        hash["tracker"]["open_stories_count"].should == project.open_stories_count
-      end
-    end
   end
 
   describe "#status_in_words" do
@@ -702,48 +646,6 @@ describe Project do
 
     context "when project none of the statuses" do
       it { should == "offline" }
-    end
-  end
-
-  describe "#volatility" do
-    context "when project has velocities" do
-      let(:project) { FactoryGirl.create(:project_with_tracker_integration)}
-
-      it "should return correct volatility" do
-        project.volatility.should == 55
-      end
-    end
-
-    context "when project has this historical velocity" do
-      let(:project) { FactoryGirl.create(:project_with_tracker_integration,
-                                          last_ten_velocities: [ 0,0,4,0,0,7,4,15,0,0 ]) }
-      it "should return this volatility" do
-        project.volatility.should == 163
-      end
-    end
-
-    context "when project has no velocity" do
-      let(:project) { FactoryGirl.create(:project_with_tracker_integration,
-                                          last_ten_velocities: [ 0,0,0,0,0,0,0,0,0,0 ])}
-      it "should return zero volatility" do
-        project.volatility.should == 0
-      end
-    end
-
-    context "when project has no velocity" do
-      let(:project) { FactoryGirl.create(:project_with_tracker_integration,
-                                          last_ten_velocities: [ 0,0,0,0,0,0,0,0,0,0 ])}
-      it "should return zero volatility" do
-        project.volatility.should == 0
-      end
-    end
-
-    context "when project has no velocities" do
-      let(:project) { FactoryGirl.build(:project)}
-
-      it "should return correct volatility" do
-        project.volatility.should == 0
-      end
     end
   end
 

@@ -7,7 +7,6 @@ class ProjectMonitor.Views.ProjectView extends Backbone.View
   initialize: (options) ->
     @subviews = []
     @subviews.push(new ProjectMonitor.Views.BuildView(model: @model.get("build"))) if @model.get("build")
-    @subviews.push(new ProjectMonitor.Views.TrackerView(model: @model.get("tracker"))) if @model.get("tracker")
     @.registerSubView(subview) for subview in @subviews
     @$el.data(project_id: @model.get("project_id"))
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112213529) do
+ActiveRecord::Schema.define(version: 20131126180413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,11 +87,8 @@ ActiveRecord::Schema.define(version: 20131112213529) do
     t.integer  "deprecated_latest_status_id"
     t.string   "code"
     t.string   "deprecated_location",          limit: 20
-    t.string   "tracker_project_id"
-    t.string   "tracker_auth_token"
     t.integer  "current_velocity",                        default: 0,     null: false
     t.string   "last_ten_velocities"
-    t.boolean  "tracker_online"
     t.string   "cruise_control_rss_feed_url"
     t.string   "jenkins_base_url"
     t.string   "jenkins_build_name"
@@ -104,7 +101,6 @@ ActiveRecord::Schema.define(version: 20131112213529) do
     t.boolean  "online",                                  default: false
     t.string   "guid"
     t.boolean  "webhooks_enabled"
-    t.string   "tracker_validation_status"
     t.datetime "last_refreshed_at"
     t.string   "semaphore_api_url"
     t.string   "parsed_url"

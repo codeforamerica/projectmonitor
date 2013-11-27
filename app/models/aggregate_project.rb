@@ -37,10 +37,6 @@ validates :name, presence: true
     projects.present? && projects.all?(&:online?)
   end
 
-  def tracker_project?
-    false
-  end
-
   def code
     super.presence || name.downcase.gsub(" ", '')[0..3]
   end

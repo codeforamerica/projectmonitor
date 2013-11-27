@@ -32,8 +32,6 @@ describe AggregateProject do
 
   let(:aggregate_project) { AggregateProject.new(name: "Aggregate Project") }
 
-  it { should_not be_tracker_project }
-
   describe "callbacks" do
     subject { aggregate_project }
 
