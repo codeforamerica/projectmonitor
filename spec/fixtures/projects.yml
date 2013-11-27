@@ -88,7 +88,7 @@ internal_project2:
   online: true
   aggregate_project: internal_projects_aggregate
 internal_project3:
-  name: Aggregated Internal Project with Different Tag
+  name: Aggregated Internal Project 3
   type: CruiseControlProject
   cruise_control_rss_feed_url: http://never-ci:3333/projects/internal_project3.rss
   enabled: true

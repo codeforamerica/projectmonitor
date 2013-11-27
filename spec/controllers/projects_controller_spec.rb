@@ -19,7 +19,6 @@ describe ProjectsController do
       let!(:projects) { [FactoryGirl.create(:jenkins_project)] }
       let!(:aggregate_project) { FactoryGirl.create(:aggregate_project) }
       let!(:aggregate_projects) { [aggregate_project] }
-      let(:tags) { 'bleecker' }
 
       before do
         AggregateProject.stub(:displayable).and_return(aggregate_projects)
@@ -32,12 +31,11 @@ describe ProjectsController do
         get :index, format: :json
       end
 
-      it 'gets a collection of aggregate projects by tag' do
-        AggregateProject.should_receive(:displayable).with(tags)
-        Project.standalone.should_receive(:displayable).with(tags)
-        get :index, tags: tags, format: :json
+      it 'gets a collection of aggregate projects' do
+        AggregateProject.should_receive(:displayable)
+        Project.standalone.should_receive(:displayable)
+        get :index, format: :json
       end
-
     end
 
     describe "#create" do

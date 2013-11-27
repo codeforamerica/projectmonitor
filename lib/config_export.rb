@@ -68,15 +68,11 @@ module ConfigExport
     private
 
     def exported_project_attributes(project)
-      attrs = project.attributes.slice(*PROJECT_ATTRIBUTES)
-      attrs['tag_list'] = project.tag_list.to_a
-      attrs
+      project.attributes.slice(*PROJECT_ATTRIBUTES)
     end
 
     def exported_aggregate_project_attributes(ap)
-      attrs = ap.attributes.slice(*AGGREGATE_PROJECT_ATTRIBUTES)
-      attrs['tag_list'] = ap.tag_list.to_a
-      attrs
+      ap.attributes.slice(*AGGREGATE_PROJECT_ATTRIBUTES)
     end
   end
 

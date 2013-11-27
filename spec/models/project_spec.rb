@@ -129,81 +129,11 @@ describe Project do
     end
 
     describe '.displayable' do
-      subject { Project.displayable tags }
+      subject { Project.displayable }
 
-      context "when supplying tags" do
-        let(:tags) { "southeast, northwest" }
-
-        it "should find tagged with tags" do
-          scope = double
-          Project.stub_chain(:enabled, :order) { scope }
-          scope.should_receive(:tagged_with).with(tags, {:any => true})
-          subject
-        end
-
-        context "when displayable projects are tagged" do
-          before do
-            projects(:socialitis).update_attributes(tag_list: tags)
-            projects(:jenkins_project).update_attributes(tag_list: "southeast")
-            projects(:pivots).update_attributes(tag_list: [])
-          end
-
-          it "should return scoped projects" do
-            subject.should include(projects(:socialitis), projects(:jenkins_project))
-            subject.should_not include projects(:pivots)
-          end
-        end
-
-      end
-
-      context "when not supplying tags" do
-        let(:tags) { nil }
-
-        it "should return scoped projects" do
-          subject.should include projects(:pivots)
-          subject.should include projects(:socialitis)
-        end
-      end
-
-    end
-
-    describe '.tagged' do
-      subject { Project.tagged tags }
-
-      context "when supplying tags" do
-        let(:tags) { "southeast, northwest" }
-
-        it "should find tagged with tags" do
-          Project.should_receive(:tagged_with).with(tags, {:any => true})
-          subject
-        end
-
-        context "when displayable projects are tagged" do
-          before do
-            projects(:socialitis).update_attributes(tag_list: tags)
-            projects(:disabled).update_attributes(tag_list: tags)
-            projects(:pivots).update_attributes(tag_list: [])
-          end
-
-          it "should return scoped projects" do
-            subject.should include projects(:socialitis)
-            subject.should include projects(:disabled)
-            subject.should_not include projects(:pivots)
-          end
-        end
-      end
-
-      context "when not supplying tags" do
-        let(:tags) { nil }
-
-        it "should return scoped projects" do
-          subject.should include projects(:pivots)
-          subject.should include projects(:socialitis)
-        end
-
-        it "does not filter by enabled" do
-          subject.should include projects(:disabled)
-        end
+      it "should return scoped projects" do
+        subject.should include projects(:pivots)
+        subject.should include projects(:socialitis)
       end
     end
   end

@@ -25,20 +25,10 @@ class Project < ActiveRecord::Base
     .where(webhooks_enabled: [nil, false])
   }
 
-  scope :displayable, lambda {|tags|
-    scope = enabled.order('code ASC')
-    return scope.tagged_with(tags, :any => true) if tags
-    scope
+  scope :displayable, lambda {
+    enabled.order('code ASC')
   }
 
-  scope :tagged, lambda { |tags|
-    return Project.tagged_with(tags, :any => true) if tags
-    all
-  }
-
-  unless (ARGV & ['assets:precompile', 'assets:clean']).any?
-    acts_as_taggable
-  end
   validates :name, presence: true
   validates :type, presence: true
 
