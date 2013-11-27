@@ -5,7 +5,7 @@ class ProjectFeedDecorator < ApplicationDecorator
                             :auth_password,
                             :deprecated_feed_url,
                             :deprecated_latest_status_id],
-                   methods: :tag_list})
+                  })
   end
 
 end

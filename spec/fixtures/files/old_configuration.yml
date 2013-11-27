@@ -3,7 +3,6 @@ aggregate_projects:
 - id: 6
   name: Tracker
   enabled: true
-  tag_list: []
 projects:
 - name: Tracker
   deprecated_feed_url: http://tracker-ci-b.denver.pivotallabs.com:3333/projects/Tracker.rss
@@ -38,5 +37,3 @@ projects:
   team_city_rest_build_type_id:
   travis_github_account:
   travis_repository:
-  tag_list:
-  - internal

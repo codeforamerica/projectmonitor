@@ -104,7 +104,7 @@ the [whenever documentation](https://github.com/javan/whenever) for instructions
 on how to integrate it with your deployment. Refer to [Heroku scheduler documentation](https://devcenter.heroku.com/articles/scheduler) for instructions
 on how to integrate the rake task with your Heroku deployment.
 
-The default schedule clears log entries and cleans up unused tags daily, and fetches project statuses every 3 minutes.
+The default schedule clears log entries and fetches project statuses every 3 minutes.
 
 The fetch project task is what goes out and hits the individual builds. We find
 that if you do this too frequently it can swamp the builds. On the other hand,
@@ -310,10 +310,6 @@ aggregate project to see the status of its component projects.
 
 ### Admin Interface
 Click 'manage projects' at the lower right to edit project details.
-
-## Tags
-You can enter tags for a project (separated by commas) on the project edit page.  You can then have ProjectMonitor display
-only projects that match a set of tags by going to /?tags=tag1,tag2
 
 ## CI
 CI for ProjectMonitor is [here](http://travis-ci.org/pivotal/projectmonitor), and it's aggregated at [ci.pivotallabs.com](http://ci.pivotallabs.com)

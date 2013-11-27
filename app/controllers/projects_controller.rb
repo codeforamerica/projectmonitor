@@ -9,8 +9,8 @@ class ProjectsController < ApplicationController
     if params[:aggregate_project_id].present?
       projects = AggregateProject.find(params[:aggregate_project_id]).projects
     else
-      standalone_projects = Project.standalone.displayable(params[:tags])
-      aggregate_projects = AggregateProject.displayable(params[:tags])
+      standalone_projects = Project.standalone.displayable
+      aggregate_projects = AggregateProject.displayable
       projects = standalone_projects + aggregate_projects
     end
 
@@ -110,7 +110,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(%i(aggregate_project_id auth_password auth_username
                                        build_branch code cruise_control_rss_feed_url enabled
                                        jenkins_base_url jenkins_build_name name online
-                                       semaphore_api_url tag_list tddium_auth_token tddium_project_name
+                                       semaphore_api_url tddium_auth_token tddium_project_name
                                        team_city_base_url team_city_build_name travis_github_account
                                        travis_repository type verify_ssl webhooks_enabled
                                        circleci_username circleci_project_name circleci_auth_token repo_name))
