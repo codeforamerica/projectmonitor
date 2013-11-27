@@ -5,20 +5,10 @@ class AggregateProject < ActiveRecord::Base
 
   scope :enabled, -> { where(enabled: true) }
   scope :with_statuses, -> { joins(:projects => :statuses).uniq }
-  scope :displayable, lambda { |tags=nil|
-    scope = enabled.joins(:projects).select("DISTINCT aggregate_projects.*").order('code ASC')
-    return scope.tagged_with(tags, :any => true) if tags
-    scope
+  scope :displayable, lambda {
+    enabled.joins(:projects).select("DISTINCT aggregate_projects.*").order('code ASC')
   }
 
-  scope :tagged, lambda { |tags|
-    return tagged_with(tags, :any => true) if tags
-    all
-  }
-
-unless (ARGV & ['assets:precompile', 'assets:clean']).any?
-  acts_as_taggable
-end
 validates :name, presence: true
 
   def red?

@@ -6,13 +6,6 @@ GIT
     ruby-openid (2.2.3)
 
 GIT
-  remote: git://github.com/mbleigh/acts-as-taggable-on.git
-  revision: 2f2768f854324000ea28d441ef3c0a378158ed40
-  specs:
-    acts-as-taggable-on (2.4.2.pre)
-      rails (>= 3, < 5)
-
-GIT
   remote: git://github.com/pivotal/jasmine-gem.git
   revision: e8105401b6ed9d4b462bbbaf508ab7ac8a77a245
   specs:
@@ -393,7 +386,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on!
   awesome_print
   bourbon
   capybara

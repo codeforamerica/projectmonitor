@@ -24,27 +24,17 @@ describe ConfigurationController do
   end
 
   describe '#edit' do
-    let(:tags) { 'nyc' }
 
     it 'should find all the projects' do
       project_scope = double.as_null_object
-      project_scope.should_receive(:tagged).with(tags)
       Project.should_receive(:order).with(:name).and_return(project_scope)
-      get :edit, tags: tags
+      get :edit
     end
 
     it 'should find all the aggregate projects' do
       aggregate_scope = double
-      aggregate_scope.should_receive(:tagged).with(tags)
       AggregateProject.should_receive(:order).with(:name).and_return(aggregate_scope)
-      get :edit, tags: tags
-    end
-
-    it 'gets a list of all the tags in the system' do
-      tag_list = [ double(:tag, name: 'nyc') ]
-      ActsAsTaggableOn::Tag.should_receive(:order).with(:name).and_return tag_list
-      get :edit, tags: tags
-      assigns(:tags).should == ['nyc']
+      get :edit
     end
   end
 end

@@ -10,7 +10,7 @@ describe ConfigExport do
     end
 
     it "should create new project when there is no guid" do
-      FactoryGirl.create(:jenkins_project, name: 'Foo', tag_list: %w[foo bar baz])
+      FactoryGirl.create(:jenkins_project, name: 'Foo')
       yaml = YAML.load(ConfigExport.export)
       yaml['projects'].first.delete('guid')
 
@@ -20,15 +20,13 @@ describe ConfigExport do
     end
 
     it "should update the project when there is a guid" do
-      jenkins_project = FactoryGirl.create(:jenkins_project, name: 'Foo', tag_list: %w[foo bar baz])
+      jenkins_project = FactoryGirl.create(:jenkins_project, name: 'Foo')
       yaml = YAML.load(ConfigExport.export)
       yaml['projects'].first['name']= 'New name'
-      yaml['projects'].first['tag_list']= %w[a b c]
 
       ConfigExport.import yaml.to_yaml
 
       jenkins_project.reload.name.should == 'New name'
-      jenkins_project.tag_list.should =~ %w[a b c]
     end
 
     context 'given an old configuration file with obsolete fields' do
