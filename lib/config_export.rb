@@ -10,8 +10,6 @@ module ConfigExport
                           aggregate_project_id
                           deprecated_latest_status_id
                           code
-                          tracker_project_id
-                          tracker_auth_token
                           cruise_control_rss_feed_url
                           jenkins_base_url
                           jenkins_build_name

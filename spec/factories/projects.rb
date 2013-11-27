@@ -5,16 +5,6 @@ FactoryGirl.define do
     jenkins_base_url "http://www.example.com"
     jenkins_build_name "project"
 
-    factory :project_with_tracker_integration do
-      tracker_project_id "123"
-      tracker_auth_token "foo"
-      tracker_online true
-      current_velocity 15
-      stories_to_accept_count 7
-      open_stories_count 16
-      last_ten_velocities [ 1,2,3,4,5,6,7,8,9,10 ]
-    end
-
     factory :jenkins_project
   end
 

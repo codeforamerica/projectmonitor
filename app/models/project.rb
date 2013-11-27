@@ -15,7 +15,6 @@ class Project < ActiveRecord::Base
 
   serialize :last_ten_velocities, Array
   serialize :iteration_story_state_counts, JSON
-  serialize :tracker_validation_status, Hash
 
   scope :enabled, -> { where(enabled: true) }
   scope :standalone, -> { where(aggregate_project_id: nil) }
@@ -24,12 +23,6 @@ class Project < ActiveRecord::Base
   scope :updateable, -> {
     enabled
     .where(webhooks_enabled: [nil, false])
-  }
-
-  scope :tracker_updateable, -> {
-    enabled
-    .where('tracker_auth_token is NOT NULL').where('tracker_auth_token != ?', '')
-    .where('tracker_project_id is NOT NULL').where('tracker_project_id != ?', '')
   }
 
   scope :displayable, lambda {|tags|
@@ -129,10 +122,6 @@ class Project < ActiveRecord::Base
     return "yellow" if yellow?
   end
 
-  def tracker_configured?
-    tracker_project_id.present? && tracker_auth_token.present?
-  end
-
   def red_since
     breaking_build.try(:published_at)
   end
@@ -148,18 +137,6 @@ class Project < ActiveRecord::Base
 
   def build_status_url
     raise NotImplementedError, "Must implement build_status_url in subclasses"
-  end
-
-  def tracker_project_url
-    "https://www.pivotaltracker.com/services/v3/projects/#{tracker_project_id}"
-  end
-
-  def tracker_iterations_url
-    "https://www.pivotaltracker.com/services/v3/projects/#{tracker_project_id}/iterations/done?offset=-10"
-  end
-
-  def tracker_current_iteration_url
-    "https://www.pivotaltracker.com/services/v3/projects/#{tracker_project_id}/iterations/current"
   end
 
   def to_s
@@ -189,10 +166,6 @@ class Project < ActiveRecord::Base
     auth_username.present? || auth_password.present?
   end
 
-  def tracker_project?
-    tracker_project_id.present? &&  tracker_auth_token.present?
-  end
-
   def payload
     raise NotImplementedError, "Must implement payload in subclasses"
   end
@@ -220,11 +193,7 @@ class Project < ActiveRecord::Base
       .merge({"statuses" => statuses.reverse_chronological})
       .merge({"current_build_url" => current_build_url })
       .merge({"readme_status" => status.readme_valid_in_words})
-      json["tracker"] = super(
-        only: [:tracker_online, :current_velocity, :last_ten_velocities, :stories_to_accept_count, :open_stories_count, :iteration_story_state_counts],
-        methods: ["volatility"],
-        root:false) if tracker_project_id?
-        json
+    json
   end
 
   def volatility

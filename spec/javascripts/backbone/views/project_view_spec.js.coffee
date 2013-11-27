@@ -22,8 +22,5 @@ describe "ProjectMonitor.Views.ProjectView", ->
     it "should include build view", ->
       expect($("section")).toContain("article.build")
 
-    it "should include tracker view", ->
-      expect($("section")).toContain("article.tracker")
-
     it "should include a link to the current build url", ->
       expect($("section .code a").attr('href')).toEqual(@model.get("build").get("current_build_url"))

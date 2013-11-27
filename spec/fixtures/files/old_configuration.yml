@@ -29,8 +29,6 @@ projects:
   ec2_elastic_ip: ''
   code: ''
   location: Denver
-  tracker_project_id: ''
-  tracker_auth_token: ''
   cruise_control_rss_feed_url: http://tracker-ci-b.denver.pivotallabs.com:3333/projects/Tracker.rss
   jenkins_base_url:
   jenkins_build_name:
