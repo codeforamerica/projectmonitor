@@ -34,7 +34,7 @@ var ProjectCheck = function() {
         if (!_.isEqual(ProjectCheck.mapIds(data), ProjectCheck.mapIds(projects))) {
           ProjectMonitor.Window.reload();
         }
-        scheduleRefresh();
+        // scheduleRefresh();
       });
     },
 

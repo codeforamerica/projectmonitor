@@ -21,7 +21,7 @@ var VersionCheck = function() {
       versionRequest(function(response) {
         window.currentVersion = response;
       });
-      scheduleRefresh();
+      // scheduleRefresh();
     },
 
     checkVersion: function() {
@@ -30,7 +30,7 @@ var VersionCheck = function() {
           ProjectMonitor.Window.reload();
         }
       });
-      scheduleRefresh();
+      // scheduleRefresh();
     },
 
     currentVersion: function() {
