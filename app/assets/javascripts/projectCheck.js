@@ -26,7 +26,7 @@ var ProjectCheck = function() {
       makeRequest(function(data) {
         projects = data;
       });
-      scheduleRefresh();
+      // scheduleRefresh();
     },
 
     checkProjects: function() {
