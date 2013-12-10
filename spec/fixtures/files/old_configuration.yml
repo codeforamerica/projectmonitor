@@ -1,8 +1,4 @@
 ---
-aggregate_projects:
-- id: 6
-  name: Tracker
-  enabled: true
 projects:
 - name: Tracker
   deprecated_feed_url: http://tracker-ci-b.denver.pivotallabs.com:3333/projects/Tracker.rss

@@ -18,7 +18,7 @@ describe ConfigurationController do
     end
 
     it 'should change the configuration' do
-      ConfigExport.should_receive(:import).with("---\naggregated_projects: []\nprojects: []\n")
+      ConfigExport.should_receive(:import).with("---\nprojects: []\n")
       subject
     end
   end
@@ -28,12 +28,6 @@ describe ConfigurationController do
     it 'should find all the projects' do
       project_scope = double.as_null_object
       Project.should_receive(:order).with(:name).and_return(project_scope)
-      get :edit
-    end
-
-    it 'should find all the aggregate projects' do
-      aggregate_scope = double
-      AggregateProject.should_receive(:order).with(:name).and_return(aggregate_scope)
       get :edit
     end
   end

@@ -16,17 +16,4 @@ feature "home" do
       page.should have_content(project.code)
     end
   end
-
-  context "aggregate projects" do
-    let!(:aggregate) { FactoryGirl.create(:aggregate_project, code: 'GTFO', projects: [project]) }
-    let!(:project) { FactoryGirl.create(:travis_project) }
-
-    it "user sees the projects for an aggregate project", js: true do
-      visit root_path
-      click_on(aggregate.code)
-
-      page.should have_content(project.code)
-
-    end
-  end
 end

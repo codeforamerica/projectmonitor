@@ -21,7 +21,6 @@ class ProjectDecorator < ApplicationDecorator
     else
       ' offline'
     end
-    klass += ' aggregate' if respond_to? :projects
 
     klass
   end
