@@ -304,10 +304,6 @@ recent build will be on the left and the least recent on the right.
 Successful builds are marked with a filled in circle, and unsuccessful builds
 are marked with an x.
 
-### Aggregate Projects
-Striped tiles indicate the aggregate status of several projects.  Click on an
-aggregate project to see the status of its component projects.
-
 ### Admin Interface
 Click 'manage projects' at the lower right to edit project details.
 

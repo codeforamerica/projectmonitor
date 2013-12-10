@@ -13,12 +13,6 @@ describe ProjectDecorator do
       it { should == "project_#{id}"}
     end
 
-    context "when AggregateProject" do
-      let(:project) { AggregateProject.new }
-
-      it { should == "aggregate_project_#{id}"}
-    end
-
   end
 
   describe "#css_class" do
@@ -45,14 +39,6 @@ describe ProjectDecorator do
 
     context "project is offline" do
       it { should == "project offline"}
-    end
-
-    context "project is aggregate" do
-      before do
-        project.stub :projects
-      end
-
-      it { should include "aggregate"}
     end
   end
 

@@ -8,7 +8,6 @@
     %th Project Type
     %th Enabled?
     %th Last Status
-    %th Aggregate
     %th Last Edit
     %th Webhooks
     %th Actions
@@ -27,33 +26,9 @@
           %span{:style => "color: #AA1224;"} ✕
         %td
           = project_last_status(project)
-      %td{:style => "text-align: center;"}= project.aggregate_project.present? ? project.aggregate_project.name : ""
       %td.age= project.updated_at.present? ? time_ago_in_words(project.updated_at) : "N/A"
       %td.webhooks= project.webhooks_enabled ? "✓" : "x"
       %td.actions
         = link_to 'Edit', edit_project_path(project), :class => "button"
       %td.actions
         = link_to 'Delete', project_path(project), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class =>"button"
-
-%h1== Aggregate Projects #{link_to 'Add Aggregate Project +', new_aggregate_project_path, :class => "button add_button"}
-%table.projects
-  %tr
-    %th Name
-    %th Enabled?
-    %th Count
-    %th Last Edit
-    %th Actions
-  - reset_cycle
-  - for aggregate_project in @aggregate_projects
-    %tr{:class => cycle("odd", "even"), :id => "aggregate-project-#{aggregate_project.id}"}
-      %td= h aggregate_project.name
-      %td{:style => "text-align: center;"}
-        - if aggregate_project.enabled?
-          ✓
-        - else
-          %span{:style => "color: #AA1224;"} ✕
-      %td.count= aggregate_project.projects.count
-      %td.age= aggregate_project.updated_at.present? ? time_ago_in_words(aggregate_project.updated_at) : "N/A"
-      %td.actions
-        = link_to 'Edit', edit_aggregate_project_path(aggregate_project), :class => "button"
-        = link_to 'Delete', aggregate_project_path(aggregate_project), :method => :delete, :class =>"button"

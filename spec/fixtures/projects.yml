@@ -71,28 +71,3 @@ never_built:
   enabled: true
   code: NBL
   online: true
-internal_project1:
-  name: Aggregated Internal Project 1
-  type: CruiseControlProject
-  cruise_control_rss_feed_url: http://never-ci:3333/projects/internal_project1.rss
-  enabled: true
-  code: AIP
-  online: true
-  aggregate_project: internal_projects_aggregate
-internal_project2:
-  name: Aggregated Internal Project 2
-  type: CruiseControlProject
-  cruise_control_rss_feed_url: http://never-ci:3333/projects/internal_project2.rss
-  enabled: true
-  code: AIPO
-  online: true
-  aggregate_project: internal_projects_aggregate
-internal_project3:
-  name: Aggregated Internal Project 3
-  type: CruiseControlProject
-  cruise_control_rss_feed_url: http://never-ci:3333/projects/internal_project3.rss
-  enabled: true
-  code: OPEC
-  online: true
-  aggregate_project: internal_projects_aggregate
-

@@ -26,10 +26,7 @@ class ProjectMonitor.Views.HomeView extends Backbone.View
         view.tearDown()
 
   _addTileView: (model) ->
-    if model.get("aggregate")
-      view = new ProjectMonitor.Views.AggregateProjectView(model: model)
-    else
-      view = new ProjectMonitor.Views.ProjectView(model: model)
+    view = new ProjectMonitor.Views.ProjectView(model: model)
     @registerSubView(view)
 
   render: ->

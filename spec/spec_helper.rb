@@ -14,7 +14,7 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.use_instantiated_fixtures  = false
-  config.global_fixtures = :project_statuses, :projects, :aggregate_projects
+  config.global_fixtures = :project_statuses, :projects
 
   config.include Devise::TestHelpers, :type => :controller
   config.include ViewHelpers, :type => :view

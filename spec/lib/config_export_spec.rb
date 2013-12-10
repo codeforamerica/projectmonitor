@@ -6,7 +6,6 @@ describe ConfigExport do
 
     before do
       Project.destroy_all
-      AggregateProject.destroy_all
     end
 
     it "should create new project when there is no guid" do
@@ -32,9 +31,7 @@ describe ConfigExport do
     context 'given an old configuration file with obsolete fields' do
       it 'should import the records' do
         expect do
-          expect do
-            ConfigExport.import File.read('spec/fixtures/files/old_configuration.yml')
-          end.to change(AggregateProject, :count).by(1)
+          ConfigExport.import File.read('spec/fixtures/files/old_configuration.yml')
         end.to change(Project, :count).by(1)
       end
     end
