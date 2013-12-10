@@ -4,9 +4,6 @@ ProjectMonitor::Application.routes.draw do
 
   get 'builds' => "home#builds", format: :rss
   get 'version' => 'versions#show'
-  get 'github_status' => 'home#github_status', format: :json
-  get 'heroku_status' => 'home#heroku_status', format: :json
-  get 'rubygems_status' => 'home#rubygems_status', format: :json
 
   post 'projects/validate_build_info'
 
