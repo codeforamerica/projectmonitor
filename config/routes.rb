@@ -19,12 +19,6 @@ ProjectMonitor::Application.routes.draw do
       get :status
     end
   end
-  resources :aggregate_projects do
-    member do
-      get :status
-    end
-    resources :projects, only: [:index]
-  end
   resources :messages, only: [:index, :new, :create, :edit, :update, :destroy] do
     get :load_message
   end

@@ -8,32 +8,16 @@ describe ProjectsController do
       sign_in @current_user
     end
 
-    context "when nested under an aggregate project" do
-      it "should scope by aggregate_project_id" do
-        Project.should_receive(:with_aggregate_project).with('1')
-        get :index, aggregate_project_id: 1
-      end
-    end
-
     describe "#index" do
       let!(:projects) { [FactoryGirl.create(:jenkins_project)] }
-      let!(:aggregate_project) { FactoryGirl.create(:aggregate_project) }
-      let!(:aggregate_projects) { [aggregate_project] }
 
       before do
-        AggregateProject.stub(:displayable).and_return(aggregate_projects)
-        Project.stub_chain(:standalone, :displayable).and_return(projects)
-        projects.stub_chain(:concat, :sort_by).and_return(projects + aggregate_projects)
+        Project.stub(:displayable).and_return(projects)
+        projects.stub_chain(:concat, :sort_by).and_return(projects)
       end
 
       it "should render collection of projects as JSON" do
-        ProjectFeedDecorator.should_receive(:decorate).with(projects + aggregate_projects)
-        get :index, format: :json
-      end
-
-      it 'gets a collection of aggregate projects' do
-        AggregateProject.should_receive(:displayable)
-        Project.standalone.should_receive(:displayable)
+        ProjectFeedDecorator.should_receive(:decorate).with(projects)
         get :index, format: :json
       end
     end

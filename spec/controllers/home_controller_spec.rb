@@ -3,53 +3,16 @@ require 'time'
 
 describe HomeController do
   let!(:projects) { [FactoryGirl.create(:jenkins_project)] }
-  let!(:aggregate_project) { FactoryGirl.create(:aggregate_project) }
-  let!(:aggregate_projects) { [aggregate_project] }
 
   describe "#index" do
     before do
-      AggregateProject.stub(:displayable).and_return(aggregate_projects)
-      Project.stub_chain(:standalone, :displayable).and_return(projects)
-      projects.stub_chain(:concat, :sort_by).and_return(projects + aggregate_projects)
+      Project.stub(:displayable).and_return(projects)
+      projects.stub_chain(:concat, :sort_by).and_return(projects)
     end
 
     it "should render collection of projects as JSON" do
       get :index
-      assigns(:projects).should == (projects + aggregate_projects)
-    end
-
-    it 'gets a collection of aggregate projects' do
-      AggregateProject.should_receive(:displayable)
-      projects.stub(:take).and_return(projects)
-      get :index
-    end
-  end
-
-  context 'when an aggregate project id is specified' do
-    before do
-      AggregateProject.stub(:find).and_return(aggregate_project)
-      aggregate_project.stub_chain(:projects, :displayable).and_return(projects)
-      projects.stub_chain(:concat, :sort_by).and_return(projects)
-    end
-
-    it 'loads the specified project' do
-      AggregateProject.should_receive(:find).with('1')
-      projects.stub(:take).and_return(projects)
-      get :index, aggregate_project_id: 1
-    end
-  end
-
-  context 'when the aggregate project id is not specified' do
-    before do
-      AggregateProject.stub(:displayable).and_return(aggregate_projects)
-      Project.stub_chain(:standalone, :displayable).and_return(projects)
-      projects.stub_chain(:concat, :sort_by).and_return(projects)
-    end
-
-    it 'gets a collection of aggregate projects' do
-      AggregateProject.should_receive(:displayable)
-      projects.stub(:take).and_return(projects)
-      get :index
+      assigns(:projects).should == projects
     end
   end
 

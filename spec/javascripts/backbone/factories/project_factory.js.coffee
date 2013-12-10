@@ -3,7 +3,6 @@ BackboneFactory.define 'project', ProjectMonitor.Models.Project, ->
     project_id: do -> Math.floor(Math.random()*99999)
     build:
       code: 'PROJ'
-      aggregate: false
       status: "success"
       statuses: [{success: true, readme_valid: true, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: false, url: "http://status.com"}, {success: true, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}]
       published_at: "2013-09-10T19:51:54.000Z"
@@ -15,7 +14,6 @@ BackboneFactory.define 'complete_project', ProjectMonitor.Models.Project, ->
     build:
       code: 'PROJ'
       current_build_url: 'http://placekitten.com/500'
-      aggregate: false
       status: "success"
       statuses: [{success: true, readme_valid: true, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: false, url: "http://status.com"}, {success: true, url: "http://status.com"}, {success: true, readme_valid: true, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}, {success: false, readme_valid: false, url: "http://status.com"}]
       published_at: "4d"

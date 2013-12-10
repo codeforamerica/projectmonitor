@@ -11,19 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127212324) do
+ActiveRecord::Schema.define(version: 20131210003955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "aggregate_projects", force: true do |t|
-    t.string   "name"
-    t.boolean  "enabled",               default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "code"
-    t.string   "location",   limit: 20
-  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
@@ -83,7 +74,6 @@ ActiveRecord::Schema.define(version: 20131127212324) do
     t.boolean  "enabled",                                 default: true
     t.boolean  "building",                                default: false, null: false
     t.string   "type"
-    t.integer  "aggregate_project_id"
     t.integer  "deprecated_latest_status_id"
     t.string   "code"
     t.string   "deprecated_location",          limit: 20
@@ -120,8 +110,6 @@ ActiveRecord::Schema.define(version: 20131127212324) do
     t.string   "circleci_username"
     t.string   "repo_name"
   end
-
-  add_index "projects", ["aggregate_project_id"], name: "index_projects_on_aggregate_project_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",                  limit: 40

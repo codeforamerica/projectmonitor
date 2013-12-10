@@ -10,14 +10,12 @@ class Project < ActiveRecord::Base
     before_add: :update_refreshed_at,
     after_add: :remove_outdated_status
   has_many :payload_log_entries
-  belongs_to :aggregate_project
   belongs_to :creator, class_name: "User"
 
   serialize :last_ten_velocities, Array
   serialize :iteration_story_state_counts, JSON
 
   scope :enabled, -> { where(enabled: true) }
-  scope :standalone, -> { where(aggregate_project_id: nil) }
   scope :with_statuses, -> { joins(:statuses).uniq }
 
   scope :updateable, -> {
@@ -38,10 +36,6 @@ class Project < ActiveRecord::Base
 
   def self.project_specific_attributes
     columns.map(&:name).grep(/#{project_attribute_prefix}_/)
-  end
-
-  def self.with_aggregate_project(aggregate_project_id, &block)
-    where(aggregate_project_id: aggregate_project_id).scoping(&block)
   end
 
   def self.content_exists?(readme)
