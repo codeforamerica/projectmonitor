@@ -5,8 +5,7 @@ class ProjectsController < ApplicationController
   respond_to :json, only: [:index, :show]
 
   def index
-    projects = Project.displayable
-    respond_with ProjectFeedDecorator.decorate projects
+    @projects = Project.displayable
   end
 
   def new
