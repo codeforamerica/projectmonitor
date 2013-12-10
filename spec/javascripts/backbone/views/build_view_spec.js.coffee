@@ -45,17 +45,6 @@ describe "ProjectMonitor.Views.BuildView", ->
       it "should include the last build time", ->
         expect($(".time-since-last-build")).toHaveText("4d")
 
-    describe "aggregate", ->
-      beforeEach ->
-        @build.set(aggregate: true)
-        setFixtures(@view.render().$el)
-
-      it "should include the code", ->
-        expect($(".code")).toHaveText(@build.get("code"))
-
-      it "should not include the history", ->
-        expect($(".history")).not.toExist()
-
   describe "when build model changes", ->
     it "should render the view", ->
       build = BackboneFactory.create("project").get("build")

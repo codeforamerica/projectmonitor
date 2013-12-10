@@ -1,19 +1,11 @@
 class ProjectsController < ApplicationController
   skip_filter :authenticate_user!, :only => [:show, :status, :index]
   before_filter :load_project, :only => [:edit, :update, :destroy]
-  around_filter :scope_by_aggregate_project
 
   respond_to :json, only: [:index, :show]
 
   def index
-    if params[:aggregate_project_id].present?
-      projects = AggregateProject.find(params[:aggregate_project_id]).projects
-    else
-      standalone_projects = Project.standalone.displayable
-      aggregate_projects = AggregateProject.displayable
-      projects = standalone_projects + aggregate_projects
-    end
-
+    projects = Project.displayable
     respond_with ProjectFeedDecorator.decorate projects
   end
 
@@ -92,22 +84,12 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  def scope_by_aggregate_project
-    if aggregate_project_id = params[:aggregate_project_id]
-      Project.with_aggregate_project aggregate_project_id do
-        yield
-      end
-    else
-      yield
-    end
-  end
-
   def existing_project_missing_password?
     params[:project][:id].present? && params[:project][:auth_password].empty?
   end
 
   def project_params
-    params.require(:project).permit(%i(aggregate_project_id auth_password auth_username
+    params.require(:project).permit(%i(auth_password auth_username
                                        build_branch code cruise_control_rss_feed_url enabled
                                        jenkins_base_url jenkins_build_name name online
                                        semaphore_api_url tddium_auth_token tddium_project_name

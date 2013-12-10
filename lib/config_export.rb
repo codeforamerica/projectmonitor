@@ -7,7 +7,6 @@ module ConfigExport
                           enabled
                           type
                           polling_interval
-                          aggregate_project_id
                           deprecated_latest_status_id
                           code
                           cruise_control_rss_feed_url
@@ -20,20 +19,13 @@ module ConfigExport
                           travis_github_account
                           travis_repository
                           webhooks_enabled]
-  AGGREGATE_PROJECT_ATTRIBUTES = %w[id name enabled]
-
   class << self
     def export
       projects = Project.all.map do |project|
         exported_project_attributes(project)
       end
 
-      aggregate_projects = AggregateProject.all.map do |ap|
-        exported_aggregate_project_attributes(ap)
-      end
-
-      {'aggregate_projects' => aggregate_projects,
-       'projects' => projects}.to_yaml
+      {'projects' => projects}.to_yaml
     end
 
     def import(config)
@@ -41,9 +33,6 @@ module ConfigExport
 
       Project.transaction do
         cached_agg = {}
-        config['aggregate_projects'].each do |aggregate_project|
-          cached_agg[aggregate_project['id']] = AggregateProject.create!(aggregate_project.except('id'))
-        end
 
         config['projects'].each do |project_attributes|
           guid = project_attributes['guid']
@@ -59,7 +48,6 @@ module ConfigExport
             setter_method = "#{key}="
             project.send(setter_method, value) if project.respond_to?(setter_method)
           end
-          project.aggregate_project_id = cached_agg[project_attributes['aggregate_project_id']].try(:id)
           project.save(validate: false)
         end
       end
@@ -69,10 +57,6 @@ module ConfigExport
 
     def exported_project_attributes(project)
       project.attributes.slice(*PROJECT_ATTRIBUTES)
-    end
-
-    def exported_aggregate_project_attributes(ap)
-      ap.attributes.slice(*AGGREGATE_PROJECT_ATTRIBUTES)
     end
   end
 

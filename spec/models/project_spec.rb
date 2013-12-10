@@ -12,7 +12,6 @@ describe Project do
   describe 'associations' do
     it { should have_many :statuses }
     it { should have_many :payload_log_entries  }
-    it { should belong_to :aggregate_project }
     it { should belong_to(:creator).class_name("User") }
   end
 
@@ -67,15 +66,6 @@ describe Project do
   end
 
   describe 'scopes' do
-    describe "standalone" do
-      it "should return non aggregated projects" do
-        Project.standalone.should include projects(:pivots)
-        Project.standalone.should include projects(:socialitis)
-        Project.standalone.should_not include projects(:internal_project1)
-        Project.standalone.should_not include projects(:internal_project2)
-      end
-    end
-
     describe "enabled" do
       let!(:disabled_project) { FactoryGirl.create(:jenkins_project, enabled: false) }
 
@@ -91,23 +81,12 @@ describe Project do
       it "returns projects only with statues" do
         projects = Project.with_statuses
 
-        projects.length.should be > 9
+        projects.length.should be > 6
         projects.should_not include project
         projects.each do |project|
           project.latest_status.should_not be_nil
         end
       end
-    end
-
-    describe "with_aggregate_project" do
-      subject do
-        Project.with_aggregate_project(aggregate_projects(:internal_projects_aggregate)) do
-          Project.all
-        end
-      end
-
-      it { should include projects(:internal_project1) }
-      it { should_not include projects(:socialitis) }
     end
 
     describe '.updateable' do

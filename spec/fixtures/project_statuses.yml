@@ -83,20 +83,6 @@ green_currently_building_status:
   published_at: <%= 10.minutes.ago.to_s(:db) %>
   project: green_currently_building
 
-aggregate1_status:
-  id: 12
-  build_id: 12
-  success: true
-  published_at: <%= 10.minutes.ago.to_s(:db) %>
-  project: internal_project1
-
-aggregate2_status:
-  id: 13
-  build_id: 13
-  success: true
-  published_at: <%= 5.minutes.ago.to_s(:db) %>
-  project: internal_project2
-
 <% (1..20).each do |i| %>
 online_status_<%= i %>:
   id: <%= 13 + i %>

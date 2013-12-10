@@ -17,7 +17,6 @@ class ConfigurationController < ApplicationController
 
   def edit
     @projects = Project.order(:name)
-    @aggregate_projects = AggregateProject.order(:name)
   end
 
 end

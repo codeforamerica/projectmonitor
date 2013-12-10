@@ -6,10 +6,10 @@
 %section
   %ol.projects
 :coffeescript
-  build_success = {code: 'PROJ', aggregate: false, status: "success", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
-  build_failure = {code: 'SEMA', aggregate: false, status: "failure", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
-  build_offline = {code: 'NYC', aggregate: false, status: "offline", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
-  build_indeterminate = {code: 'COLO', aggregate: false, status: "indeterminate", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
+  build_success = {code: 'PROJ', status: "success", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
+  build_failure = {code: 'SEMA', status: "failure", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
+  build_offline = {code: 'NYC', status: "offline", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
+  build_indeterminate = {code: 'COLO', status: "indeterminate", statuses: [true, false, true, true, false, true, true, false, true, true], time_since_last_build: "4d"}
 
   project = new ProjectMonitor.Models.Project({project_id: 123, build: build_success})
   view = new ProjectMonitor.Views.ProjectView {model: project}
