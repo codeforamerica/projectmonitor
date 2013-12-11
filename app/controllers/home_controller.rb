@@ -13,7 +13,6 @@ class HomeController < ApplicationController
 
   def builds
     @projects = Project.with_statuses
-    respond_with @projects
   end
 
   def github_status

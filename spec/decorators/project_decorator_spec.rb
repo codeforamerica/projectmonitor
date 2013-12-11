@@ -41,10 +41,4 @@ describe ProjectDecorator do
       it { should == "project offline"}
     end
   end
-
-  describe "#as_json" do
-    subject { ProjectDecorator.new(Project.new(name: "foo")).as_json['project'].keys }
-
-    it { should == ['id'] }
-  end
 end

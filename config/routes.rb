@@ -24,6 +24,5 @@ ProjectMonitor::Application.routes.draw do
     get "/jobs" => DelayedJobWeb, :anchor => false
   end
 
-  get 'styleguide' => 'home#styleguide'
   root :to => 'home#index'
 end
