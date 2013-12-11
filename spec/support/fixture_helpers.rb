@@ -38,10 +38,6 @@ class TravisExample < FixtureFile
   def initialize(filename)
     super("travis_examples", filename)
   end
-
-  def as_json
-    JSON.parse(read)
-  end
 end
 
 class JenkinsJsonExample < FixtureFile

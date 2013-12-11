@@ -2,10 +2,6 @@ class ProjectDecorator < ApplicationDecorator
 
   delegate :to_s, :to => :model
 
-  def as_json(options = {})
-    model.as_json(only: :id, root: true)
-  end
-
   def css_id
     "#{model.class.base_class.name.underscore}_#{model.id}"
   end
