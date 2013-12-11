@@ -1,3 +1,4 @@
+//TODO Not sure if I can reuse this. If so, need to rewrite tests.
 var VersionCheck = function() {
   var versionCheckTimeout = 30 * 1000;
 

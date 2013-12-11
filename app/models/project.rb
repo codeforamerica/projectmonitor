@@ -166,20 +166,6 @@ class Project < ActiveRecord::Base
     self.guid = SecureRandom.uuid
   end
 
-  def as_json(options={})
-    json = super # TODO: Remove before merge
-    json["project_id"] = self.id
-    json["build"] = super(
-      only: [:code, :id, :statuses, :building],
-      root: false)
-      .merge({"published_at" => published_at})
-      .merge({"status" => status_in_words})
-      .merge({"statuses" => statuses.reverse_chronological})
-      .merge({"current_build_url" => current_build_url })
-      .merge({"readme_status" => status.readme_valid_in_words})
-    json
-  end
-
   def volatility
     if last_ten_velocities.any?
       calculated_volatility
@@ -258,13 +244,5 @@ class Project < ActiveRecord::Base
     else
       response.error!
     end
-  end
-
-  def as_json(options = {})
-    model.as_json({except: [:auth_username,
-                            :auth_password,
-                            :deprecated_feed_url,
-                            :deprecated_latest_status_id],
-                  })
   end
 end
