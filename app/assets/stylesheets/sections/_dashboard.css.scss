@@ -2,154 +2,108 @@ html {
   height: 100%;
 }
 
-body.dashboard {
-  background-color: #2A271F;
-  height: 100%;
-  width: 100%;
+body.dashboard
+{
+  background-color: white;
+  font-family: 'Gotham A', 'Gotham B', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
 
-  .warnings {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    z-index: 1000;
-  }
+  ul.projects
+  {
+    padding: 0;
+    margin: 20px 0 0 30px;
 
-  .github, .heroku, .rubygems {
-    text-align: center;
-    display: none;
-    border-bottom: 1px solid black;
-    height: 60px;
-    z-index: 1000;
-    margin-bottom: 3px;
+    li.project
+    {
+      width: 289px;
+      height: 184px;
+      display: inline-block;
+      padding: 18px;
+      margin: 0 15px 15px 0;
 
-    &.bad {
-      opacity: 0.94;
-      @include striped-background(orange, $gray);
-    }
+      position: relative;
 
-    &.unreachable {
-      background-color: rgba(255, 255, 255, 0.9);
-    }
-
-    &.broken {
-      background-color: red;
-      a {
-        color: white;
+      .icon
+      {
+        font-family: Entypo;
+        font-size: 150%;
+        line-height: 20px;
       }
-    }
 
-    a {
-      font-size: 60px;
-      line-height: 60px;
-      font-weight: bolder;
-      padding: 0 24px;
-    }
-  }
+      h2
+      {
+        width: 100%;
+        height: 100px;
+        padding-top: 20px;
+        border-bottom: 1px solid black;
+        text-align: center;
 
-  #footer {
-    color: white;
-    vertical-align: bottom;
-    clear: both;
+        font-family: 'Gotham A', 'Gotham B', Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 36px;
+      }
 
-    a {
-      display: inline-block;
-    }
+      p.readme
+      {
+        float: right;
+        width: 33%;
+      }
 
-    .left {
-      display: inline-block;
-      float: left;
-    }
+      p.readme,
+      p.builds
+      {
+        margin: 8px 0 0 0;
+        white-space: nowrap;
+      }
 
-    .right {
-      display: inline-block;
-      float: right;
-      margin-right: 50px;
+      p.builds,
+      ol.builds
+      {
+        width: 60%;
+      }
 
-      #indicator {
-        float:left;
-        display:block;
+      ol.builds
+      {
+        list-style: none;
+        margin: 4px 0 0 0;
+        padding: 0;
 
-        &.idle {
-          display:none;
+        li.build
+        {
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          margin: 0 1px 0 0;
+
+          background-color: white;
+
+          a
+          {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 23px;
+            text-decoration: none;
+          }
         }
       }
     }
-  }
+    li.project.unbuilt
+    {
+      background-color: orange;
+    }
 
-  a.projects_path {
-    padding: 5px;
-    color: white;
-    text-decoration: none;
-  }
-}
+    li.project.success
+    {
+      background-color: #b6ddc7;
+    }
 
-.clear {
-  height:75px;
-  clear: both;
-}
-
-ol.projects {
-  list-style-type: none;
-}
-
-.project {
-  float: left;
-  width: 600px;
-  background-color: #2E2E29;
-  padding: 10px;
-  margin: 5px;
-  @include roman_font;
-}
-
-.two-tile {
-  article:nth-child(1) {
-    margin-bottom: 10px;
-  }
-}
-
-.three-tile {
-  article:nth-child(1) {
-    float: left;
-  }
-
-  article:nth-child(2) {
-    float: right;
-    margin-bottom: 10px;
-  }
-
-  article:nth-child(3) {
-    float: right;
-  }
-}
-
-.four-tile {
-  article:nth-child(1) {
-    float: left;
-    margin-bottom: 10px;
-  }
-
-  article:nth-child(2) {
-    float: right;
-    margin-bottom: 10px;
-  }
-
-  article:nth-child(3) {
-    float: left;
-  }
-
-  article:nth-child(4) {
-    float: right;
-  }
-}
-
-.one-tile, .two-tile {
-  article {
-    width: 600px;
-  }
-}
-
-.three-tile, .four-tile {
-  article {
-    width: 295px;
+    li.project.failure
+    {
+      background-color: #ff7676;
+    }
   }
 }

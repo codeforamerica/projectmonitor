@@ -10,9 +10,8 @@ feature "home" do
 
     it "should render project collection" do
       visit root_path
-      # TODO: test something here when the new styling has been merged in
-      # page.should have_selector(".builds")
-      # page.should have_content(project.code)
+      page.should have_selector(".builds")
+      page.should have_content(project.name)
     end
   end
 end
