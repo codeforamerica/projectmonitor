@@ -1,3 +1,36 @@
-<% @projects.each do |project| %>
-<%= project.name %>
-<% end %>
+<ul class="projects">
+  <% @projects.each do |project| %>
+    <% statuses = project.statuses.order(published_at: :desc)[0..4] %>
+    <% build_status = "unbuilt"
+      if statuses.first.present?
+        build_status = statuses.last.success ? "success" : "failure"
+      end %>
+    <li class="project <%= build_status %>">
+      <h2><span class="centered-words"><%= project.name %></span></h2>
+      <p class="readme">
+        <span class="icon">&#128196;</span> Readme
+        <br>
+        <b>Valid</b>
+      </p>
+      <p class="builds">
+        <% published_at = statuses.last.try(:published_at) %>
+        <span class="icon">&#9874;</span> Built <span id="time-since-last-build-<%= project.id %>"><%= published_at %></span> ago
+      </p>
+      <ol class="builds">
+        <% statuses.each do |status| %>
+          <li class="build">
+            <% status_symbol = status.success ? "&#10003;".html_safe : "&#10006;".html_safe %>
+            <a href="<%= status.url %>" target="_blank"><%= status_symbol %></a>
+          </li>
+        <% end %>
+      </ol>
+    </li>
+  <% end %>
+</ul>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $( "span[id*='time-since-last-build']" ).each(function(){
+      $(this).replaceWith(moment(new Date($(this).text())).fromNow());
+    })
+  });
+</script>

@@ -17,7 +17,8 @@ module ProjectMonitor
     config.assets.enabled = true
     config.assets.version = '1.1'
     config.assets.initialize_on_precompile = false
-    config.assets.paths << Rails.root.join('app','assets','skins')
+    config.assets.paths << Rails.root.join('app','assets', 'fonts')
+    config.assets.precompile += %w(.eot .woff)
 
     config.action_mailer.default_url_options = Rails.configuration.emailer_host.to_hash.symbolize_keys
     config.secret_key_base = 'project_monitor'
