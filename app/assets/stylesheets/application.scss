@@ -18,3 +18,12 @@
 @import 'sections/dashboard';
 @import 'sections/manage_projects';
 @import 'sections/projects';
+
+@font-face
+{
+font-family: 'Entypo';
+src: font-url('entypo.woff'),
+     font-url('entypo.eot');
+}
+
+@import '//cloud.typography.com/6435252/803522/css/fonts.css'
