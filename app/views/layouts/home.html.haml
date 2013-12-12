@@ -6,12 +6,13 @@
     = javascript_include_tag "application"
     = csrf_meta_tag
     %script{:src => "http://fast.fonts.com/jsapi/14aea2b8-37b7-4a31-afb9-e44414bef419.js", :type => "text/javascript"}
-  %body{:class => "dashboard tiles_#{@tiles_count}", "data-tiles-count" => @tiles_count}
+  %body{:class => "dashboard"}
     = yield
     #footer
-      .left
-      .right
-        - if current_user
-          = link_to "log out", destroy_user_session_path, class: "projects_path", method: :delete
-          |
-        = link_to "manage projects", edit_configuration_path, class: "projects_path"
+      .manage_links
+        .left
+        .right
+          - if current_user
+            = link_to "log out", destroy_user_session_path, class: "projects_path", method: :delete
+            |
+          = link_to "manage projects", edit_configuration_path, class: "projects_path"
