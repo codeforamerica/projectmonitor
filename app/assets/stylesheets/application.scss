@@ -22,8 +22,11 @@
 @font-face
 {
 font-family: 'Entypo';
-src: font-url('entypo.woff'),
-     font-url('entypo.eot');
+src: url('/assets/entypo.eot');
+src: url('/assets/entypo.eot?iefix') format('eot'),
+     url('/assets/entypo.woff') format('woff'),
+     url('/assets/entypo.ttf') format('truetype'),
+     url('/assets/entypo.svg#webfont') format('svg');
 }
 
 @import '//cloud.typography.com/6435252/803522/css/fonts.css'
