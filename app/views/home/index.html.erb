@@ -18,8 +18,14 @@
       </p>
       <ol class="builds">
         <% statuses.each do |status| %>
-          <li class="build icon">
-            <% status_symbol = status.success ? "&#10003;".html_safe : "&#10060;".html_safe %>
+          <% if status.success?
+               status_symbol = "&#10003;".html_safe
+               status_class = "success"
+             else
+               status_symbol = "&#10060;".html_safe
+               status_class = "error"
+             end %>
+          <li class="build <%= "status_class" %>">
             <a href="<%= status.url %>" target="_blank"><%= status_symbol %></a>
           </li>
         <% end %>
