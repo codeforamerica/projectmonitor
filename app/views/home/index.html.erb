@@ -25,7 +25,7 @@
                status_symbol = "&#10060;".html_safe
                status_class = "error"
              end %>
-          <li class="build <%= status_class %>">
+          <li class="build icon <%= status_class %>">
             <a href="<%= status.url %>" target="_blank"><%= status_symbol %></a>
           </li>
         <% end %>
