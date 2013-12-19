@@ -75,8 +75,6 @@ body.dashboard
           display: inline-block;
           width: 25px;
           height: 25px;
-          background-color: white;
-
           a
           {
             position: relative;
@@ -87,6 +85,14 @@ body.dashboard
             line-height: 26px;
             text-decoration: none;
           }
+        }
+        li.build.success
+        {
+          background-color: #a8cbb7;
+        }
+        li.build.error
+        {
+          background-color: #df6666;
         }
       }
     }
