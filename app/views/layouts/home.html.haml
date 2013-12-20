@@ -6,6 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tag
   %body{:class => "dashboard"}
+    %meta{"http-equiv" => "refresh", "content" => "300"}
     = yield
     #footer
       .manage_links
