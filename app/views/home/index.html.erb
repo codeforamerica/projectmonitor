@@ -3,7 +3,7 @@
     <% statuses = project.statuses.order(published_at: :desc)[0..4] %>
     <% build_status = "unbuilt"
       if statuses.first.present?
-        build_status = statuses.last.success ? "success" : "failure"
+        build_status = statuses.first.success ? "success" : "failure"
       end %>
     <li class="project <%= build_status %>">
       <h2><span class="centered-words"><%= project.name %></span></h2>
