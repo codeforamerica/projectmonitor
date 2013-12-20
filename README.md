@@ -20,13 +20,15 @@ ProjectMonitor currently supports:
 This project is forked from [pivotal/projectmonitor](https://github.com/pivotal/projectmonitor). CfA uses it to show the status of fellowship projects and internal tools.
 
 ## Display
-Just open a browser on `/`. The page refreshes every 30 seconds with the latest
+Just open a browser on `/`. The page refreshes every 5 minutes with the latest
 status fetched by the cron job or received via Webhook. That is,
 refreshing the page doesn't cause the individual builds to be re-polled.
 
 ### Layout
 The layout consists of a grid of tiles representing the projects.  The
 number of projects that need to be displayed is determined automatically.
+
+![Project Monitor Dashboard](http://github.com/codeforamerica/projectmonitor/public/assets/static/project_monitor_dashboard.png)
 
 ### Tile colors
 Tiles are green for green projects, red for red projects. If the build server is online but no
