@@ -28,7 +28,7 @@ refreshing the page doesn't cause the individual builds to be re-polled.
 The layout consists of a grid of tiles representing the projects.  The
 number of projects that need to be displayed is determined automatically.
 
-![Project Monitor Dashboard](http://github.com/codeforamerica/projectmonitor/public/assets/static/project_monitor_dashboard.png)
+![Project Monitor Dashboard](http://codeforamerica.github.io/assets/images/static/project_monitor_dashboard.png)
 
 ### Tile colors
 Tiles are green for green projects, red for red projects. If the build server is online but no
