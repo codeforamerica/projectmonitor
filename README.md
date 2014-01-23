@@ -35,8 +35,8 @@ Tiles are green for green projects, red for red projects. If the build server is
 builds have been run then the tile will appear in yellow.
 
 ### Build Statuses
-To the right of the ticker and name, each project lists the amount of time
-since the last build, followed by the build status history.  The last 5 builds
+Each project lists the amount of time since the last build in the bottom left corner.
+Underneath that is the build status history.  The last 5 builds
 are displayed from left to right, in reverse chronological order -- the most
 recent build will be on the left and the least recent on the right.
 Successful builds are marked with a check mark, and unsuccessful builds
