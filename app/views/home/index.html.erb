@@ -6,7 +6,7 @@
         build_status = statuses.first.success ? "success" : "failure"
       end %>
     <li class="project <%= build_status %>">
-      <h2><span class="centered-words"><%= project.name %></span></h2>
+      <h2><span class="centered-words"><%= project.code %></span></h2>
       <p class="readme">
         <span class="icon">&#128196;</span> Readme
         <br>
