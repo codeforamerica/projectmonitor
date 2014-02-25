@@ -14,7 +14,7 @@
       </p>
       <p class="builds">
         <% published_at = statuses.first.try(:published_at) %>
-        <span class="icon">&#9874;</span> Built <span id="time-since-last-build-<%= project.id %>"><%= published_at %></span> ago
+        <span class="icon">&#9874;</span> Built <span id="time-since-last-build-<%= project.id %>"><%= convert_to_iso8601(published_at) %></span> ago
       </p>
       <ol class="builds">
         <% statuses.each do |status| %>
