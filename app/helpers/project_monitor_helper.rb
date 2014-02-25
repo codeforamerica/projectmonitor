@@ -1,4 +1,11 @@
+require 'time'
+
 module ProjectMonitorHelper
+  def convert_to_iso8601(publish_time)
+    return if publish_time.nil?
+    publish_time.utc.iso8601
+  end
+
   def static_status_messages_for(project)
     messages = []
     if project.online?

@@ -6,11 +6,21 @@ describe ProjectMonitorHelper do
     @project = double(Project, :status => @status)
   end
 
-  describe "#static_status_messages_for" do
-    def publish_time
-      Time.parse('Fri May 28 17:27:11 -0700 2010')
+  def publish_time
+    Time.parse('Fri May 28 17:27:11 -0700 2010')
+  end
+
+  describe "#convert_to_iso8601" do
+    it "converts a status' publishe_at date to iso8601 format" do
+      convert_to_iso8601(@status.published_at).should == "2010-05-29T00:27:11Z"
     end
 
+    it "returns nil if the time is nil" do
+      convert_to_iso8601(nil).should be_nil
+    end
+  end
+
+  describe "#static_status_messages_for" do
     context "when the project's status published_at & red_since is nil" do
       before do
         @status = double(ProjectStatus, :published_at => nil)
