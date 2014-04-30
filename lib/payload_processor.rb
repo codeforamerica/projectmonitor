@@ -38,6 +38,7 @@ class PayloadProcessor
     payload.each_status(project) do |status|
       Rails.logger.error "*********************"
       Rails.logger.error "status in payload_processor: #{status.inspect}"
+      Rails.logger.error "status in payload_processor: #{status.url}"
       next if project.has_status?(status)
       if status.valid?
         project.statuses.push status

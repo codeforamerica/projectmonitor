@@ -17,7 +17,7 @@ class StatusController < ApplicationController
       end
 
       Rails.logger.error "I AM IN THE STATUS CONTROLLER"
-
+      Rails.logger.error project.name
       log = PayloadProcessor.new(project, payload).process
       log.update_method = "Webhooks"
       log.save!
