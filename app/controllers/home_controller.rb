@@ -10,7 +10,7 @@ class HomeController < ApplicationController
   def index
     unsorted_projects = Project.with_statuses.displayable
     @projects = unsorted_projects.sort do |first_project, second_project|
-      first_project.statuses.last.created_at <=> second_project.statuses.last.created_at
+      second_project.statuses.last.created_at <=> first_project.statuses.last.created_at
     end
   end
 
