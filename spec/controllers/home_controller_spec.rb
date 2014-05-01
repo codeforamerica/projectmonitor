@@ -7,7 +7,6 @@ describe HomeController do
   describe "#index" do
     before do
       Project.stub(:displayable).and_return(projects)
-      projects.stub_chain(:concat, :sort_by).and_return(projects)
     end
 
     it "should render collection of projects as JSON" do

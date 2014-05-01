@@ -8,7 +8,10 @@ class HomeController < ApplicationController
   respond_to :json, :only => [:github_status, :heroku_status, :rubygems_status, :index]
 
   def index
-    @projects = Project.displayable.sort_by { |p| p.code.downcase }
+    unsorted_projects = Project.with_statuses.displayable
+    @projects = unsorted_projects.sort do |first_project, second_project|
+      first_project.statuses.last.created_at <=> second_project.statuses.last.created_at
+    end
   end
 
   def builds
