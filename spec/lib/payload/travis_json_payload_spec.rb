@@ -87,20 +87,24 @@ describe TravisJsonPayload do
       it { should be_false }
     end
 
+    context 'the payload contains a build on the master branch' do
+      let(:json) { "success.json" }
+
+      it { should be_true }
+    end
+
     context 'the payload contains a build from a branch other than master' do
       let(:json) { "branch.json" }
 
-      context 'and the branch has not been specified' do
-        it { should be_false }
-      end
-
-      context 'and the branch has been specified' do
-        before { payload.branch = 'staging' }
-
-        it { should be_true }
-      end
+      it { should be_false }
     end
-    
+
+    context 'the payload contains a build with no branch specified' do
+      let(:json) { "no_branch.json" }
+
+      it { should be_false }
+    end
+
     context 'the payload contains a build from pull request' do
       let(:json) { "pull_request.json" }
       it { should be_false }
@@ -129,20 +133,5 @@ describe TravisJsonPayload do
   describe '#parse_published_at' do
     subject { payload.parse_published_at(content) }
     it { should == Time.utc(2013, 1, 22, 21, 20, 56) }
-  end
-
-  describe '#branch=' do
-    subject { payload.branch }
-    before { payload.branch = branch }
-
-    context "when given a branch name" do
-      let(:branch) { "staging" }
-      it { should == branch }
-    end
-
-    context "when given an empty string" do
-      let(:branch) { "" }
-      it { should == "master" }
-    end
   end
 end

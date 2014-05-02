@@ -1,14 +1,6 @@
 class TravisJsonPayload < Payload
   attr_accessor :slug
 
-  def branch=(new_branch)
-    @branch = new_branch unless new_branch.blank?
-  end
-
-  def branch
-    @branch ||= 'master'
-  end
-
   def building?
     status_content.first['state'] == "started" ||
       status_content.first['state'] == "created"
@@ -21,7 +13,7 @@ class TravisJsonPayload < Payload
   def content_ready?(content)
     content['state'] != 'started' &&
       content['state'] != 'created' &&
-      specified_branch?(content) &&
+      master_branch?(content) &&
       content['event_type'] != 'pull_request'
   end
 
@@ -60,7 +52,7 @@ class TravisJsonPayload < Payload
 
   private
 
-  def specified_branch?(content)
-    branch == content['branch']
+  def master_branch?(content)
+    content['branch'] == 'master'
   end
 end
