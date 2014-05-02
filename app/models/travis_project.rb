@@ -24,14 +24,12 @@ class TravisProject < Project
   def fetch_payload
     TravisJsonPayload.new.tap do |payload|
       payload.slug = slug
-      payload.branch = build_branch
     end
   end
 
   def webhook_payload
     TravisJsonPayload.new.tap do |payload|
       payload.slug = slug
-      payload.branch = build_branch
     end
   end
 
