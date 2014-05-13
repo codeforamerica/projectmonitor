@@ -13,10 +13,12 @@ body.dashboard
   {
     padding: 0;
     margin: 20px 0 0 30px;
-
+    clear:both;
+    overflow: auto;
+    
     li.project
     {
-      width: 45%;
+      width: 28%;
       float:left;
       display: inline-block;
       padding: 18px;
