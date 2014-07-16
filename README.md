@@ -3,6 +3,11 @@
 Description
 ===========
 
+## TL;DR I Just Want to Add My Project That's Using Travis
+Your project needs to be added to project monitor. You can do this by asking Erica to create an admin account for you and following the instructions to add a project that are in the **Add projects as an Admin Section** below OR talk to Erica or Mike to add your project for you. You will then need to add the generated webhook to your `.travis.yml` Here's an example:
+[https://github.com/codeforamerica/cfapi/blob/master/.travis.yml](https://github.com/codeforamerica/cfapi/blob/master/.travis.yml)
+
+
 ProjectMonitor is a CI display aggregator. It displays the status of multiple
 Continuous Integration builds on a single web page.  The intent is that you
 display the page on a big screen monitor or TV so that the status of all your
@@ -46,10 +51,15 @@ are marked with an x.
 For a project's readme to be valid, it must have an installation section or has a section indicating the project has been moved. A valid installation section includes a head with the root word of "Install", "Setup", "Build" or "Deploy". A section indicating the project has moved must include the phrase "Repository has moved". A project can have no readme and still be considered valid if the project is less than a week old.
 
 ### Admin Interface
-Click 'manage projects' at the lower left to log in then add or edit projects.
+You can create an admin user in the console as follows:
 
-### Add projects
-After logging in, click the "New Project" button and enter
+    User.create!(login: 'john', name: 'John Doe', email: 'jdoe@example.com', password: 'password', password_confirmation: 'password')
+
+Once you have an account, you can log in to set up projects by clicking the "Manage Projects"
+link in the bottom-right corner of the main ProjectMonitor screen.
+
+### Add projects as an Admin
+Click the "New Project" button and enter
 the details for a build you want to display on ProjectMonitor. The "Name" and
 "Project Type" are required. You will need to either connect your service via
 Webhooks or polling.
@@ -67,7 +77,7 @@ If you want to set up a project to connect via polling instead, you'll typically
 to enter the base URL, build name or ID, and your login credentials with the CI service.
 
 #### TeamCity
-For TeamCity projects, find the buildTypeId (usually something like 'bt2') from the URL, which should look like one of the following: 
+For TeamCity projects, find the buildTypeId (usually something like 'bt2') from the URL, which should look like one of the following:
 
     http://teamcity:8111/app/rest/builds?locator=running:all,buildType:
     http://teamcity:8111/viewType.html?buildTypeId=
@@ -76,8 +86,8 @@ For TeamCity projects, find the buildTypeId (usually something like 'bt2') from 
 You will also need a valid user account and password.
 
 If you want TeamCity to connect via Webhooks, you'll need to install the
-[TcWebHooks plugin](http://sourceforge.net/apps/trac/tcplugins/wiki/TcWebHooks) on 
-your TeamCity instance. When setting up the webhook in TeamCity, make sure the payload 
+[TcWebHooks plugin](http://sourceforge.net/apps/trac/tcplugins/wiki/TcWebHooks) on
+your TeamCity instance. When setting up the webhook in TeamCity, make sure the payload
 format is set to "JSON" (it might show up as "JSON (beta)").
 
 If you want to connect to TeamCity via polling, you will need to ensure that your TeamCity instance
@@ -86,10 +96,10 @@ is accessible by the machine running ProjectMonitor.
 #### Semaphore
 When configuring [Semaphore](http://semaphoreapp.com), you should use the Branch History URL from the API section of your Project Settings page.
 
-This ensures that no build statuses will be missed. 
+This ensures that no build statuses will be missed.
 
-If you notice that there are build statuses missing in project monitor, ensure that you are NOT using the Branches URL from the API section (vs. the 
-recommended Branch History URL).  The Branches URL from the API section returns only the latest build status, instead of the history, so if builds occurred 
+If you notice that there are build statuses missing in project monitor, ensure that you are NOT using the Branches URL from the API section (vs. the
+recommended Branch History URL).  The Branches URL from the API section returns only the latest build status, instead of the history, so if builds occurred
 between status fetches, they would be missed and not be reflected in project monitor.
 
 #### Jenkins
@@ -99,7 +109,7 @@ If you want Jenkins to connect via Webhooks, you will need the
 If you want to connect to Jenkins via polling, you'll need to ensure that your Jenkins instance is accessible by the machine running ProjectMonitor.
 
 #### Travis
-If you want Travis to connect via Webhooks, you will still need to enter the 
+If you want Travis to connect via Webhooks, you will still need to enter the
 GitHub account, repository, and optionally branch name for the codebase being
 built in Travis.
 
@@ -116,12 +126,12 @@ The value for "SOME-TOKEN-HERE" is the TDDium authentication token you'll need t
 The XML returned by that link will look something like:
 
     <Projects>
-       <Project name="foobar (master)" webUrl="https://api.tddium.com/1/reports/151751" lastBuildLabel="151751" 
+       <Project name="foobar (master)" webUrl="https://api.tddium.com/1/reports/151751" lastBuildLabel="151751"
        lastBuildTime="2013-01-08 18:20:05" lastBuildStatus="Failure" activity="Building"/>
     </Projects>
 
 The "TDDium Project Name" field in the ProjectManager settings will need to be set to the full value of the Project
-name attribute, complete with the branch name in parentheses (in this case, "foobar (master)"). 
+name attribute, complete with the branch name in parentheses (in this case, "foobar (master)").
 
 ## Installation
 
@@ -133,7 +143,7 @@ ProjectMonitor is a Rails application. To get the code, execute the following:
     bundle install
 
 ### Initial Setup
-We have provided an example file for `database.yml`. Run the following to 
+We have provided an example file for `database.yml`. Run the following to
 automatically generate these files for you:
 
     rake setup
@@ -159,114 +169,16 @@ homebrew or another package manager:
 
 After you have successfully installed memcached follow the instructions to run it.
 
-### Authentication support
-#### Password authentication
-Project monitor uses [Devise](https://github.com/plataformatec/devise) to provide both database backed authentication and
-Google OAuth2 logins.
-
-Regular password authentication for managing project settings is enabled by default and can be switched off
-by setting the `password_auth_enabled` setting to `false`. To ensure strong
-password encryption you should adjust the value for `password_auth_pepper` and
-`password_auth_stretches` appropriately.
-
-#### Google OAuth2 setup
-To use Google OAuth2 authentication you need Google apps set up for your domain
-and the following configuration options specified:
-
-    oauth2_enabled: true
-    oauth2_apphost: 'MY_APP_ID'
-    oauth2_secret: 'MY_SECRET'
-
-### Setup Cron with Whenever
-We have included a sample whenever gem config in config/schedule.rb. Refer to
-the [whenever documentation](https://github.com/javan/whenever) for instructions
-on how to integrate it with your deployment. Refer to [Heroku scheduler documentation](https://devcenter.heroku.com/articles/scheduler) for instructions
-on how to integrate the rake task with your Heroku deployment.
-
-The default schedule clears log entries and fetches project statuses every 3 minutes.
-
-The fetch project task is what goes out and hits the individual builds. We find
-that if you do this too frequently it can swamp the builds. On the other hand,
-you don't want ProjectMonitor displaying stale information. At Pivotal we set
-it up to run every 3 minutes.
-
-### Start workers
-The cron job above will add jobs to the queue, which workers will execute.  To
-start running the workers, use the following command:
-
-    rake start_workers
-
-The default number of workers is 2, but if you wanted 3 you would call it like this:
-
-    rake start_workers[3]
-
-These workers need only be started once per system reboot, and must be running
-for your project statuses to update.  To stop the workers, run this command:
-
-    rake stop_workers
-
-The workers are implemented using the [delayed_job
-gem](http://github.com/collectiveidea/delayed_job).  The workers are configured
-to have a maximum timeout of 1 minute when polling project status.  If you want
-to change this setting, you can edit `config/initializers/delayed_job_config.rb`
-
-### Start the application
-Execute:
-
-    nohup rails server -e production &> projectmonitor.log
-
-## Configuration
-Each build that you want ProjectMonitor to display is called a "project" in
-ProjectMonitor. You can log in to set up projects by clicking the "Manage Projects" 
-link in the bottom-right corner of the main ProjectMonitor screen. You can either
-create a user using the console as follows:
-
-    rails c production
-    User.create!(login: 'john', name: 'John Doe', email: 'jdoe@example.com', password: 'password', password_confirmation: 'password')
-
-Or, if you have set up Google OAuth2 as per above, you can simply log in with Google to create a new user account.
-
-### Importing and Exporting Configurations
-You can export your configuration for posterity or to be transferred to another
-host:
-
-    rake projectmonitor:export > ${your_configuration.yml}
-
-Or using heroku:
-
-    heroku run rake projectmonitor:export --app projectmonitor-staging > ${your_configuration.yml}
-
-Or you can download it using the configuration endpoint, using curl (or your web browser):
-
-    curl --user ${username}:${password} ${your_project_monitor_host}/configuration > ${your_configuration.yml}
-
-NOTE: That heroku doesn't treat STDERR and STDOUT differently so you may get
-some warnings at the beginning of the generated file that you'll have to remove
-manually.
-
-It can be imported in a similar way:
-
-    rake projectmonitor:import < ${your_configuration.yml}
-
-On heroku or another host which doesn't allow you to directly load files or
-read from stdin, you'll need to post the file to the configuration endpoint
-like so:
-
-    curl --user ${username}:${password} -F "content=@-" ${your_project_monitor_host}/configuration < ${your_configuration.yml}
-
 ## Deployment
 
-### Heroku
 To get running on Heroku, after you have cloned and bundled, run the following commands:
-
-NB: These instructions are for the basic authentication strategy. 
 
     heroku create
     git push heroku master
     heroku run rake db:migrate
     heroku config:add REST_AUTH_SITE_KEY=<unique, private and long alphanumeric key, e.g. abcd1234edfg78910>
     heroku config:add REST_AUTH_DIGEST_STRETCHES<count of number of times to apply the digest, 10 recommended>
-    heroku run console 
+    heroku run console
 
 When inside the console, run the creating a new user step above. You should then be able to access your server and start using it.
 
@@ -303,4 +215,3 @@ To run a local development server and worker, run:
     foreman start
 
 Copyright (c) 2013 Pivotal Labs. This software is licensed under the MIT License.
-
