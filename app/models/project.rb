@@ -51,7 +51,8 @@ class Project < ActiveRecord::Base
   end
 
   def has_valid_readme?
-    response_json = get("repos/codeforamerica/#{repo_name}/readme")
+    account = travis_github_account.present? ? travis_github_account : "codeforamerica"
+    response_json = get("repos/#{account}/#{repo_name}/readme")
     readme = Base64.decode64(response_json["content"])
     Project.content_exists?(readme) &&
     (Project.installation_instructions_exists?(readme) ||

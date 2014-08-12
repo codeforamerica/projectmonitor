@@ -9,7 +9,7 @@ describe StatusController do
     end
 
     context "Travis project" do
-      let!(:project) { FactoryGirl.create(:travis_project, repo_name: 'brigade') }
+      let!(:project) { FactoryGirl.create(:travis_project, travis_github_account: "codeforamerica", repo_name: 'brigade') }
       let(:payload) do
       URI.encode '{
         "id": 4219108,
@@ -130,7 +130,7 @@ describe StatusController do
       it "should update parsed_url" do
         project.parsed_url.should be_nil
         subject
-        project.reload.parsed_url.should == 'https://travis-ci.org/account/project/builds/4219108'
+        project.reload.parsed_url.should == 'https://travis-ci.org/codeforamerica/project/builds/4219108'
       end
 
     end
