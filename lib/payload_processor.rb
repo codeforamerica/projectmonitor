@@ -36,11 +36,7 @@ class PayloadProcessor
 
   def add_statuses_from_payload
     payload.each_status(project) do |status|
-      Rails.logger.info "**********************************************"
-      Rails.logger.info "#{project.name}"
-      Rails.logger.info "has status: #{project.has_status?(status)}"
       next if project.has_status?(status)
-      Rails.logger.info "status valid?: #{status.valid?}"
       if status.valid?
         project.statuses.push status
       else
