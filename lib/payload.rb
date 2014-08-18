@@ -12,6 +12,14 @@ class Payload
 
   def each_status(project)
     status_content.each do |content|
+      Rails.logger.info "**************************************************************"
+      Rails.logger.info "content ready: #{content_ready?(content)}"
+      Rails.logger.info "success: #{parse_success(content)}"
+      Rails.logger.info "url: #{parse_url(content)}"
+      Rails.logger.info "published at: #{parse_published_at(content)}"
+      Rails.logger.info "readme #{project.has_valid_readme?}"
+      Rails.logger.info "**************************************************************"
+
       next if !content_ready?(content)
       yield ProjectStatus.new(
         success: parse_success(content),
