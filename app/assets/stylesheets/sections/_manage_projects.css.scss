@@ -22,17 +22,12 @@ a:hover {
   margin: 0;
   padding: .8em 1em;
   background-color: #88C2E5;
+  padding-right: 15px;
+  text-align: right;
 }
 
 #header a, #header img {
   border: 0;
-}
-
-#top_right {
-  position: absolute;
-  top: 0.25em;
-  right: 2em;
-  margin-top: 0.5em;
 }
 
 #flash_error {
