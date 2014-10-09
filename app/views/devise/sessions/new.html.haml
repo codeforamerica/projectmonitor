@@ -1,4 +1,4 @@
-%h1 Sign in
+%h1{class: 'text-center'} Sign in
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   %p
     = f.label :login, 'Login or Email'
@@ -12,4 +12,5 @@
       = f.label :remember_me
   %p.submit
     = f.submit "Sign in"
-= render "devise/shared/links"
+.text-center
+  = render "devise/shared/links"

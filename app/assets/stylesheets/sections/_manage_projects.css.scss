@@ -102,8 +102,12 @@ Form Errors
   }
 }
 
+.text-center {
+  text-align: center;
+}
 
 table.projects {
+  width: 100%;
   border-collapse: collapse;
   margin: 15px 0 40px 0;
 }
@@ -163,7 +167,7 @@ a:hover.button {
 form {
 
   background-color: #eeeeee;
-  margin: 30px;
+  margin: 30px auto;
   padding: 30px;
   width: 38em;
 
