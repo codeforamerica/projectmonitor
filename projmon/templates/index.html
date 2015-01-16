@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Monitor</title>
+<link href="http://project-monitor.codeforamerica.org/assets/application-e28314fc9a46a7d24aca6e1041e5dd4e.css" media="screen" rel="stylesheet" />
+<script src="http://project-monitor.codeforamerica.org/assets/application-dce92ecdbebe5f17c173d737d4481603.js"></script>
+</head>
+<body class='dashboard'>
+<meta content='300' http-equiv='refresh'>
+<ul class="projects">
+    {% for project in projects %}
+        <li class="project success">
+            <h2><span class="centered-words">{{project.name}}</span></h2>
+            <p class="readme">
+                <span class="icon">&#128196;</span> Readme
+                <b>Valid</b>
+            </p>
+            <p class="builds">
+                <span class="icon">&#9874;</span> Built <span id="time-since-last-build">2015-01-16T22:52:54Z</span> ago
+            </p>
+            <ol class="builds">
+                <li class="build icon success">
+                    <a href="https://travis-ci.org/codeforamerica/codeforamerica.org/builds/47306987" target="_blank">&#10003;</a>
+                </li>
+                <li class="build icon success">
+                    <a href="https://travis-ci.org/codeforamerica/codeforamerica.org/builds/47305664" target="_blank">&#10003;</a>
+                </li>
+                <li class="build icon success">
+                    <a href="https://travis-ci.org/codeforamerica/codeforamerica.org/builds/47304292" target="_blank">&#10003;</a>
+                </li>
+                <li class="build icon success">
+                    <a href="https://travis-ci.org/codeforamerica/codeforamerica.org/builds/47303900" target="_blank">&#10003;</a>
+                </li>
+                <li class="build icon success">
+                    <a href="https://travis-ci.org/codeforamerica/codeforamerica.org/builds/47147380" target="_blank">&#10003;</a>
+                </li>
+            </ol>
+        </li>
+    {% endfor %}
+    <li class="project failure">
+      <h2><span class="centered-words">Transit Mix</span></h2>
+      <p class="readme">
+        <span class="icon">&#128196;</span> Readme
+        <b>Valid</b>
+      </p>
+      <p class="builds">
+        <span class="icon">&#9874;</span> Built <span id="time-since-last-build-15">2014-12-11T03:09:15Z</span> ago
+      </p>
+      <ol class="builds">
+          <li class="build icon error">
+            <a href="https://travis-ci.org/codeforamerica/transitmix/builds/43673912" target="_blank">&#10060;</a>
+          </li>
+          <li class="build icon error">
+            <a href="https://travis-ci.org/codeforamerica/transitmix/builds/43673877" target="_blank">&#10060;</a>
+          </li>
+          <li class="build icon error">
+            <a href="https://travis-ci.org/codeforamerica/transitmix/builds/43673184" target="_blank">&#10060;</a>
+          </li>
+          <li class="build icon success">
+            <a href="https://travis-ci.org/codeforamerica/transitmix/builds/39387469" target="_blank">&#10003;</a>
+          </li>
+          <li class="build icon success">
+            <a href="https://travis-ci.org/codeforamerica/transitmix/builds/38091376" target="_blank">&#10003;</a>
+          </li>
+      </ol>
+    </li>
+</ul>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $( "span[id*='time-since-last-build']" ).each(function(){
+      $(this).replaceWith(moment(new Date($(this).text())).fromNow());
+    })
+  });
+</script>
+</div>
+</body>
+</html>
+
