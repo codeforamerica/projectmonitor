@@ -1,0 +1,117 @@
+[
+  {
+    "name": "brigade alpha", 
+    "guid": "001d08e8-5e39-4824-8117-df996d35c531", 
+    "travis url": "https://travis-ci.org/codeforamerica/brigade-alpha"
+  }, 
+  {
+    "name": "Bizarro CMS", 
+    "guid": "1bf2f3b3-bed8-42bc-91e8-d47f873443de", 
+    "travis url": "https://travis-ci.org/codeforamerica/bizarro-cms"
+  }, 
+  {
+    "name": "Denver Schedules API", 
+    "guid": "5410eca6-0a90-4bf0-b9c0-39f679940ba4", 
+    "travis url": "https://travis-ci.org/codeforamerica/denver-schedules-api"
+  }, 
+  {
+    "name": "spot it like its hot", 
+    "guid": "7f784962-2d83-4ad5-a23d-a598bec3345e", 
+    "travis url": "https://travis-ci.org/codeforamerica/spot-it-like-its-hot"
+  }, 
+  {
+    "name": "Georelevent", 
+    "guid": "77db7e4d-a05a-4ee8-b7ab-3bd29c6dd1b0", 
+    "travis url": "https://travis-ci.org/codeforamerica/georelevent"
+  }, 
+  {
+    "name": "BIZFRIENDLY API", 
+    "guid": "2b40577c-2e35-4893-affa-c7fe5cfbe6b5", 
+    "travis url": "https://travis-ci.org/codeforamerica/bizfriendly-api"
+  }, 
+  {
+    "name": "ENGINE LIGHT", 
+    "guid": "707eb273-de8f-4125-9f9f-846fb30bd83c", 
+    "travis url": "https://travis-ci.org/codeforamerica/engine-light"
+  }, 
+  {
+    "name": "rentfacts api", 
+    "guid": "19c25e73-95dc-451d-a221-12a0a9008d9f", 
+    "travis url": "https://travis-ci.org/codeforamerica/rentfacts-api"
+  }, 
+  {
+    "name": "CFA API", 
+    "guid": "72d031cc-8f21-4968-8db6-ff7370f5e98b", 
+    "travis url": "https://travis-ci.org/codeforamerica/cfapi"
+  }, 
+  {
+    "name": "Civic Tech Issue Finder", 
+    "guid": "f16d5385-d040-4a39-b7f5-cdc3de835117", 
+    "travis url": "https://travis-ci.org/codeforamerica/civic-issue-finder"
+  }, 
+  {
+    "name": "Answers", 
+    "guid": "d4b6c15d-e2af-43ab-b546-0631a0a2e469", 
+    "travis url": "https://travis-ci.org/codeforamerica/oakland_answers"
+  }, 
+  {
+    "name": "cute pets", 
+    "guid": "d702edae-5a33-478b-9d08-acc4a7826533", 
+    "travis url": "https://travis-ci.org/codeforamerica/CutePets"
+  }, 
+  {
+    "name": "CFA Website", 
+    "guid": "325e607a-561b-4e33-9fe0-b2f38d6b384b", 
+    "travis url": "https://travis-ci.org/codeforamerica/codeforamerica.org"
+  }, 
+  {
+    "name": "Open Trails", 
+    "guid": "6ee3ad02-a7ba-4f9d-aab5-fc4ce55a59d5", 
+    "travis url": "https://travis-ci.org/codeforamerica/OpenTrails"
+  }, 
+  {
+    "name": "Transit Mix", 
+    "guid": "b4187edb-11eb-429e-bc0a-9eb92f6eead6", 
+    "travis url": "https://travis-ci.org/codeforamerica/transitmix"
+  }, 
+  {
+    "name": "streetmix", 
+    "guid": "4083b10b-11a4-4ac5-9a7f-51c5cb614243", 
+    "travis url": "https://travis-ci.org/codeforamerica/streetmix"
+  }, 
+  {
+    "name": "balance", 
+    "guid": "418a62a0-e994-432d-9df5-0b398504c48f", 
+    "travis url": "https://travis-ci.org/daguar/balance"
+  }, 
+  {
+    "name": "homebase", 
+    "guid": "98138ce2-1d31-4eac-91b8-55e763474cc9", 
+    "travis url": "https://travis-ci.org/codeforamerica/homebase"
+  }, 
+  {
+    "name": "Lex Special Events", 
+    "guid": "3f8160e4-1aa1-4fac-b40d-c2cbb63db6b7", 
+    "travis url": "https://travis-ci.org/codeforamerica/lexington-special-events"
+  }, 
+  {
+    "name": "bizwallet", 
+    "guid": "4b795a27-37e0-4d41-8b25-b580f623c1b4", 
+    "travis url": "https://travis-ci.org/CoquiCoders/bizwallet"
+  }, 
+  {
+    "name": "City Voice", 
+    "guid": "44ca9e93-fc92-46bd-9b76-bafe54b90590", 
+    "travis url": "https://travis-ci.org/codeforamerica/cityvoice"
+  }, 
+  {
+    "name": "PROMPTLY", 
+    "guid": "e794be6b-2609-4246-b34a-6b20eb79b2c0", 
+    "travis url": "https://travis-ci.org/codeforamerica/promptly"
+  }, 
+  {
+    "name": "Ohana Web Search", 
+    "guid": "67f80d53-afb0-4344-bd40-2644f55a4462", 
+    "travis url": "https://travis-ci.org/codeforamerica/ohana-web-search"
+  }
+]
