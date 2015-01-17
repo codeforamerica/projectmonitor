@@ -14,7 +14,10 @@ class TestProjects (unittest.TestCase):
             projects = json.load(file)
         
         guids = map(itemgetter('guid'), projects)
-        self.assertEqual(len(guids), len(set(guids)), 'Unique GUIDs')
+        self.assertEqual(len(guids), len(set(guids)), 'Non-unique GUIDs')
+        
+        names = map(itemgetter('name'), projects)
+        self.assertEqual(len(names), len(set(names)), 'Non-unique names')
         
         for project in projects:
             _, host, path, _, _, _ = urlparse(project['travis url'])
