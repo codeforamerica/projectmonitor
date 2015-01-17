@@ -3,10 +3,13 @@
 from os.path import join, dirname, realpath
 from itertools import groupby
 from operator import itemgetter
+from urlparse import urlparse
 from csv import DictReader
+from time import time
 import json
 
-from flask import Flask, render_template
+from requests import get
+from flask import Flask, render_template, jsonify
 
 with open(join(dirname(__file__), 'VERSION')) as file:
     __version__ = file.read().strip()
@@ -43,3 +46,40 @@ def index():
     projects.sort(key=itemgetter('updated_at'), reverse=True)
 
     return render_template('index.html', projects=projects)
+
+@app.route('/.well-known/status')
+def status():
+    with open(PROJECTS_FILE) as file:
+        projects = json.load(file)
+    
+    try:
+        for project in projects:
+            _, host, path, _, _, _ = urlparse(project['travis url'])
+            api_url = 'https://api.{host}/repos{path}'.format(**locals())
+            resp = get(api_url)
+        
+            # See if the Github URL has moved.
+            if resp.status_code == 404:
+                github_url = 'https://github.com{path}'.format(**locals())
+                resp = get(github_url)
+            
+                if resp.status_code == 200:
+                    _, _, github_path, _, _, _ = urlparse(resp.url)
+                
+                    if github_path != path:
+                        message = 'Error in {guid}: {path} has moved to {github_path}'
+                        kwargs = dict(guid=project['guid'], **locals())
+                        raise Exception(message.format(**kwargs))
+        
+            if resp.status_code != 200:
+                message = 'Missing {guid}: no {travis url}'
+                raise Exception(message.format(**project))
+    except Exception as e:
+        status = str(e)
+    else:
+        status = 'ok'
+    
+    return jsonify(dict(status=status,
+                        updated=int(time()),
+                        dependencies=['Travis', 'Github'],
+                        resources={}))

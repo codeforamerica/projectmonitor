@@ -1,8 +1,6 @@
-import json, unittest
-from urlparse import urlparse
+import json, unittest, re
 from operator import itemgetter
 
-from requests import get
 from . import PROJECTS_FILE
 
 class TestProjects (unittest.TestCase):
@@ -14,31 +12,18 @@ class TestProjects (unittest.TestCase):
             projects = json.load(file)
         
         guids = map(itemgetter('guid'), projects)
+        self.assertEqual(len(guids), len(projects), 'A GUID in every project')
         self.assertEqual(len(guids), len(set(guids)), 'Non-unique GUIDs')
         
+        matches = [bool(re.match(r'^\w+(-\w+)*$', guid)) for guid in guids]
+        self.assertFalse(False in matches, r'GUIDs all match "^\w+(-\w+)*$"')
+        
         names = map(itemgetter('name'), projects)
+        self.assertEqual(len(names), len(projects), 'A name in every project')
         self.assertEqual(len(names), len(set(names)), 'Non-unique names')
         
-        for project in projects:
-            _, host, path, _, _, _ = urlparse(project['travis url'])
-            api_url = 'https://api.{host}/repos{path}'.format(**locals())
-            resp = get(api_url)
-            
-            # See if the Github URL has moved.
-            if resp.status_code == 404:
-                github_url = 'https://github.com{path}'.format(**locals())
-                resp = get(github_url)
-                
-                if resp.status_code == 200:
-                    _, _, github_path, _, _, _ = urlparse(resp.url)
-                    
-                    if github_path != path:
-                        message = 'Error in {guid}: {path} has moved to {github_path}'
-                        kwargs = dict(guid=project['guid'], **locals())
-                        raise Exception(message.format(**kwargs))
-            
-            message = 'Missing {guid}: no {travis url}'
-            self.assertEqual(resp.status_code, 200, message.format(**project))
+        urls = map(itemgetter('travis url'), projects)
+        self.assertEqual(len(urls), len(projects), 'A URL in every project')
 
 if __name__ == '__main__':
     unittest.main()
