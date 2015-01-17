@@ -1,2 +1,4 @@
 language: python
-script: "echo all is well"
+install:
+  - sudo pip install -r requirements.txt
+script: python -m projmon.test
