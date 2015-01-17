@@ -15,14 +15,14 @@
     "travis url": "https://travis-ci.org/codeforamerica/denver-schedules-api"
   }, 
   {
-    "name": "spot it like its hot", 
+    "name": "AddressIQ", 
     "guid": "7f784962-2d83-4ad5-a23d-a598bec3345e", 
-    "travis url": "https://travis-ci.org/codeforamerica/spot-it-like-its-hot"
+    "travis url": "https://travis-ci.org/codeforamerica/address-iq"
   }, 
   {
-    "name": "Georelevent", 
+    "name": "Citygram", 
     "guid": "77db7e4d-a05a-4ee8-b7ab-3bd29c6dd1b0", 
-    "travis url": "https://travis-ci.org/codeforamerica/georelevent"
+    "travis url": "https://travis-ci.org/codeforamerica/citygram"
   }, 
   {
     "name": "BIZFRIENDLY API", 
@@ -35,9 +35,9 @@
     "travis url": "https://travis-ci.org/codeforamerica/engine-light"
   }, 
   {
-    "name": "rentfacts api", 
+    "name": "bestnest api", 
     "guid": "19c25e73-95dc-451d-a221-12a0a9008d9f", 
-    "travis url": "https://travis-ci.org/codeforamerica/rentfacts-api"
+    "travis url": "https://travis-ci.org/codeforamerica/bestnest-api"
   }, 
   {
     "name": "CFA API", 
@@ -82,7 +82,7 @@
   {
     "name": "balance", 
     "guid": "418a62a0-e994-432d-9df5-0b398504c48f", 
-    "travis url": "https://travis-ci.org/daguar/balance"
+    "travis url": "https://travis-ci.org/codeforamerica/balance"
   }, 
   {
     "name": "homebase", 
@@ -95,9 +95,9 @@
     "travis url": "https://travis-ci.org/codeforamerica/lexington-special-events"
   }, 
   {
-    "name": "bizwallet", 
+    "name": "PrimerPeso", 
     "guid": "4b795a27-37e0-4d41-8b25-b580f623c1b4", 
-    "travis url": "https://travis-ci.org/CoquiCoders/bizwallet"
+    "travis url": "https://travis-ci.org/codeforamerica/primerpeso"
   }, 
   {
     "name": "City Voice", 
