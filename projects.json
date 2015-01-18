@@ -35,6 +35,11 @@
     "travis url": "https://travis-ci.org/codeforamerica/engine-light"
   }, 
   {
+    "name": "Project Monitor", 
+    "guid": "cfa-project-monitor", 
+    "travis url": "https://travis-ci.org/codeforamerica/projectmonitor"
+  }, 
+  {
     "name": "bestnest api", 
     "guid": "19c25e73-95dc-451d-a221-12a0a9008d9f", 
     "travis url": "https://travis-ci.org/codeforamerica/bestnest-api"

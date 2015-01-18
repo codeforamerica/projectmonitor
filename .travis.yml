@@ -7,3 +7,5 @@ virtualenv:
 install:
   - sudo pip install -r requirements.txt
 script: python -m projmon.test
+notifications:
+  webhooks: http://projmon-dev.herokuapp.com/projects/cfa-project-monitor/status
