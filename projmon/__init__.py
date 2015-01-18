@@ -9,10 +9,10 @@ from operator import itemgetter
 from urllib.parse import urlparse
 from csv import DictReader
 from time import time
-import json
+import json, sys
 
 from requests import get
-from flask import Flask, render_template, jsonify
+from flask import Flask, request, render_template, jsonify
 
 with open(join(dirname(__file__), 'VERSION')) as file:
     __version__ = file.read().strip()
@@ -49,6 +49,23 @@ def index():
     projects.sort(key=itemgetter('updated_at'), reverse=True)
 
     return render_template('index.html', projects=projects)
+
+@app.route('/projects/<guid>/status', methods=['POST'])
+def post_status(guid):
+    if 'payload' not in request.form:
+        raise Exception('Missing payload')
+
+    payload = json.loads(request.form['payload'])
+    repository = payload.get('repository', {}).get('url', None)
+    build = payload.get('id', None)
+    event = payload.get('type', None)
+    branch = payload.get('branch', None)
+    commit = payload.get('commit', None)
+    status = payload.get('status', None)
+    passed = (status == 0)
+    
+    print('post_status:', repository, branch, commit, event, passed, file=sys.stderr)
+    return 'ok'
 
 @app.route('/.well-known/status')
 def status():
