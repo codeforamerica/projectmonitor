@@ -52,40 +52,48 @@ def index():
 
 @app.route('/projects/<guid>/status', methods=['POST'])
 def post_status(guid):
-    if 'payload' not in request.form:
-        raise Exception('Missing payload')
+    try:
+        if 'payload' not in request.form:
+            raise RuntimeError('Missing payload')
 
-    payload = json.loads(request.form['payload'])
-    repository = payload.get('repository', {}).get('url', None)
-    build = payload.get('id', None)
-    event = payload.get('type', None)
-    branch = payload.get('branch', None)
-    commit = payload.get('commit', None)
-    status = payload.get('status', None)
-    passed = (status == 0)
+        payload = json.loads(request.form['payload'])
+        build_url = payload.get('build_url', '')
+        project = None
+    
+        with open(PROJECTS_FILE) as file:
+            for other_project in json.load(file):
+                if other_project['guid'] != guid:
+                    continue
+                if build_url.startswith(other_project['travis url']):
+                    project = other_project
+    
+        if not project:
+            raise RuntimeError('No match found for {}, {}'.format(guid, build_url))
+    
+        _, _, build_path, _, _, _ = urlparse(build_url)
+        info_url = 'https://api.travis-ci.org{}'.format(build_path)
+        print('info_url:', info_url, file=sys.stderr)
+    
+        # guid,success,url,published_at,updated_at,valid_readme
+        # 2b40577c-2e35-4893-affa-c7fe5cfbe6b5,t,https://travis-ci.org/codeforamerica/bizfriendly-api/builds/13886436,2013-11-12T23:45:16Z,2013-11-12T23:45:18Z,t
+    
+        got = get(info_url)
+    
+        if got.status_code != 200:
+            raise RuntimeError('HTTP {} for {}'.format(got.status_code, info_url))
+    
+        info = got.json()
+        success = (info['status'] == 0)
+        updated_at = info.get('finished_at', info['started_at'])
+        valid_readme = None
+    
+        print('post_status: guid={guid}, success={success}, url={build_url}, updated_at={updated_at}, valid_readme=?'.format(**locals()), file=sys.stderr)
 
-    build_url = payload.get('build_url', '')
-    
-    with open(PROJECTS_FILE) as file:
-        projects = json.load(file)
-    
-    project = None
-    
-    for other_project in projects:
-        if other_project['guid'] != guid:
-            continue
-        if build_url.startswith(other_project['travis url']):
-            project = other_project
-    
-    if not project:
-        raise Exception('No match found for {}, {}'.format(guid, build_url))
-    
-    _, _, build_path, _, _, _ = urlparse(build_url)
-    info_url = 'https://api.travis-ci.org{}'.format(build_path)
-    print('info_url:', info_url, file=sys.stderr)
-    
-    print('post_status:', repository, branch, commit, event, passed, file=sys.stderr)
-    return 'ok'
+    except RuntimeError as e:
+        raise
+
+    else:
+        return 'ok'
 
 @app.route('/.well-known/status')
 def status():
