@@ -65,6 +65,7 @@ def post_status(guid):
     passed = (status == 0)
     
     print('post_status:', repository, branch, commit, event, passed, file=sys.stderr)
+    print('notified:', json.dumps(payload), file=sys.stderr)
     return 'ok'
 
 @app.route('/.well-known/status')
