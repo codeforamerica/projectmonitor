@@ -63,9 +63,28 @@ def post_status(guid):
     commit = payload.get('commit', None)
     status = payload.get('status', None)
     passed = (status == 0)
+
+    build_url = payload.get('build_url', '')
+    
+    with open(PROJECTS_FILE) as file:
+        projects = json.load(file)
+    
+    project = None
+    
+    for other_project in projects:
+        if other_project['guid'] != guid:
+            continue
+        if build_url.startswith(other_project['travis url']):
+            project = other_project
+    
+    if not project:
+        raise Exception('No match found for {}, {}'.format(guid, build_url))
+    
+    _, _, build_path, _, _, _ = urlparse(build_url)
+    info_url = 'https://api.travis-ci.org{}'.format(build_path)
+    print('info_url:', info_url, file=sys.stderr)
     
     print('post_status:', repository, branch, commit, event, passed, file=sys.stderr)
-    print('notified:', json.dumps(payload), file=sys.stderr)
     return 'ok'
 
 @app.route('/.well-known/status')
