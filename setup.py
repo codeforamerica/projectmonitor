@@ -15,7 +15,11 @@ setup(
         'projmon': ['VERSION']
     },
     install_requires = [
+        # http://flask.pocoo.org
         'flask == 0.10.1',
+        
+        # http://initd.org/psycopg/
+        'psycopg2 >= 2',
         
         # http://python-future.org
         'future >= 0.14.3',

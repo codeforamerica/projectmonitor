@@ -9,9 +9,11 @@ from operator import itemgetter
 from urllib.parse import urlparse
 from csv import DictReader
 from time import time
-import json, sys
+import json, sys, os
 
 from requests import get
+from psycopg2 import connect
+from psycopg2.extras import DictCursor
 from flask import Flask, request, render_template, jsonify
 
 with open(join(dirname(__file__), 'VERSION')) as file:
@@ -19,8 +21,6 @@ with open(join(dirname(__file__), 'VERSION')) as file:
 
 PROJECTS_FILE = realpath(join(dirname(__file__), '..', 'projects.json'))
 STATUSES_FILE = realpath(join(dirname(__file__), '..', 'statuses.csv'))
-state_classes = dict(t='success', f='failure error')
-state_labels = dict(t=u'✓', f=u'❌')
 
 app = Flask(__name__)
 
@@ -29,20 +29,25 @@ def index():
     with open(PROJECTS_FILE) as file:
         projects = json.load(file)
 
-    with open(STATUSES_FILE) as file:
-        statuses = sorted(DictReader(file), key=itemgetter('guid'))
+    with connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=DictCursor) as db:
+            db.execute('''SELECT guid, success, url, updated_at, valid_readme
+                          FROM statuses WHERE updated_at IS NOT NULL
+                          ORDER BY guid''')
+            
+            statuses = map(dict, db.fetchall())
     
     for (guid, group) in groupby(statuses, itemgetter('guid')):
         statuses = sorted(group, key=itemgetter('updated_at'), reverse=True)
         
         for status in statuses:
-            status['state_class'] = state_classes[status['success']]
-            status['state_label'] = state_labels[status['success']]
+            status['state_class'] = 'success' if status['success'] else 'failure error'
+            status['state_label'] = u'✓' if status['success'] else u'❌'
 
         project = [proj for proj in projects if proj['guid'] == guid][0]
-        project['updated_at'] = statuses[0]['updated_at']
+        project['updated_at'] = statuses[0]['updated_at'].strftime('%Y-%m-%dT%H:%M:%SZ')
         project['valid_readme'] = statuses[0]['valid_readme']
-        project['state_class'] = state_classes[statuses[0]['success']]
+        project['state_class'] = 'success' if statuses[0]['success'] else 'failure error'
         project['statuses'] = statuses[:5]
     
     projects = [proj for proj in projects if 'updated_at' in proj]
