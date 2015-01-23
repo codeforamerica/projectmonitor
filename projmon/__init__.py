@@ -47,7 +47,7 @@ def index():
         project = [proj for proj in projects if proj['guid'] == guid][0]
         project['updated_at'] = statuses[0]['updated_at'].strftime('%Y-%m-%dT%H:%M:%SZ')
         project['valid_readme'] = statuses[0]['valid_readme']
-        project['state_class'] = 'success' if statuses[0]['success'] else 'failure error'
+        project['state_class'] = statuses[0]['state_class']
         project['statuses'] = statuses[:5]
     
     projects = [proj for proj in projects if 'updated_at' in proj]
@@ -91,7 +91,17 @@ def post_status(guid):
         success = (info['status'] == 0)
         updated_at = info.get('finished_at', info['started_at'])
         valid_readme = None
-    
+        
+        with connect(os.environ['DATABASE_URL']) as conn:
+            with conn.cursor(cursor_factory=DictCursor) as db:
+                db.execute('SELECT id FROM projects WHERE guid=%s', (guid, ))
+                (project_id, ) = db.fetchone()
+            
+                db.execute('''INSERT INTO project_statuses
+                              (id, success, url, updated_at, valid_readme)
+                              VALUES (%s, %s, %s, %s, %s)''',
+                           (project_id, success, url, updated_at, None))
+
         print('post_status: guid={guid}, success={success}, url={build_url}, updated_at={updated_at}, valid_readme=?'.format(**locals()), file=sys.stderr)
 
     except RuntimeError as e:
