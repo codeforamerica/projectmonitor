@@ -95,12 +95,24 @@ def post_status(guid):
         with connect(os.environ['DATABASE_URL']) as conn:
             with conn.cursor(cursor_factory=DictCursor) as db:
                 db.execute('SELECT id FROM projects WHERE guid=%s', (guid, ))
-                (project_id, ) = db.fetchone()
+                
+                try:
+                    (project_id, ) = db.fetchone()
+                    print("It's", project_id)
+                except TypeError:
+                    # Project is missing.
+                    db.execute('''INSERT INTO projects
+                                  (name, guid) VALUES (%s, %s)''',
+                               (project['name'], project['guid']))
+                    
+                    db.execute("SELECT currval('projects_id_seq')")
+                    (project_id, ) = db.fetchone()
+                    print("Created", project_id)
             
                 db.execute('''INSERT INTO project_statuses
-                              (id, success, url, updated_at, valid_readme)
+                              (project_id, success, url, updated_at, valid_readme)
                               VALUES (%s, %s, %s, %s, %s)''',
-                           (project_id, success, url, updated_at, None))
+                           (project_id, success, build_url, updated_at, True))
 
         print('post_status: guid={guid}, success={success}, url={build_url}, updated_at={updated_at}, valid_readme=?'.format(**locals()), file=sys.stderr)
 
