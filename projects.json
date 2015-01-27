@@ -10,7 +10,7 @@
     "travis url": "https://travis-ci.org/codeforamerica/bizarro-cms"
   }, 
   {
-    "name": "Denver Schedules API", 
+    "name": "Denver Schedules", 
     "guid": "5410eca6-0a90-4bf0-b9c0-39f679940ba4", 
     "travis url": "https://travis-ci.org/codeforamerica/denver-schedules-api"
   }, 
@@ -50,7 +50,7 @@
     "travis url": "https://travis-ci.org/codeforamerica/cfapi"
   }, 
   {
-    "name": "Civic Tech Issue Finder", 
+    "name": "Civic Issue Finder", 
     "guid": "f16d5385-d040-4a39-b7f5-cdc3de835117", 
     "travis url": "https://travis-ci.org/codeforamerica/civic-issue-finder"
   }, 
