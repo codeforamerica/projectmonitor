@@ -5,9 +5,9 @@
     "travis url": "https://travis-ci.org/codeforamerica/brigade-alpha"
   }, 
   {
-    "name": "Bizarro CMS", 
+    "name": "Ceviche CMS", 
     "guid": "1bf2f3b3-bed8-42bc-91e8-d47f873443de", 
-    "travis url": "https://travis-ci.org/codeforamerica/bizarro-cms"
+    "travis url": "https://travis-ci.org/codeforamerica/ceviche-cms"
   }, 
   {
     "name": "Denver Schedules", 
