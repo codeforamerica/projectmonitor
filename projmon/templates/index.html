@@ -4,9 +4,16 @@
 <title>Project Monitor</title>
 <link href="/static/styles.css" media="screen" rel="stylesheet" />
 <script src="/static/scripts.js"></script>
+<meta content='300' http-equiv='refresh'>
+<style lang="text/css">
+p.add-note { margin: 20px 0 0 30px }
+p.add-note, p.add-note * { color: white }
+</style>
 </head>
 <body class='dashboard'>
-<meta content='300' http-equiv='refresh'>
+<p class="add-note">
+    Add new projects at <a href="https://github.com/codeforamerica/projectmonitor#add-your-project">github.com/codeforamerica/projectmonitor</a>
+</p>
 <ul class="projects">
     {% for project in projects %}
         <li class="project {{project.state_class}}">
