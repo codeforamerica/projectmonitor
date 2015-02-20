@@ -34,12 +34,12 @@ def index():
             db.execute('''SELECT guid, success, url, updated_at, valid_readme
                           FROM statuses WHERE updated_at IS NOT NULL
                           ORDER BY guid''')
-            
+
             statuses = map(dict, db.fetchall())
-    
+
     for (guid, group) in groupby(statuses, itemgetter('guid')):
         statuses = sorted(group, key=itemgetter('updated_at'), reverse=True)
-        
+
         for status in statuses:
             status['state_class'] = 'success' if status['success'] else 'failure error'
             status['state_label'] = u'✓' if status['success'] else u'❌'
@@ -49,7 +49,7 @@ def index():
         project['valid_readme'] = statuses[0]['valid_readme']
         project['state_class'] = statuses[0]['state_class']
         project['statuses'] = statuses[:5]
-    
+
     projects = [proj for proj in projects if 'updated_at' in proj]
     projects.sort(key=itemgetter('updated_at'), reverse=True)
 
@@ -64,55 +64,37 @@ def post_status(guid):
         payload = json.loads(request.form['payload'])
         build_url = payload.get('build_url', '')
         project = None
-    
+
         with open(PROJECTS_FILE) as file:
             for other_project in json.load(file):
                 if other_project['guid'] != guid:
                     continue
                 if build_url.startswith(other_project['travis url']):
                     project = other_project
-    
+
         if not project:
             raise RuntimeError('No match found for {}, {}'.format(guid, build_url))
-    
+
         _, _, build_path, _, _, _ = urlparse(build_url)
         info_url = 'https://api.travis-ci.org{}'.format(build_path)
         print('info_url:', info_url, file=sys.stderr)
-    
-        # guid,success,url,published_at,updated_at,valid_readme
-        # 2b40577c-2e35-4893-affa-c7fe5cfbe6b5,t,https://travis-ci.org/codeforamerica/bizfriendly-api/builds/13886436,2013-11-12T23:45:16Z,2013-11-12T23:45:18Z,t
-    
+
         got = get(info_url)
-    
+
         if got.status_code != 200:
             raise RuntimeError('HTTP {} for {}'.format(got.status_code, info_url))
-    
+
         info = got.json()
         success = (info['status'] == 0)
         updated_at = info.get('finished_at', info['started_at'])
         valid_readme = None
-        
+
         with connect(os.environ['DATABASE_URL']) as conn:
             with conn.cursor(cursor_factory=DictCursor) as db:
-                db.execute('SELECT id FROM projects WHERE guid=%s', (guid, ))
-                
-                try:
-                    (project_id, ) = db.fetchone()
-                    print("It's", project_id)
-                except TypeError:
-                    # Project is missing.
-                    db.execute('''INSERT INTO projects
-                                  (name, guid) VALUES (%s, %s)''',
-                               (project['name'], project['guid']))
-                    
-                    db.execute("SELECT currval('projects_id_seq')")
-                    (project_id, ) = db.fetchone()
-                    print("Created", project_id)
-            
-                db.execute('''INSERT INTO project_statuses
-                              (project_id, success, url, updated_at, valid_readme)
+                db.execute('''INSERT INTO statuses
+                              (guid, success, url, updated_at, valid_readme)
                               VALUES (%s, %s, %s, %s, %s)''',
-                           (project_id, success, build_url, updated_at, True))
+                           (project['guid'], success, build_url, updated_at, True))
 
         print('post_status: guid={guid}, success={success}, url={build_url}, updated_at={updated_at}, valid_readme=?'.format(**locals()), file=sys.stderr)
 
@@ -126,26 +108,26 @@ def post_status(guid):
 def status():
     with open(PROJECTS_FILE) as file:
         projects = json.load(file)
-    
+
     try:
         for project in projects:
             _, host, path, _, _, _ = urlparse(project['travis url'])
             api_url = 'https://api.{host}/repos{path}'.format(**locals())
             resp = get(api_url)
-        
+
             # See if the Github URL has moved.
             if resp.status_code == 404:
                 github_url = 'https://github.com{path}'.format(**locals())
                 resp = get(github_url)
-            
+
                 if resp.status_code == 200:
                     _, _, github_path, _, _, _ = urlparse(resp.url)
-                
+
                     if github_path != path:
                         message = 'Error in {guid}: {path} has moved to {github_path}'
                         kwargs = dict(guid=project['guid'], **locals())
                         raise Exception(message.format(**kwargs))
-        
+
             if resp.status_code != 200:
                 message = 'Missing {guid}: no {travis url}'
                 raise Exception(message.format(**project))
@@ -153,7 +135,7 @@ def status():
         status = str(e)
     else:
         status = 'ok'
-    
+
     return jsonify(dict(status=status,
                         updated=int(time()),
                         dependencies=['Travis', 'Github'],
