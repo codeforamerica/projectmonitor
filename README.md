@@ -24,8 +24,8 @@ Github pull request. You will need three pieces of information:
 Here is an example:
 
     {
-      "name": "Project Monitor", 
-      "guid": "cfa-project-monitor", 
+      "name": "Project Monitor",
+      "guid": "cfa-project-monitor",
       "travis url": "https://travis-ci.org/codeforamerica/projectmonitor"
     }
 
@@ -66,6 +66,36 @@ For a project's readme to be valid, it must have an installation section or has 
 
 ProjectMonitor is a [Python Flask application](https://github.com/codeforamerica/howto/blob/master/Python-Virtualenv.md).
 It relies on [PostreSQL for data storage](https://github.com/codeforamerica/howto/blob/master/PostgreSQL.md).
+
+The app relies on one database table, which you can create like so from the command line:
+```
+createdb projectmonitor
+psql projectmonitor
+
+create table statuses (
+  guid text,
+  success boolean DEFAULT false NOT NULL,
+  url text,
+  updated_at timestamp without time zone,
+  valid_readme boolean DEFAULT false NOT NULL
+);
+```
+To test the app locally:
+
+1. Set the `DATABASE_URL` environment variable:
+
+  `export DATABASE_URL="postgresql://localhost/projectmonitor"`
+
+
+2. Run the server: `python runserver.py`
+
+3. Simulate Travis sending a POST request to your server:
+
+  `curl -X POST -d 'payload={"build_url":"https://travis-ci.org/codeforamerica/projectmonitor/builds/51265414"}' http://127.0.0.1:5000/projects/cfa-project-monitor/status --header "Content-Type:application/x-www-form-urlencoded"`
+
+  Note that the Travis project in the command above needs to correspond to a project in your `projects.json`.
+
+4. Open the site at [http://localhost:5000](http://localhost:5000)
 
 Copyright (c) 2013 Pivotal Labs / 2014-2015 Code for America.
 This software is licensed under the MIT License.
