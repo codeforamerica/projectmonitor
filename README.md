@@ -70,15 +70,7 @@ It relies on [PostreSQL for data storage](https://github.com/codeforamerica/howt
 The app relies on one database table, which you can create like so from the command line:
 ```
 createdb projectmonitor
-psql projectmonitor
-
-create table statuses (
-  guid text,
-  success boolean DEFAULT false NOT NULL,
-  url text,
-  updated_at timestamp without time zone,
-  valid_readme boolean DEFAULT false NOT NULL
-);
+psql projectmonitor < statuses.pgsql
 ```
 To test the app locally:
 
