@@ -74,20 +74,20 @@ psql projectmonitor < statuses.pgsql
 ```
 To test the app locally:
 
-1. Set the `DATABASE_URL` environment variable:
+1. Run the server with the `DATABASE_URL` environment variable:
 
-  `export DATABASE_URL="postgresql://localhost/projectmonitor"`
+  `env DATABASE_URL="postgresql://localhost/projectmonitor" python runserver.py`
+  
+  Put the database URL in a `.env` file to run the server
+  [from the `Procfile`](https://github.com/codeforamerica/howto/blob/master/Procfile.md).
 
-
-2. Run the server: `python runserver.py`
-
-3. Simulate Travis sending a POST request to your server:
+2. Simulate Travis sending a POST request to your server:
 
   `curl -X POST -d 'payload={"build_url":"https://travis-ci.org/codeforamerica/projectmonitor/builds/51265414"}' http://127.0.0.1:5000/projects/cfa-project-monitor/status --header "Content-Type:application/x-www-form-urlencoded"`
 
   Note that the Travis project in the command above needs to correspond to a project in your `projects.json`.
 
-4. Open the site at [http://localhost:5000](http://localhost:5000)
+3. Open the site at [http://localhost:5000](http://localhost:5000)
 
 Copyright (c) 2013 Pivotal Labs / 2014-2015 Code for America.
 This software is licensed under the MIT License.
