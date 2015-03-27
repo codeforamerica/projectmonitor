@@ -3,7 +3,12 @@
     "name": "brigade alpha", 
     "guid": "001d08e8-5e39-4824-8117-df996d35c531", 
     "travis url": "https://travis-ci.org/codeforamerica/brigade-alpha"
-  }, 
+  },
+  {
+    "name": "brigade v3",
+    "guid": "brigade-v3",
+    "travis url": "https://travis-ci.org/codeforamerica/brigade"
+  },
   {
     "name": "Ceviche CMS", 
     "guid": "1bf2f3b3-bed8-42bc-91e8-d47f873443de", 
