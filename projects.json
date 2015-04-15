@@ -1,12 +1,12 @@
 [
   {
-    "name": "brigade alpha", 
+    "name": "Brigade 2014", 
     "guid": "001d08e8-5e39-4824-8117-df996d35c531", 
     "travis url": "https://travis-ci.org/codeforamerica/brigade-alpha"
   },
   {
-    "name": "brigade v3",
-    "guid": "brigade-v3",
+    "name": "Brigade 2015",
+    "guid": "brigade-2015",
     "travis url": "https://travis-ci.org/codeforamerica/brigade"
   },
   {
