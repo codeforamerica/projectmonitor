@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/codeforamerica/projectmonitor.png?branch=master)](http://travis-ci.org/codeforamerica/projectmonitor)
+[![Build Status](https://api.travis-ci.org/codeforamerica/projectmonitor.svg)](http://travis-ci.org/codeforamerica/projectmonitor)
 
 Description
 ===========
