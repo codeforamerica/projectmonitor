@@ -38,7 +38,7 @@ Here is portion of a valid
 [Travis configuration file](http://docs.travis-ci.com/user/build-configuration/):
 
     notifications:
-      webhooks: http://project-monitor.codeforamerica.org/projects/cfa-project-monitor/status
+      webhooks: http://project-monitor.codeforamerica.org/projects/{project GUID}/status
 
 ## Display
 Just open a browser on `/`. The page refreshes every 5 minutes with the latest
