@@ -133,5 +133,10 @@
   "name": "Wextractor",
   "guid": "a3f6235b-cb0b-be2c-b026-398277332c59",
   "travis url": "https://travis-ci.org/codeforamerica/w-drive-extractor"
+  },
+  {
+  "name": "Somerville Teacher Tool",
+  "guid": "somerville-teacher-tool",
+  "travis url": "https://travis-ci.org/codeforamerica/somerville-teacher-tool"
   }
 ]
