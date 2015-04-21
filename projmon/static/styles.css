@@ -371,6 +371,7 @@ body.dashboard ul.projects li.project {
     margin: 0 15px 15px 0;
     list-style-type: none;
     position: relative;
+    height: 125px;
 }
 body.dashboard ul.projects li.project .icon {
     font-family: Entypo;
