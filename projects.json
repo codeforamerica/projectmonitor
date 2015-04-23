@@ -138,5 +138,10 @@
   "name": "Somerville Teachers",
   "guid": "somerville-teacher-tool",
   "travis url": "https://travis-ci.org/codeforamerica/somerville-teacher-tool"
+  },
+  {
+  "name": "DNS Service",
+  "guid": "cfa-dns-service",
+  "travis url": "https://travis-ci.org/codeforamerica/DNS-Service"
   }
 ]
