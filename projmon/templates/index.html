@@ -3,7 +3,6 @@
 <head>
 <title>Project Monitor</title>
 <link href="/static/styles.css" media="screen" rel="stylesheet" />
-<script src="/static/scripts.js"></script>
 <meta content='300' http-equiv='refresh'>
 <style lang="text/css">
 p.add-note { margin: 20px 0 0 30px }
@@ -11,11 +10,10 @@ p.add-note, p.add-note * { color: white }
 </style>
 </head>
 <body class='dashboard'>
-<p class="add-note">
-    Add new projects at <a href="https://github.com/codeforamerica/projectmonitor#add-your-project">github.com/codeforamerica/projectmonitor</a>
-</p>
+
 <ul class="projects">
     {% for project in projects %}
+
         <li class="project {{project.state_class}}">
             <h2><span class="centered-words">{{project.name}}</span></h2>
             <p class="readme">
@@ -23,7 +21,7 @@ p.add-note, p.add-note * { color: white }
                 <b>Valid</b>
             </p>
             <p class="builds">
-                <span class="icon">&#9874;</span> Built <span id="time-since-last-build">{{project.updated_at}}</span> ago
+                <span class="icon">&#9874;</span> Built <span id="time-since-last-build">{{project.last_updated}}</span> ago
             </p>
             <ol class="builds">
                 {% for status in project.statuses %}
@@ -33,8 +31,11 @@ p.add-note, p.add-note * { color: white }
                 {% endfor %}
             </ol>
         </li>
+
     {% endfor %}
 </ul>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 <script type="text/javascript">
   $( document ).ready(function() {
     $( "span[id*='time-since-last-build']" ).each(function(){
@@ -45,4 +46,3 @@ p.add-note, p.add-note * { color: white }
 </div>
 </body>
 </html>
-
