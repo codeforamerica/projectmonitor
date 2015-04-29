@@ -29,7 +29,7 @@ def organizations_projects(cfapi_org_id):
 
     travis_projects = []
     projects = []
-    projects = get_projects(projects, "https://www.codeforamerica.org/api/organizations/"+cfapi_org_id+"/projects", 5)
+    projects = get_projects(projects, "https://www.codeforamerica.org/api/organizations/"+cfapi_org_id+"/projects", 20)
 
     # Loop through projects and get
     for project in projects:
@@ -37,28 +37,7 @@ def organizations_projects(cfapi_org_id):
             url = urlparse(project["code_url"])
             if url.netloc == "github.com":
                 travis_url = "https://api.travis-ci.org/repositories"+url.path+"/builds"
-
-                got = get(travis_url)
-                builds = got.json()
-                if builds:
-                    project["statuses"] = builds[0:5]
-
-                    if builds[0]["result"] == 0:
-                        project["state_class"] = "success"
-                    else:
-                        project["state_class"] = "failure error"
-
-                    for status in project["statuses"]:
-                        if status["result"] == 0:
-                            status["state_class"] = "success"
-                            status["state_label"] = unicode("✓", "utf8")
-                        else:
-                            status["state_class"] = "failure error"
-                            status["state_label"] = unicode("❌", "utf8")
-                        status["url"] = "https://travis-ci.org/"+url.path+"/builds/"+str(status["id"])
-
-                    travis_projects.append(project)
-
-
+                project["travis_url"] = travis_url
+                travis_projects.append(project)
 
     return render_template('index.html', projects=travis_projects)
