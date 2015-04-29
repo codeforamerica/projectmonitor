@@ -29,7 +29,7 @@ def organizations_projects(cfapi_org_id):
 
     travis_projects = []
     projects = []
-    projects = get_projects(projects, "https://www.codeforamerica.org/api/organizations/"+cfapi_org_id+"/projects", 20)
+    projects = get_projects(projects, "https://www.codeforamerica.org/api/organizations/"+cfapi_org_id+"/projects", 50)
 
     # Loop through projects and get
     for project in projects:

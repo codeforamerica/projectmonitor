@@ -26,29 +26,29 @@ $( document ).ready(function() {
 
   $.each(projects, function(i, project){
 
-    $.getJSON(project.travis_url, function(response){
+      console.log(project.travis_url);
+      $.getJSON(project.travis_url, function(response){
 
-      if (response[0]) {
+        if (response[0]) {
 
-        if (response[0].result == 0){
-          project.state_class = "success"
-        } else {
-          project.state_class = "failure error"
+          if (response[0].result == 0){
+            project.state_class = "success"
+          } else {
+            project.state_class = "failure error"
+          }
+
+          var html = `<li class="project `+project.state_class+`">
+              <h2><span class="centered-words">`+project.name+`</span></h2>
+              <p class="builds">
+                  <span class="icon">&#9874;</span> Built <span id="time-since-last-build">`+moment(new Date(project.last_updated)).fromNow()+`</span> ago
+              </p>
+          </li>`;
+
+          $(".projects").append(html);
+
         }
 
-        var html = `<li class="project `+project.state_class+`">
-            <h2><span class="centered-words">`+project.name+`</span></h2>
-            <p class="builds">
-                <span class="icon">&#9874;</span> Built <span id="time-since-last-build">`+moment(new Date(project.last_updated)).fromNow()+`</span> ago
-            </p>
-        </li>`;
-
-        $(".projects").append(html);
-
-      }
-
-    });
-
+      });
 
   });
 
