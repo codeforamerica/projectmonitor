@@ -7,3 +7,6 @@ install:
 script: python -m projmon.test
 notifications:
   webhooks: http://project-monitor.codeforamerica.org/projects/cfa-project-monitor/status
+branches:
+  only:
+    - master
