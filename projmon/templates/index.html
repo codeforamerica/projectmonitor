@@ -2,7 +2,12 @@
 <html>
 <head>
 <title>Project Monitor</title>
+
 <link href="/static/styles.css" media="screen" rel="stylesheet" />
+
+<!-- Check the CfA Style Guide at https://style.codeforamerica.org/ -->
+    <link rel="stylesheet" href="https://style.codeforamerica.org/style/css/main.css">
+    <link rel="stylesheet" href="https://style.codeforamerica.org/style/css/layout.css" media="all and (min-width: 40em)">
 <link rel="shortcut icon"
     href="{{ url_for('static', filename='img/favicon.ico') }}">
 <meta content='300' http-equiv='refresh'>
@@ -12,6 +17,14 @@ p.add-note, p.add-note * { color: white }
 </style>
 </head>
 <body class='dashboard'>
+
+  <div class="layout-breve">
+
+  {% if org_name %}
+  <h1>{{org_name}}'s Project Monitor</h1>
+  {% else %}
+  <h1>The Civic Tech Movements Project Monitor</h1>
+  {% endif %}
 
 <ul class="projects">
 </ul>
