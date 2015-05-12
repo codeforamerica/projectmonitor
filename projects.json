@@ -125,14 +125,9 @@
     "travis url": "https://travis-ci.org/codeforamerica/ohana-web-search"
   },
   {
-  "name": "Template Maker",
+  "name": "Pittsburgh Purchasing",
   "guid": "6a9169a2-749e-197b-b402-d7b2fd555d31",
-  "travis url": "https://travis-ci.org/codeforamerica/template-maker/"
-  },
-  {
-  "name": "Wextractor",
-  "guid": "a3f6235b-cb0b-be2c-b026-398277332c59",
-  "travis url": "https://travis-ci.org/codeforamerica/w-drive-extractor"
+  "travis url": "https://travis-ci.org/codeforamerica/pittsburgh-purchasing-suite/"
   },
   {
   "name": "Somerville Teachers",
