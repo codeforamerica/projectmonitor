@@ -10,9 +10,9 @@
     "travis url": "https://travis-ci.org/codeforamerica/brigade"
   },
   {
-    "name": "Ceviche CMS", 
+    "name": "Chime CMS", 
     "guid": "1bf2f3b3-bed8-42bc-91e8-d47f873443de", 
-    "travis url": "https://travis-ci.org/codeforamerica/ceviche-cms"
+    "travis url": "https://travis-ci.org/chimecms/chime"
   }, 
   {
     "name": "Denver Schedules", 
