@@ -11,33 +11,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ICanHaz.js/0.10.3/ICanHaz.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 </head>
-<body class='dashboard'>
 
-  <div class="layout-breve">
+<style>
 
-  <h1>The Civic Tech Movements Project Monitor</h1>
+  a:link, a:visited, a:hover, a:focus, a:active {
+    color: black;
+  }
 
-  <ul id="projects" class="layout-grid-crotchet list-no-bullets">
-  </ul>
+  .alert-success, .alert-failure {
+    border: 0px;
+  }
 
-</div>
+  .project {
+    padding: 15px;
+  }
+
+</style>
+
+<body>
+
+  <div class="layout-breve layout-centered">
+
+    <h1>The Civic Tech Movement Project Monitor</h1>
+
+    <ul id="projects" class="layout-grid-crotchet">
+    </ul>
+
+  </div>
 </body>
 
 <script id="project" type="text/html">
-  <li>
-    <h2> {{ name }}</h2>
-    <p class="builds">
-      <span class="icon">&#9874;</span> Built <span id="time-since-last-build"> {{ last_updated }} </span> ago
-    </p>
+
+  <li class="{{ state }} layout-centered">
+    <div class="project">
+      <h2> <a href="{{ code_url }}"> {{ name }} </a> </h2>
+      <p> Built {{ when }} ago </p>
+      <hr />
+      <ul class="builds list-inline list-no-bullets">
+      {{#builds}}
+        <li class="icon-tools {{ state }}"></li>
+      {{/builds}}
+      </p>
+    </div>
   </li>
+
 </script>
 
 <script>
+
 $( document ).ready(function() {
 
   function getProject(project){
-
-    console.log(project);
 
     if (project.code_url) {
 
@@ -51,14 +75,29 @@ $( document ).ready(function() {
 
           if (response[0]) {
 
+            project.when = moment(new Date(project.last_updated)).fromNow()
+
             if (response[0].result == 0){
-              project.state_class = "success"
+              project.state = "alert-success"
             } else {
-              project.state_class = "failure error"
+              project.state = "alert-failure"
             }
 
-            project_template = ich.project(project);
+            project.builds = []
 
+            $.each(response.slice(0,5), function(i, build){
+
+              if (build.result == 0) {
+                build.state = "alert-success"
+              } else {
+                build.state = "alert-failure"
+              }
+
+              project.builds.push(build);
+
+            })
+
+            project_template = ich.project(project);
             $("#projects").append(project_template);
 
           }
@@ -102,7 +141,7 @@ $( document ).ready(function() {
 
   }
 
-  getProjects("https://www.codeforamerica.org/api/organizations/Chi-Hack-Night/projects", 10)
+  getProjects("https://www.codeforamerica.org/api/projects", 50)
 
 });
 
