@@ -7,12 +7,8 @@
 <link rel="stylesheet" href="https://style.codeforamerica.org/style/css/main.css">
 <link rel="stylesheet" href="https://style.codeforamerica.org/style/css/layout.css" media="all and (min-width: 40em)">
 
-<style lang="text/css">
-p.add-note { margin: 20px 0 0 30px }
-p.add-note, p.add-note * { color: white }
-</style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ICanHaz.js/0.10.3/ICanHaz.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 </head>
 <body class='dashboard'>
@@ -21,61 +17,92 @@ p.add-note, p.add-note * { color: white }
 
   <h1>The Civic Tech Movements Project Monitor</h1>
 
-  <ul id="projects">
+  <ul id="projects" class="layout-grid-crotchet list-no-bullets">
   </ul>
 
 </div>
 </body>
 
+<script id="project" type="text/html">
+  <li>
+    <h2> {{ name }}</h2>
+    <p class="builds">
+      <span class="icon">&#9874;</span> Built <span id="time-since-last-build"> {{ last_updated }} </span> ago
+    </p>
+  </li>
+</script>
+
 <script>
 $( document ).ready(function() {
 
-  $.getJSON("https://www.codeforamerica.org/api/projects", function(response){
+  function getProject(project){
 
-    function getProjects(){
-      
+    console.log(project);
+
+    if (project.code_url) {
+
+      if (project.code_url.indexOf('github.com') > -1) {
+
+        repo = project.code_url.replace("https://github.com/","");
+
+        travis_url = 'https://api.travis-ci.org/repositories/' + repo + '/builds'
+
+        $.getJSON(travis_url, function(response){
+
+          if (response[0]) {
+
+            if (response[0].result == 0){
+              project.state_class = "success"
+            } else {
+              project.state_class = "failure error"
+            }
+
+            project_template = ich.project(project);
+
+            $("#projects").append(project_template);
+
+          }
+
+        });
+
+      }
+
     }
 
-    $.each(response.objects, function(i, project){
+  }
 
-      if (project.code_url) {
+  function getProjects(cfapi_url, limit) {
+    $.getJSON(cfapi_url, function(response){
 
-        if (project.code_url.indexOf('github.com') > -1) {
+      $.each(response.objects, function(i, project){
 
-            repo = project.code_url.replace("https://github.com/","");
+        getProject(project);
 
-            travis_url = 'https://api.travis-ci.org/repositories/' + repo + '/builds'
+        if (i == response.objects.length - 1) {
 
-            $.getJSON(travis_url, function(response){
+          if (limit - response.objects.length > 0) {
 
-              if (response[0]) {
+            if (response.pages) {
 
-                if (response[0].result == 0){
-                  project.state_class = "success"
-                } else {
-                  project.state_class = "failure error"
-                }
+              if (response.pages.next) {
 
-                var html = `<li class="project `+project.state_class+`">
-                    <h2><span class="centered-words">`+project.name+`</span></h2>
-                    <p class="builds">
-                        <span class="icon">&#9874;</span> Built <span id="time-since-last-build">`+moment(new Date(project.last_updated)).fromNow()+`</span> ago
-                    </p>
-                </li>`;
-
-                $("#projects").append(html);
+                getProjects(response.pages.next, limit - response.objects.length);
 
               }
 
-            });
+            }
 
           }
 
         }
 
+      });
+
     });
 
-  });
+  }
+
+  getProjects("https://www.codeforamerica.org/api/organizations/Chi-Hack-Night/projects", 10)
 
 });
 
