@@ -45,13 +45,8 @@
   <li class="{{ state }} layout-centered">
     <div class="project">
       <h2> <a href="{{ code_url }}"> {{ name }} </a> </h2>
-      <p> Built {{ when }} ago </p>
       <hr />
-      <ul class="builds list-inline list-no-bullets">
-      {{#builds}}
-        <li class="icon-tools {{ state }}"></li>
-      {{/builds}}
-      </p>
+      <a class="icon-tools" href="{{ travis }}"> Built {{ when }} ago </a>
     </div>
   </li>
 
@@ -83,19 +78,8 @@ $( document ).ready(function() {
               project.state = "alert-failure"
             }
 
-            project.builds = []
-
-            $.each(response.slice(0,5), function(i, build){
-
-              if (build.result == 0) {
-                build.state = "alert-success"
-              } else {
-                build.state = "alert-failure"
-              }
-
-              project.builds.push(build);
-
-            })
+            repo = project.code_url.replace("https://github.com/","");
+            project.travis = 'https://travis-ci.org/' + repo + '/builds/' + response[0].id
 
             project_template = ich.project(project);
             $("#projects").append(project_template);
@@ -141,7 +125,7 @@ $( document ).ready(function() {
 
   }
 
-  getProjects("https://www.codeforamerica.org/api/projects", 50)
+  getProjects("https://www.codeforamerica.org/api/projects", 100)
 
 });
 
