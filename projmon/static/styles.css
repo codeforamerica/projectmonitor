@@ -1,6 +1,845 @@
-/*
- * This file is a static output from the Rails application, at this version:
- * https://github.com/codeforamerica/projectmonitor/tree/last-rails-version
- */
-
-@import '//cloud.typography.com/6435252/803522/css/fonts.css';@-webkit-keyframes building{0%{opacity:1}50%{opacity:0.50}100%{opacity:1}}@-moz-keyframes building{0%{opacity:1}50%{opacity:0.50}100%{opacity:1}}@-o-keyframes building{0%{opacity:1}50%{opacity:0.50}100%{opacity:1}}@keyframes building{0%{opacity:1}50%{opacity:0.50}100%{opacity:1}}html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}body{font-family:Helvetica, sans-serif;font-size:13px;background:white;margin:0}body,p,li{color:black}p{font-size:1em;line-height:1.6em;font-weight:normal;margin:0 0 1.6em 0;padding:0}h1{font-family:Helvetica, sans-serif;font-weight:bold;font-size:2.4em;color:#2B2820}h2{font-family:Helvetica, sans-serif;padding:0;line-height:1em}article.build.success h1{background-color:#93cdad;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(90%, #93cdad), color-stop(10%, #b6ddc7));background-image:-webkit-linear-gradient(top, #93cdad 90%, #b6ddc7 10%);background-image:linear-gradient(to bottom, #93cdad 90%,#b6ddc7 10%)}article.build.success aside{background-color:#b6ddc7}article.build.success ol li{background-color:#eaf5ef}article.build.failure h1{background-color:#f6704d;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(90%, #f6704d), color-stop(10%, #f8977e));background-image:-webkit-linear-gradient(top, #f6704d 90%, #f8977e 10%);background-image:linear-gradient(to bottom, #f6704d 90%,#f8977e 10%)}article.build.failure aside{background-color:#f8977e}article.build.failure ol li{background-color:#fcd2c6}article.build.offline h1{background-color:#dbe3da;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(90%, #dbe3da), color-stop(10%, #f7f9f7));background-image:-webkit-linear-gradient(top, #dbe3da 90%, #f7f9f7 10%);background-image:linear-gradient(to bottom, #dbe3da 90%,#f7f9f7 10%)}article.build.offline aside{background-color:#f7f9f7}article.build.offline ol li{background-color:white}article.build.indeterminate h1{background-color:#d1d684;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(90%, #d1d684), color-stop(10%, #dfe3aa));background-image:-webkit-linear-gradient(top, #d1d684 90%, #dfe3aa 10%);background-image:linear-gradient(to bottom, #d1d684 90%,#dfe3aa 10%)}article.build.indeterminate aside{background-color:#dfe3aa}article.build.indeterminate ol li{background-color:#f5f6e4}article.build.building{-webkit-animation-name:building;-moz-animation-name:building;-ms-animation-name:building;-o-animation-name:building;animation-name:building;-webkit-animation-duration:2s;-moz-animation-duration:2s;-ms-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s;-webkit-animation-timing-function:ease;-moz-animation-timing-function:ease;-ms-animation-timing-function:ease;-o-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-iteration-count:infinite;-moz-animation-iteration-count:infinite;-ms-animation-iteration-count:infinite;-o-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-direction:normal;-moz-animation-direction:normal;-ms-animation-direction:normal;-o-animation-direction:normal;animation-direction:normal;-webkit-animation-delay:0;-moz-animation-delay:0;-ms-animation-delay:0;-o-animation-delay:0;animation-delay:0;-webkit-animation-play-state:running;-moz-animation-play-state:running;-ms-animation-play-state:running;-o-animation-play-state:running;animation-play-state:running}article.build h1,article.build aside{background-size:10px 10px}article.build h1{text-align:center}article.build ol{float:left}article.build ol li{display:block;float:left;text-align:center}article.build ol li.success a:before{content:"\2022"}article.build ol li.failure a:before{content:"\00D7"}article.build ol li a{display:block;position:relative}article.build ol li:nth-child(2){opacity:0.95}article.build ol li:nth-child(3){opacity:0.90}article.build ol li:nth-child(4){opacity:0.85}article.build ol li:nth-child(5){opacity:0.80}article.build ol li:nth-child(6){opacity:0.70}article.build ol li:nth-child(7){opacity:0.60}article.build ol li:nth-child(8){opacity:0.40}article.build ol li:nth-child(9){opacity:0.35}article.build ol li:nth-child(10){opacity:0.30}.one-tile article.build{height:300px}.one-tile article.build h1{font-size:100px;line-height:100px;height:200px}.one-tile article.build .last-build-label{display:none}.one-tile article.build aside>div{height:80px}.one-tile article.build aside .readme-status{line-height:78px;font-size:30px;float:right;padding:0px 10px;min-width:62px}.one-tile article.build aside .time-since-last-build{line-height:78px;font-size:30px;float:left;padding:0px 10px;min-width:62px}.one-tile article.build aside ol{height:78px}.one-tile article.build aside ol li{font-size:50px;height:45px;width:45px;margin:14px 5px 7px 0px;line-height:45px}.two-tile article.build{height:160px}.two-tile article.build h1{font-size:136px;float:left;line-height:160px;width:385px}.two-tile article.build aside{float:left;width:215px;height:160px;text-align:center}.two-tile article.build aside>div{padding-left:16px}.two-tile article.build aside>div span:first-child{text-transform:uppercase}.two-tile article.build aside span{font-size:20px}.two-tile article.build aside .time-since-last-build,.two-tile article.build aside .readme-status{line-height:73px;padding:0px 10px}.two-tile article.build aside ol{width:195px}.two-tile article.build aside ol li{font-size:40px;height:35px;width:35px;margin:2px 2px;line-height:35px}.three-tile article.build h1{font-size:100px;text-align:center;line-height:165px}.three-tile article.build aside{height:165px;text-align:center}.three-tile article.build aside>div{margin-left:10px}.three-tile article.build aside>div span:first-child{text-transform:uppercase}.three-tile article.build aside span{font-size:20px}.three-tile article.build aside .time-since-last-build,.three-tile article.build aside .readme-status{line-height:60px;padding:0px 16px}.three-tile article.build aside ol{width:220px;margin-left:35px}.three-tile article.build aside ol li{font-size:40px;height:35px;width:35px;margin:2px 2px;line-height:35px}.four-tile article.build h1{font-size:100px;line-height:125px}.four-tile article.build .last-build-label{display:none}.four-tile article.build aside>div{height:35px}.four-tile article.build aside .readme-status{line-height:33px;font-size:18px;float:right;padding:0px 4px 0px 20px}.four-tile article.build aside .time-since-last-build{line-height:33px;font-size:18px;float:left;padding:0px 4px 0px 20px}.four-tile article.build aside ol{height:32px}.four-tile article.build aside ol li{font-size:24px;height:22px;width:22px;margin:3px 2px 2px 0px;line-height:22px}html{height:100%}body.dashboard{background-color:#204770;font-family:'Gotham A', 'Gotham B', Helvetica, Arial, sans-serif;font-size:16px;line-height:20px}body.dashboard ul.projects{padding:0;margin:20px 0 0 30px;clear:both;overflow:auto}body.dashboard ul.projects li.project{width:28%;float:left;display:inline-block;padding:18px;margin:0 15px 15px 0;list-style-type:none;position:relative}body.dashboard ul.projects li.project .icon{font-family:Entypo;font-size:150%;line-height:20px}body.dashboard ul.projects li.project h2{width:100%;border-bottom:1px solid black;text-align:left;font-family:'Gotham A', 'Gotham B', Helvetica, Arial, sans-serif;font-weight:bold;text-transform:uppercase;font-size:26px}body.dashboard ul.projects li.project p.readme{float:right;width:33%}body.dashboard ul.projects li.project p.readme,body.dashboard ul.projects li.project p.builds{margin:8px 0 0 0;white-space:nowrap}body.dashboard ul.projects li.project p.builds,body.dashboard ul.projects li.project ol.builds{width:60%}body.dashboard ul.projects li.project ol.builds{list-style:none;margin:4px 0 0 0;padding:0}body.dashboard ul.projects li.project ol.builds li.build{display:inline-block;width:25px;height:25px}body.dashboard ul.projects li.project ol.builds li.build a{position:relative;display:block;width:100%;height:100%;text-align:center;line-height:26px;text-decoration:none}body.dashboard ul.projects li.project ol.builds li.build.success{background-color:#a8cbb7}body.dashboard ul.projects li.project ol.builds li.build.error{background-color:#df6666}body.dashboard ul.projects li.project.unbuilt{background-color:orange}body.dashboard ul.projects li.project.success{background-color:#b6ddc7}body.dashboard ul.projects li.project.failure{background-color:#ff7676}body.dashboard #footer .manage_links{margin-left:30px}.page{margin:15px}.hide{display:none !important}a,a:link{color:black}a:hover{color:#aa1224}#header{margin:0;padding:.8em 1em;background-color:#88C2E5}#header a,#header img{border:0}#top_right{position:absolute;top:0.25em;right:2em;margin-top:0.5em}#flash_error{color:#ffffff;font-weight:bold;font-size:1.2em;background-color:#aa1224;padding:15px;margin:15px 0}#flash_notice{color:#ffffff;font-weight:bold;font-size:1.2em;background-color:#2B4C74;padding:15px;margin:15px 0}#openid_url{background:url(/static/login-bg.gif) no-repeat #fff 5px;padding-left:25px}.field_with_errors{display:inline-block}.field_with_errors>label{color:red}.field_with_errors>input,.field_with_errors>select{border:1px solid red}#errorExplanation{width:550px;border:2px solid red;padding:7px;margin:20px;background-color:#f0f0f0}#errorExplanation h2{text-align:left;font-weight:bold;padding:5px 5px 5px 15px;font-size:12px;margin:-7px;margin-bottom:0px;background-color:#c00;color:#fff}#errorExplanation ul{margin-left:24px}#errorExplanation ul li{font-size:12px;list-style:square;padding-bottom:4px}table.projects{border-collapse:collapse;margin:15px 0 40px 0}table.projects tr th{text-align:left;font-size:1.1em;padding:5px 15px}table.projects th{font-weight:bold}table.projects tr td{padding:5px 15px;border-bottom:1px solid #ddd}table.projects tr.odd td{background-color:#eee}table.projects td.actions *{margin-right:10px}.button,a:link.button{background:#2B4C74;padding:2px 5px;font-size:12px;color:#eeeeee;text-decoration:none;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;display:table-inline;font-weight:bold;letter-spacing:1px;box-shadow:0 0 0 1px #3B6692, 0 0 0 2px #444;-moz-box-shadow:0 0 0 1px #3B6692, 0 0 0 2px #444;-webkit-shadow:0 0 0 1px #3B6692, 0 0 0 2px #444}.button:hover,a:hover.button{color:#eeeeee;background:#14274A}.add_button{margin-left:15px;font-size:13px}form{background-color:#eeeeee;margin:30px;padding:30px;width:38em}form label{width:9em;display:inline-table;vertical-align:top;font-weight:bold;text-align:right;margin-right:2em}form em{margin-top:.4em;margin-left:12em;display:block}form .options{margin-left:11em}form .submit{text-align:right;margin-bottom:0}.project.message .box{background:url("/assets/greybox.png") no-repeat top left}.project.message .box p{margin:5px 0 0 15px;width:183px;height:180px;font-size:18px;font-weight:bold;line-height:22px;overflow:hidden}.projects.index h1{margin-bottom:10px}.projects td .last_status.failed a{color:#d5514b}.projects td .last_status.successful a{color:#67ae84}.dashboard ol.projects{list-style:none;display:block;margin-top:14px}.dashboard ol.projects li.project{max-height:328px;float:left}.dashboard ol.projects li.project a{text-decoration:none;color:black}.dashboard ol.projects li.project>div{height:100%}.dashboard ol.projects li.project .history ol{overflow:hidden;height:80px;list-style:none}.dashboard ol.projects li.project .history ol li{font-family:'Avenir LT W01 55 Roman', Helvetica, sans-serif;font-weight:normal;text-decoration:none;background:rgba(255,255,255,0.75) center no-repeat;display:block;float:left}.dashboard ol.projects li.project .history ol li span{font-size:48px;vertical-align:bottom}.dashboard ol.projects li.project .history ol li a{text-decoration:none;color:black}.dashboard ol.projects li.project .history ol li.success span:before{content:"\2022"}.dashboard ol.projects li.project .history ol li.failure span:before{content:"\00D7";line-height:30px}.dashboard ol.projects li.project .history ol li a{font-size:0;display:block;position:relative}.dashboard ol.projects li.project.success{background:#93cdad}.dashboard ol.projects li.project.success .information .status-bar{background:#a9d5bb;border-top:solid #67ae84 2px}.dashboard ol.projects li.project.success .velocity-block{border-color:#67ae84}.dashboard ol.projects li.project.success .velocity-block .chart dd span{background:#7cc39c}.dashboard ol.projects li.project.failure{background:#f6704d}.dashboard ol.projects li.project.failure .information .status-bar{background:#f88b69;border-top:solid #d5514b 2px}.dashboard ol.projects li.project.failure .velocity-block{background:#f99e7f;border-color:#d5514b}.dashboard ol.projects li.project.failure .velocity-block .chart dd span{background:#f25e3e}.dashboard ol.projects li.project.indeterminate{background:#d1d684}.dashboard ol.projects li.project.indeterminate .information .status-bar{background:#eaf094;border-top:solid #a2954b 2px}.dashboard ol.projects li.project.indeterminate .velocity-block{background:#f9ff9d;border-color:#a2954b}.dashboard ol.projects li.project.indeterminate .velocity-block .chart dd span{background:#aeb36e}.dashboard ol.projects li.project.offline{background:#dbe3da}.dashboard ol.projects li.project.offline .information .status-bar{background:#dbe3da;border-top:solid #bbbcb7 2px}.dashboard ol.projects li.project.offline .velocity-block{background:#e7ede6;border-color:#bbbcb7}.dashboard ol.projects li.project.offline .velocity-block .chart dd span{background:#c9c9c9}.dashboard ol.projects li.project.server-unreachable,.dashboard ol.projects li.project.server-unreachable.success,.dashboard ol.projects li.project.server-unreachable.failure{background:#f1f4f0}.dashboard ol.projects li.project.server-unreachable .information .status-bar,.dashboard ol.projects li.project.server-unreachable.success .information .status-bar,.dashboard ol.projects li.project.server-unreachable.failure .information .status-bar{background:#e7ede6;border-top:solid #c9c9c9 2px}.dashboard ol.projects li.project.server-unreachable .velocity-block,.dashboard ol.projects li.project.server-unreachable.success .velocity-block,.dashboard ol.projects li.project.server-unreachable.failure .velocity-block{background:#f1f4f0;border-color:#c9c9c9}.dashboard ol.projects li.project.server-unreachable .velocity-block .chart dd span,.dashboard ol.projects li.project.server-unreachable.success .velocity-block .chart dd span,.dashboard ol.projects li.project.server-unreachable.failure .velocity-block .chart dd span{background:#c9c9c9}.dashboard ol.projects li.project .information{float:left}.dashboard ol.projects li.project .information>div{text-align:left}.dashboard ol.projects li.project .information h1{font-family:'Avenir LT W01 85 Heavy', Helvetica, sans-serif;font-weight:normal;text-transform:capitalize;color:#2B2820}.dashboard ol.projects li.project .information h1 a,.dashboard ol.projects li.project .information h1 a:hover,.dashboard ol.projects li.project .information h1 a:visited{color:#2B2820;text-decoration:none}.dashboard ol.projects li.project .information .status-bar .building-indicator{float:left;margin:3px 0;width:80px;text-align:center}.dashboard ol.projects li.project .information .status-bar .building-indicator img{width:30px;height:30px}.dashboard ol.projects li.project .information .status-bar .publish-date{font-family:'Avenir LT W01 35 Light', Helvetica, sans-serif;font-weight:normal;float:left;text-align:center;font-size:1px}.dashboard ol.projects li.project .information .status-bar .inventory{float:right;margin-right:20px;font-size:10px}.dashboard ol.projects li.project .information .status-bar .inventory .healthy{color:green}.dashboard ol.projects li.project .information .status-bar .inventory .unhealthy{color:red}.dashboard ol.projects li.project .information .status-bar .name{font-family:'Avenir LT W01 55 Roman', Helvetica, sans-serif;font-weight:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:capitalize}.dashboard ol.projects li.project .information .status-bar .name a{text-decoration:none;color:black}.dashboard ol.projects li.project.success .velocity-block{background-color:#7cc39c;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0.05em, #7cc39c), color-stop(0.05em, #b9dcc8));background-image:-webkit-linear-gradient(top, #7cc39c 0.05em, #b9dcc8 0.05em);background-image:linear-gradient(to bottom, #7cc39c 0.05em,#b9dcc8 0.05em)}.dashboard ol.projects li.project.failure .velocity-block{background-color:#f6704d;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0.05em, #f6704d), color-stop(0.05em, #f99e7f));background-image:-webkit-linear-gradient(top, #f6704d 0.05em, #f99e7f 0.05em);background-image:linear-gradient(to bottom, #f6704d 0.05em,#f99e7f 0.05em)}.dashboard ol.projects li.project.offline .velocity-block,.dashboard ol.projects li.project.server-unreachable .velocity-block,.dashboard ol.projects li.project.server-unreachable.success .velocity-block,.dashboard ol.projects li.project.server-unreachable.failure .velocity-block{background-color:#c9c9c9;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0.05em, #c9c9c9), color-stop(0.05em, #e7ede6));background-image:-webkit-linear-gradient(top, #c9c9c9 0.05em, #e7ede6 0.05em);background-image:linear-gradient(to bottom, #c9c9c9 0.05em,#e7ede6 0.05em)}.dashboard ol.projects li.project .velocity-block{float:right;border-left:solid 2px;border-right:solid 2px;float:left;text-align:center;overflow:hidden}.dashboard ol.projects li.project .velocity-block .label{font-family:'Avenir LT W01 35 Light', Helvetica, sans-serif;font-weight:normal;text-transform:uppercase;vertical-align:top;color:#2B2820}.dashboard ol.projects li.project .velocity-block .error{color:#7c7c79;font-family:'Avenir LT W01 35 Light', Helvetica, sans-serif;font-weight:normal;text-transform:uppercase;vertical-align:middle}.dashboard ol.projects li.project .velocity-block .value{font-family:'Avenir LT W01 65 Medium', Helvetica, sans-serif;font-weight:normal;vertical-align:top}.dashboard ol.projects li.project .velocity-block .chart{padding-left:10px}.dashboard ol.projects li.project .velocity-block .chart dd{display:inline;float:left;margin-right:2px;position:relative}.dashboard ol.projects li.project .velocity-block .chart dd span{position:absolute;bottom:0;border-top-left-radius:1px;border-top-right-radius:1px}@font-face{font-family:'Entypo';src:url(/static/entypo.eot);src:url(/static/entypo.eot?iefix) format("eot"),url(/static/entypo.woff) format("woff"),url(/static/entypo.ttf) format("truetype"),url(/static/entypo.svg#webfont) format("svg")}
+@import '//cloud.typography.com/6435252/803522/css/fonts.css';
+    @-webkit-keyframes building {
+    0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.50;
+}
+100% {
+    opacity: 1;
+}
+}@-moz-keyframes building {
+    0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.50;
+}
+100% {
+    opacity: 1;
+}
+}@-o-keyframes building {
+    0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.50;
+}
+100% {
+    opacity: 1;
+}
+}@keyframes building {
+    0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.50;
+}
+100% {
+    opacity: 1;
+}
+}html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+body {
+    font-family: Helvetica,  sans-serif;
+    font-size: 13px;
+    background: white;
+    margin: 0;
+}
+body, p, li {
+    color: black;
+}
+p {
+    font-size: 1em;
+    line-height: 1.6em;
+    font-weight: normal;
+    margin: 0 0 1.6em 0;
+    padding: 0;
+}
+h1 {
+    font-family: Helvetica,  sans-serif;
+    font-weight: bold;
+    font-size: 2.4em;
+    color: #2B2820;
+}
+h2 {
+    font-family: Helvetica,  sans-serif;
+    padding: 0;
+    line-height: 1em;
+}
+article.build.success h1 {
+    background-color: #93cdad;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(90%,  #93cdad),  color-stop(10%,  #b6ddc7));
+    background-image: -webkit-linear-gradient(top,  #93cdad 90%,  #b6ddc7 10%);
+    background-image: linear-gradient(to bottom,  #93cdad 90%, #b6ddc7 10%);
+}
+article.build.success aside {
+    background-color: #b6ddc7;
+}
+article.build.success ol li {
+    background-color: #eaf5ef;
+}
+article.build.failure h1 {
+    background-color: #f6704d;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(90%,  #f6704d),  color-stop(10%,  #f8977e));
+    background-image: -webkit-linear-gradient(top,  #f6704d 90%,  #f8977e 10%);
+    background-image: linear-gradient(to bottom,  #f6704d 90%, #f8977e 10%);
+}
+article.build.failure aside {
+    background-color: #f8977e;
+}
+article.build.failure ol li {
+    background-color: #fcd2c6;
+}
+article.build.offline h1 {
+    background-color: #dbe3da;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(90%,  #dbe3da),  color-stop(10%,  #f7f9f7));
+    background-image: -webkit-linear-gradient(top,  #dbe3da 90%,  #f7f9f7 10%);
+    background-image: linear-gradient(to bottom,  #dbe3da 90%, #f7f9f7 10%);
+}
+article.build.offline aside {
+    background-color: #f7f9f7;
+}
+article.build.offline ol li {
+    background-color: white;
+}
+article.build.indeterminate h1 {
+    background-color: #d1d684;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(90%,  #d1d684),  color-stop(10%,  #dfe3aa));
+    background-image: -webkit-linear-gradient(top,  #d1d684 90%,  #dfe3aa 10%);
+    background-image: linear-gradient(to bottom,  #d1d684 90%, #dfe3aa 10%);
+}
+article.build.indeterminate aside {
+    background-color: #dfe3aa;
+}
+article.build.indeterminate ol li {
+    background-color: #f5f6e4;
+}
+article.build.building {
+    -webkit-animation-name: building;
+    -moz-animation-name: building;
+    -ms-animation-name: building;
+    -o-animation-name: building;
+    animation-name: building;
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -ms-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-timing-function: ease;
+    -ms-animation-timing-function: ease;
+    -o-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: normal;
+    -moz-animation-direction: normal;
+    -ms-animation-direction: normal;
+    -o-animation-direction: normal;
+    animation-direction: normal;
+    -webkit-animation-delay: 0;
+    -moz-animation-delay: 0;
+    -ms-animation-delay: 0;
+    -o-animation-delay: 0;
+    animation-delay: 0;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -ms-animation-play-state: running;
+    -o-animation-play-state: running;
+    animation-play-state: running;
+}
+article.build h1, article.build aside {
+    background-size: 10px 10px;
+}
+article.build h1 {
+    text-align: center;
+}
+article.build ol {
+    float: left;
+}
+article.build ol li {
+    display: block;
+    float: left;
+    text-align: center;
+}
+article.build ol li.success a:before {
+    content: "\2022"}
+article.build ol li.failure a:before {
+    content: "\00D7"}
+article.build ol li a {
+    display: block;
+    position: relative;
+}
+article.build ol li:nth-child(2) {
+    opacity: 0.95;
+}
+article.build ol li:nth-child(3) {
+    opacity: 0.90;
+}
+article.build ol li:nth-child(4) {
+    opacity: 0.85;
+}
+article.build ol li:nth-child(5) {
+    opacity: 0.80;
+}
+article.build ol li:nth-child(6) {
+    opacity: 0.70;
+}
+article.build ol li:nth-child(7) {
+    opacity: 0.60;
+}
+article.build ol li:nth-child(8) {
+    opacity: 0.40;
+}
+article.build ol li:nth-child(9) {
+    opacity: 0.35;
+}
+article.build ol li:nth-child(10) {
+    opacity: 0.30;
+}
+.one-tile article.build {
+    height: 300px;
+}
+.one-tile article.build h1 {
+    font-size: 100px;
+    line-height: 100px;
+    height: 200px;
+}
+.one-tile article.build .last-build-label {
+    display: none;
+}
+.one-tile article.build aside>div {
+    height: 80px;
+}
+.one-tile article.build aside .readme-status {
+    line-height: 78px;
+    font-size: 30px;
+    float: right;
+    padding: 0px 10px;
+    min-width: 62px;
+}
+.one-tile article.build aside .time-since-last-build {
+    line-height: 78px;
+    font-size: 30px;
+    float: left;
+    padding: 0px 10px;
+    min-width: 62px;
+}
+.one-tile article.build aside ol {
+    height: 78px;
+}
+.one-tile article.build aside ol li {
+    font-size: 50px;
+    height: 45px;
+    width: 45px;
+    margin: 14px 5px 7px 0px;
+    line-height: 45px;
+}
+.two-tile article.build {
+    height: 160px;
+}
+.two-tile article.build h1 {
+    font-size: 136px;
+    float: left;
+    line-height: 160px;
+    width: 385px;
+}
+.two-tile article.build aside {
+    float: left;
+    width: 215px;
+    height: 160px;
+    text-align: center;
+}
+.two-tile article.build aside>div {
+    padding-left: 16px;
+}
+.two-tile article.build aside>div span:first-child {
+    text-transform: uppercase;
+}
+.two-tile article.build aside span {
+    font-size: 20px;
+}
+.two-tile article.build aside .time-since-last-build, .two-tile article.build aside .readme-status {
+    line-height: 73px;
+    padding: 0px 10px;
+}
+.two-tile article.build aside ol {
+    width: 195px;
+}
+.two-tile article.build aside ol li {
+    font-size: 40px;
+    height: 35px;
+    width: 35px;
+    margin: 2px 2px;
+    line-height: 35px;
+}
+.three-tile article.build h1 {
+    font-size: 100px;
+    text-align: center;
+    line-height: 165px;
+}
+.three-tile article.build aside {
+    height: 165px;
+    text-align: center;
+}
+.three-tile article.build aside>div {
+    margin-left: 10px;
+}
+.three-tile article.build aside>div span:first-child {
+    text-transform: uppercase;
+}
+.three-tile article.build aside span {
+    font-size: 20px;
+}
+.three-tile article.build aside .time-since-last-build, .three-tile article.build aside .readme-status {
+    line-height: 60px;
+    padding: 0px 16px;
+}
+.three-tile article.build aside ol {
+    width: 220px;
+    margin-left: 35px;
+}
+.three-tile article.build aside ol li {
+    font-size: 40px;
+    height: 35px;
+    width: 35px;
+    margin: 2px 2px;
+    line-height: 35px;
+}
+.four-tile article.build h1 {
+    font-size: 100px;
+    line-height: 125px;
+}
+.four-tile article.build .last-build-label {
+    display: none;
+}
+.four-tile article.build aside>div {
+    height: 35px;
+}
+.four-tile article.build aside .readme-status {
+    line-height: 33px;
+    font-size: 18px;
+    float: right;
+    padding: 0px 4px 0px 20px;
+}
+.four-tile article.build aside .time-since-last-build {
+    line-height: 33px;
+    font-size: 18px;
+    float: left;
+    padding: 0px 4px 0px 20px;
+}
+.four-tile article.build aside ol {
+    height: 32px;
+}
+.four-tile article.build aside ol li {
+    font-size: 24px;
+    height: 22px;
+    width: 22px;
+    margin: 3px 2px 2px 0px;
+    line-height: 22px;
+}
+html {
+    height: 100%}
+body.dashboard {
+    background-color: #204770;
+    font-family: 'Gotham A',  'Gotham B',  Helvetica,  Arial,  sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+body.dashboard ul.projects {
+    padding: 0;
+    margin: 20px 0 0 30px;
+    clear: both;
+    overflow: auto;
+}
+body.dashboard ul.projects li.project {
+    width: 28%;
+    float: left;
+    display: inline-block;
+    padding: 18px;
+    margin: 0 15px 15px 0;
+    list-style-type: none;
+    position: relative;
+    height: 125px;
+}
+body.dashboard ul.projects li.project .icon {
+    font-family: Entypo;
+    font-size: 150%;
+    line-height: 20px;
+}
+body.dashboard ul.projects li.project h2 {
+    width: 100%;
+    border-bottom: 1px solid black;
+    text-align: left;
+    font-family: 'Gotham A',  'Gotham B',  Helvetica,  Arial,  sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 26px;
+}
+body.dashboard ul.projects li.project p.readme {
+    float: right;
+    width: 33%}
+body.dashboard ul.projects li.project p.readme, body.dashboard ul.projects li.project p.builds {
+    margin: 8px 0 0 0;
+    white-space: nowrap;
+}
+body.dashboard ul.projects li.project p.builds, body.dashboard ul.projects li.project ol.builds {
+    width: 60%}
+body.dashboard ul.projects li.project ol.builds {
+    list-style: none;
+    margin: 4px 0 0 0;
+    padding: 0;
+}
+body.dashboard ul.projects li.project ol.builds li.build {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+body.dashboard ul.projects li.project ol.builds li.build a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 26px;
+    text-decoration: none;
+}
+body.dashboard ul.projects li.project ol.builds li.build.success {
+    background-color: #a8cbb7;
+}
+body.dashboard ul.projects li.project ol.builds li.build.error {
+    background-color: #df6666;
+}
+body.dashboard ul.projects li.project.unbuilt {
+    background-color: orange;
+}
+body.dashboard ul.projects li.project.success {
+    background-color: #b6ddc7;
+}
+body.dashboard ul.projects li.project.failure {
+    background-color: #ff7676;
+}
+body.dashboard #footer .manage_links {
+    margin-left: 30px;
+}
+.page {
+    margin: 15px;
+}
+.hide {
+    display: none !important;
+}
+a, a:link {
+    color: black;
+}
+a:hover {
+    color: #aa1224;
+}
+#header {
+    margin: 0;
+    padding: .8em 1em;
+    background-color: #88C2E5;
+}
+#header a, #header img {
+    border: 0;
+}
+#top_right {
+    position: absolute;
+    top: 0.25em;
+    right: 2em;
+    margin-top: 0.5em;
+}
+#flash_error {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: #aa1224;
+    padding: 15px;
+    margin: 15px 0;
+}
+#flash_notice {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: #2B4C74;
+    padding: 15px;
+    margin: 15px 0;
+}
+#openid_url {
+    background: url(/static/login-bg.gif) no-repeat #fff 5px;
+    padding-left: 25px;
+}
+.field_with_errors {
+    display: inline-block;
+}
+.field_with_errors>label {
+    color: red;
+}
+.field_with_errors>input, .field_with_errors>select {
+    border: 1px solid red;
+}
+#errorExplanation {
+    width: 550px;
+    border: 2px solid red;
+    padding: 7px;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+#errorExplanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+}
+#errorExplanation ul {
+    margin-left: 24px;
+}
+#errorExplanation ul li {
+    font-size: 12px;
+    list-style: square;
+    padding-bottom: 4px;
+}
+table.projects {
+    border-collapse: collapse;
+    margin: 15px 0 40px 0;
+}
+table.projects tr th {
+    text-align: left;
+    font-size: 1.1em;
+    padding: 5px 15px;
+}
+table.projects th {
+    font-weight: bold;
+}
+table.projects tr td {
+    padding: 5px 15px;
+    border-bottom: 1px solid #ddd;
+}
+table.projects tr.odd td {
+    background-color: #eee;
+}
+table.projects td.actions * {
+    margin-right: 10px;
+}
+.button, a:link.button {
+    background: #2B4C74;
+    padding: 2px 5px;
+    font-size: 12px;
+    color: #eeeeee;
+    text-decoration: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    display: table-inline;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 0 0 1px #3B6692,  0 0 0 2px #444;
+    -moz-box-shadow: 0 0 0 1px #3B6692,  0 0 0 2px #444;
+    -webkit-shadow: 0 0 0 1px #3B6692,  0 0 0 2px #444;
+}
+.button:hover, a:hover.button {
+    color: #eeeeee;
+    background: #14274A;
+}
+.add_button {
+    margin-left: 15px;
+    font-size: 13px;
+}
+form {
+    background-color: #eeeeee;
+    margin: 30px;
+    padding: 30px;
+    width: 38em;
+}
+form label {
+    width: 9em;
+    display: inline-table;
+    vertical-align: top;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 2em;
+}
+form em {
+    margin-top: .4em;
+    margin-left: 12em;
+    display: block;
+}
+form .options {
+    margin-left: 11em;
+}
+form .submit {
+    text-align: right;
+    margin-bottom: 0;
+}
+.project.message .box {
+    background: url("/assets/greybox.png") no-repeat top left;
+}
+.project.message .box p {
+    margin: 5px 0 0 15px;
+    width: 183px;
+    height: 180px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 22px;
+    overflow: hidden;
+}
+.projects.index h1 {
+    margin-bottom: 10px;
+}
+.projects td .last_status.failed a {
+    color: #d5514b;
+}
+.projects td .last_status.successful a {
+    color: #67ae84;
+}
+.dashboard ol.projects {
+    list-style: none;
+    display: block;
+    margin-top: 14px;
+}
+.dashboard ol.projects li.project {
+    max-height: 328px;
+    float: left;
+}
+.dashboard ol.projects li.project a {
+    text-decoration: none;
+    color: black;
+}
+.dashboard ol.projects li.project>div {
+    height: 100%}
+.dashboard ol.projects li.project .history ol {
+    overflow: hidden;
+    height: 80px;
+    list-style: none;
+}
+.dashboard ol.projects li.project .history ol li {
+    font-family: 'Avenir LT W01 55 Roman',  Helvetica,  sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.75) center no-repeat;
+    display: block;
+    float: left;
+}
+.dashboard ol.projects li.project .history ol li span {
+    font-size: 48px;
+    vertical-align: bottom;
+}
+.dashboard ol.projects li.project .history ol li a {
+    text-decoration: none;
+    color: black;
+}
+.dashboard ol.projects li.project .history ol li.success span:before {
+    content: "\2022"}
+.dashboard ol.projects li.project .history ol li.failure span:before {
+    content: "\00D7";
+    line-height: 30px;
+}
+.dashboard ol.projects li.project .history ol li a {
+    font-size: 0;
+    display: block;
+    position: relative;
+}
+.dashboard ol.projects li.project.success {
+    background: #93cdad;
+}
+.dashboard ol.projects li.project.success .information .status-bar {
+    background: #a9d5bb;
+    border-top: solid #67ae84 2px;
+}
+.dashboard ol.projects li.project.success .velocity-block {
+    border-color: #67ae84;
+}
+.dashboard ol.projects li.project.success .velocity-block .chart dd span {
+    background: #7cc39c;
+}
+.dashboard ol.projects li.project.failure {
+    background: #f6704d;
+}
+.dashboard ol.projects li.project.failure .information .status-bar {
+    background: #f88b69;
+    border-top: solid #d5514b 2px;
+}
+.dashboard ol.projects li.project.failure .velocity-block {
+    background: #f99e7f;
+    border-color: #d5514b;
+}
+.dashboard ol.projects li.project.failure .velocity-block .chart dd span {
+    background: #f25e3e;
+}
+.dashboard ol.projects li.project.indeterminate {
+    background: #d1d684;
+}
+.dashboard ol.projects li.project.indeterminate .information .status-bar {
+    background: #eaf094;
+    border-top: solid #a2954b 2px;
+}
+.dashboard ol.projects li.project.indeterminate .velocity-block {
+    background: #f9ff9d;
+    border-color: #a2954b;
+}
+.dashboard ol.projects li.project.indeterminate .velocity-block .chart dd span {
+    background: #aeb36e;
+}
+.dashboard ol.projects li.project.offline {
+    background: #dbe3da;
+}
+.dashboard ol.projects li.project.offline .information .status-bar {
+    background: #dbe3da;
+    border-top: solid #bbbcb7 2px;
+}
+.dashboard ol.projects li.project.offline .velocity-block {
+    background: #e7ede6;
+    border-color: #bbbcb7;
+}
+.dashboard ol.projects li.project.offline .velocity-block .chart dd span {
+    background: #c9c9c9;
+}
+.dashboard ol.projects li.project.server-unreachable, .dashboard ol.projects li.project.server-unreachable.success, .dashboard ol.projects li.project.server-unreachable.failure {
+    background: #f1f4f0;
+}
+.dashboard ol.projects li.project.server-unreachable .information .status-bar, .dashboard ol.projects li.project.server-unreachable.success .information .status-bar, .dashboard ol.projects li.project.server-unreachable.failure .information .status-bar {
+    background: #e7ede6;
+    border-top: solid #c9c9c9 2px;
+}
+.dashboard ol.projects li.project.server-unreachable .velocity-block, .dashboard ol.projects li.project.server-unreachable.success .velocity-block, .dashboard ol.projects li.project.server-unreachable.failure .velocity-block {
+    background: #f1f4f0;
+    border-color: #c9c9c9;
+}
+.dashboard ol.projects li.project.server-unreachable .velocity-block .chart dd span, .dashboard ol.projects li.project.server-unreachable.success .velocity-block .chart dd span, .dashboard ol.projects li.project.server-unreachable.failure .velocity-block .chart dd span {
+    background: #c9c9c9;
+}
+.dashboard ol.projects li.project .information {
+    float: left;
+}
+.dashboard ol.projects li.project .information>div {
+    text-align: left;
+}
+.dashboard ol.projects li.project .information h1 {
+    font-family: 'Avenir LT W01 85 Heavy',  Helvetica,  sans-serif;
+    font-weight: normal;
+    text-transform: capitalize;
+    color: #2B2820;
+}
+.dashboard ol.projects li.project .information h1 a, .dashboard ol.projects li.project .information h1 a:hover, .dashboard ol.projects li.project .information h1 a:visited {
+    color: #2B2820;
+    text-decoration: none;
+}
+.dashboard ol.projects li.project .information .status-bar .building-indicator {
+    float: left;
+    margin: 3px 0;
+    width: 80px;
+    text-align: center;
+}
+.dashboard ol.projects li.project .information .status-bar .building-indicator img {
+    width: 30px;
+    height: 30px;
+}
+.dashboard ol.projects li.project .information .status-bar .publish-date {
+    font-family: 'Avenir LT W01 35 Light',  Helvetica,  sans-serif;
+    font-weight: normal;
+    float: left;
+    text-align: center;
+    font-size: 1px;
+}
+.dashboard ol.projects li.project .information .status-bar .inventory {
+    float: right;
+    margin-right: 20px;
+    font-size: 10px;
+}
+.dashboard ol.projects li.project .information .status-bar .inventory .healthy {
+    color: green;
+}
+.dashboard ol.projects li.project .information .status-bar .inventory .unhealthy {
+    color: red;
+}
+.dashboard ol.projects li.project .information .status-bar .name {
+    font-family: 'Avenir LT W01 55 Roman',  Helvetica,  sans-serif;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;
+}
+.dashboard ol.projects li.project .information .status-bar .name a {
+    text-decoration: none;
+    color: black;
+}
+.dashboard ol.projects li.project.success .velocity-block {
+    background-color: #7cc39c;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(0.05em,  #7cc39c),  color-stop(0.05em,  #b9dcc8));
+    background-image: -webkit-linear-gradient(top,  #7cc39c 0.05em,  #b9dcc8 0.05em);
+    background-image: linear-gradient(to bottom,  #7cc39c 0.05em, #b9dcc8 0.05em);
+}
+.dashboard ol.projects li.project.failure .velocity-block {
+    background-color: #f6704d;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(0.05em,  #f6704d),  color-stop(0.05em,  #f99e7f));
+    background-image: -webkit-linear-gradient(top,  #f6704d 0.05em,  #f99e7f 0.05em);
+    background-image: linear-gradient(to bottom,  #f6704d 0.05em, #f99e7f 0.05em);
+}
+.dashboard ol.projects li.project.offline .velocity-block, .dashboard ol.projects li.project.server-unreachable .velocity-block, .dashboard ol.projects li.project.server-unreachable.success .velocity-block, .dashboard ol.projects li.project.server-unreachable.failure .velocity-block {
+    background-color: #c9c9c9;
+    background-image: -webkit-gradient(linear,  left top,  left bottom,  color-stop(0.05em,  #c9c9c9),  color-stop(0.05em,  #e7ede6));
+    background-image: -webkit-linear-gradient(top,  #c9c9c9 0.05em,  #e7ede6 0.05em);
+    background-image: linear-gradient(to bottom,  #c9c9c9 0.05em, #e7ede6 0.05em);
+}
+.dashboard ol.projects li.project .velocity-block {
+    float: right;
+    border-left: solid 2px;
+    border-right: solid 2px;
+    float: left;
+    text-align: center;
+    overflow: hidden;
+}
+.dashboard ol.projects li.project .velocity-block .label {
+    font-family: 'Avenir LT W01 35 Light',  Helvetica,  sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    vertical-align: top;
+    color: #2B2820;
+}
+.dashboard ol.projects li.project .velocity-block .error {
+    color: #7c7c79;
+    font-family: 'Avenir LT W01 35 Light',  Helvetica,  sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+.dashboard ol.projects li.project .velocity-block .value {
+    font-family: 'Avenir LT W01 65 Medium',  Helvetica,  sans-serif;
+    font-weight: normal;
+    vertical-align: top;
+}
+.dashboard ol.projects li.project .velocity-block .chart {
+    padding-left: 10px;
+}
+.dashboard ol.projects li.project .velocity-block .chart dd {
+    display: inline;
+    float: left;
+    margin-right: 2px;
+    position: relative;
+}
+.dashboard ol.projects li.project .velocity-block .chart dd span {
+    position: absolute;
+    bottom: 0;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+}
+@font-face {
+    font-family: 'Entypo';
+    src: url(/static/entypo.eot);
+    src: url(/static/entypo.eot?iefix) format("eot"), url(/static/entypo.woff) format("woff"), url(/static/entypo.ttf) format("truetype"), url(/static/entypo.svg#webfont) format("svg");
+}
